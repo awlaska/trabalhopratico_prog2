@@ -1,5 +1,5 @@
 public enum tipoUser {
-    User,
-    UserManager,
-    Admin
+    USER,
+    MANAGER,
+    ADMIN
 }
