@@ -5,29 +5,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Ficheiro {
-    @Test
     public void CriarFicheiro(){
-        try {
-            File infoC = new File("src/Ficheiros/info.txt");
-            if (infoC.createNewFile()) {
-                System.out.println("Ficheiro criado: " + infoC.getName());
-            } else {
-                System.out.println("Ficheiro já existente.");
-            }
-        } catch (IOException e) {
-            System.out.println("Ocorreu um erro.");
-            e.printStackTrace();
-        }
+        File infoC = new File("src/Ficheiros/info.csv");
     }
 
-    public void EscreverFicheiro(){
+    public void EscreverFicheiro(String user, String password){
         try {
-            FileWriter infoE = new FileWriter("info.txt");
-            infoE.write("Files in Java might be tricky, but it is fun enough!");
+            FileWriter infoE = new FileWriter("src/Ficheiros/info.csv");
+            infoE.write(user + ";" + password);
             infoE.close();
             System.out.println("Escreveu com successo.");
         } catch (IOException e) {
-            System.out.println("Ocorreu um erros.");
+            System.out.println("Ocorreu um erro.");
             e.printStackTrace();
         }
     }
