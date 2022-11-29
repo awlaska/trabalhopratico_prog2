@@ -2,23 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class User {
-    private String username;
-    private String password;
-
-    public User(String user, String pass){
-        this.username = user;
-        this.password = pass;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
+public class Ficheiro {
     public void CriarFicheiro(){
         try {
             File infoC = new File("info.txt");
@@ -44,5 +28,4 @@ public class User {
             e.printStackTrace();
         }
     }
-
 }

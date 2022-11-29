@@ -30,7 +30,7 @@ Funcionalidades a incluir
 12. Cada tipo de utilizador identificado apenas deve ter acesso às funcionalidades que lhe dizem respeito.
 
 Requisitos Gerais  
-1. Criar 3 níveis de autenticação no sistema: User (pode aceder aos seus registos ou a registos consigo partilhados);  
+1. Criar 3 níveis de autenticação no sistema: Utilizador (pode aceder aos seus registos ou a registos consigo partilhados);  
    UserManager (pode criar utilizadores, editar permissões na aplicação e visualizar todos os registos);  
    Admin (pode realizar qualquer ação no sistema; criar/editar utilizadores (de todos os tipos),  
    alterar permissões e visualizar todos os registos disponíveis no sistema).  
