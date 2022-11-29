@@ -1,11 +1,14 @@
+import org.testng.annotations.Test;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Ficheiro {
+    @Test
     public void CriarFicheiro(){
         try {
-            File infoC = new File("info.txt");
+            File infoC = new File("src/Ficheiros/info.txt");
             if (infoC.createNewFile()) {
                 System.out.println("Ficheiro criado: " + infoC.getName());
             } else {
