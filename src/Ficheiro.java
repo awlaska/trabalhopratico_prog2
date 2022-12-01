@@ -1,4 +1,4 @@
-import org.testng.annotations.Test;
+//import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,7 +12,7 @@ public class Ficheiro {
     public void EscreverFicheiro(String user, String password){
         try {
             FileWriter infoE = new FileWriter("src/Ficheiros/info.csv");
-            infoE.write(user + ";" + password);
+            infoE.write(user + ";" + password + ";\n");
             infoE.close();
             System.out.println("Escreveu com successo.");
         } catch (IOException e) {
