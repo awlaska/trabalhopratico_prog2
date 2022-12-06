@@ -1,6 +1,6 @@
 package Enum;
 
 public enum estadoReserva {
-    PROCESSANDO,
+    EM_PROCESSAMENTO,
     FINALIZADO
 }

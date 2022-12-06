@@ -17,7 +17,8 @@ Funcionalidades a incluir
 6. O dono do stand deve conseguir adicionar, modificar ou desativar veículos do stand.  
    Veículos desativados não aparecem na listagem de veículos disponíveis para compra,  
    mas continuam a aparecer no histórico de compras e reservas do cliente;
-7. O dono do stand deve ter acesso a uma listagem onde consegue visualizar todos os veículos que estão registados no stand (incluindo desativados);
+7. O dono do stand deve ter acesso a uma listagem onde consegue visualizar todos os veículos
+   que estão registados no stand (incluindo desativados);
 8. O dono do stand deve conseguir validar ou cancelar uma reserva.  
    Se a reserva for cancelada, o veículo passa a estar novamente disponível para ser reservado por um cliente;
 9. O dono do stand deve conseguir registar uma venda de um veículo.  
