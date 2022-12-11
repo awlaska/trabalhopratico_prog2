@@ -36,13 +36,13 @@ public class Form extends Utilizador{
         password = input.nextLine();
     }
 
-    public void loadToMap(String username, String password) throws SignUpException {
-        if(verificarSeExiste(username, password))
-            throw new SignUpException("O user já existe!");
-        else{
-            super.dados.put(username, password);
-        }
-    }
+//    public void loadToMap(String username, String password) throws SignUpException {
+//        if(verificarSeExiste(username, password))
+//            throw new SignUpException("O user já existe!");
+//        else{
+//            super.dados.put(username, password);
+//        }
+//    }
 
     //TODO nr min de letras para user e passe
 }

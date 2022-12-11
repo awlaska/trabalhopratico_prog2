@@ -54,6 +54,4 @@ public class Utilizador {
 //            System.out.println("Username: " + this.username + "\tPassword: " + this.pass);
 //        }
 //    }
-
-
 }
