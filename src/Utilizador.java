@@ -1,16 +1,16 @@
 import java.util.*;
 
 public class Utilizador {
-
-    protected Map<String, String> dados;
-    //TODO map com: username; morada, nrtelemovel,
-    // protected Map<String, List<elemento>>;
-    private int nrUtilizadores;
+    protected String username;
+    protected String password;
+    protected String morada;
+    protected int nrTelemovel;
+    private int nrUtilizadores = 0;
 
     public Utilizador(){nrUtilizadores++;}
 
     public Utilizador(String user, String pass){
-        this.dados = new HashMap<>();
+
         nrUtilizadores++;
     }
 
@@ -19,15 +19,39 @@ public class Utilizador {
     }
 
     public String getUsername(){
-        return this.dados.keySet().toString();
+        return this.username;
     }
     public String getPassword(){
-        return this.dados.values().toString();
+        return this.password;
     }
 
-//    public void apresentaDados(){
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getMorada() {
+        return morada;
+    }
+
+    public void setMorada(String morada) {
+        this.morada = morada;
+    }
+
+    public int getNrTelemovel() {
+        return nrTelemovel;
+    }
+
+    public void setNrTelemovel(int nrTelemovel) {
+        this.nrTelemovel = nrTelemovel;
+    }
+
+    //    public void apresentaDados(){
 //        for(var dado : dados.entrySet()) {
-//            System.out.println("Username: " + dado.getKey() + "\tPassword: " + dado.getValue());
+//            System.out.println("Username: " + this.username + "\tPassword: " + this.pass);
 //        }
 //    }
 
