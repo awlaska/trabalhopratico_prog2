@@ -6,7 +6,6 @@ public class Reserva {
     private Utilizador cliente;
     private Utilizador donoStand;
 
-
     public Date getDataReserva() {
         return dataReserva;
     }
