@@ -3,10 +3,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Ficheiro {
-    //public void CriarFicheiro(){
-    //    File infoC = new File("src/Ficheiros/info.csv");
-    //}
-
     public void escreverFicheiro(String ficheiro, String user, String password, int nrPermissao){
         try {
             FileWriter infoE = new FileWriter("src/Ficheiros/" + ficheiro + ".csv");
