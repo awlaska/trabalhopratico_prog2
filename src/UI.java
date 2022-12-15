@@ -12,34 +12,25 @@ public class UI {
     }
 
     public void Inicial() {
-        /*
-        1-cliente
-        2-Dono stand
-        3-Admin
-         */
-
-        System.out.println("1 - Cliente | 2 - Dono stand | 3 - Admin | 0 - Sair");
-        int idUser = Escolha();
-        while (idUser < 3 && idUser > 0) {
-            switch (idUser) {
+        System.out.println("0 - Sair | 1 - Login | 2 - Signup");
+        int val = Escolha();
+        while (val <= 4 && val >= 0) {
+            switch (val) {
                 case 1:
-                    System.out.println("Cliente");
+                    System.out.println("Login");
+                    login();
                     break;
                 case 2:
-                    System.out.println("Dono stand");
-                    break;
-                case 3:
-                    System.out.println("Admin");
+                    System.out.println("Signup");
                     break;
                 case 0:
-                    System.out.println("sair");
-                default:
-                    System.out.println("Sou feio!");
+                    System.out.println("Sair");
+                    //método para guardar tudo em ficheiro
             }
         }
     }
 
-    public void cliente() {
+    public void Cliente() {
 
     }
 }

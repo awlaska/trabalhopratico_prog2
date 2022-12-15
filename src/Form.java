@@ -28,12 +28,16 @@ public class Form extends Utilizador{
         return existe;
     }
 
-    //TODO ver se o user existe e entrar como eles(ver quais metodos se aplicam)
-    public void signUp(){
+    //TODO ver se o user existe e entrar como eles (ver quais metodos se aplicam)
+    public void signup(){
         System.out.print("Username: ");
         username = input.nextLine();
         System.out.print("Password: ");
         password = input.nextLine();
+        System.out.println("Nome: ");
+        nome = input.nextLine();
+        System.out.print("Morada: ");
+        morada = input.nextLine();
     }
 
 //    public void loadToMap(String username, String password) throws SignUpException {

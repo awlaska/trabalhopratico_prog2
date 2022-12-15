@@ -1,6 +1,7 @@
 import java.util.Date;
 
 public class Reserva {
+    private int nrReserva;
     private Date dataReserva;
     private Veiculo veiculo;
     private Utilizador cliente;
