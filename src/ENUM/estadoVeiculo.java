@@ -1,4 +1,4 @@
-package Enum;
+package ENUM;
 
 public enum estadoVeiculo {
     DISPONIVEL,

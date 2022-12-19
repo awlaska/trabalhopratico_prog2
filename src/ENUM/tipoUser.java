@@ -1,7 +1,8 @@
-package Enum;
+package ENUM;
 
 public enum tipoUser {
     USER,
     MANAGER,
-    ADMIN
+    ADMIN,
+    NULL
 }

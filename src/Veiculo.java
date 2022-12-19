@@ -1,5 +1,6 @@
+import ENUM.estadoVeiculo;
+
 import java.util.Date;
-import Enum.estadoVeiculo;
 
 public class Veiculo {
     private int nrCarro;

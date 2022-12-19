@@ -1,4 +1,4 @@
-package Enum;
+package ENUM;
 
 public enum estadoReserva {
     EM_PROCESSAMENTO,
