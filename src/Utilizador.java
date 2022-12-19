@@ -53,35 +53,36 @@ public class Utilizador {
         this.nrTelemovel = nrTelemovel;
     }
 
-    public void login() throws UtilizadorException{
+    public void login() throws UtilizadorException, IOException {
         Scanner logIn = new Scanner(System.in);
-        String uname = "", pword = "";
 
-        while(!(map.get(username).equals(uname)) && !(map.get(password).equals(pword))) {
+//        while(!map.containsValue(uname) && !map.containsValue(pword)) {
             System.out.print(">> Username: ");
-            uname = logIn.nextLine();
+            String uname = logIn.nextLine();
             System.out.print(">> Password: ");
-            pword = logIn.nextLine();
-        }
-            if(user.get(username).equals(uname) && user.get(password).equals(pword)){
-                if(user.get(tipo).equals("null")) {
-                    throw new UtilizadorException("Aguarde ativação do administrador!");
-                }
-                if(user.get(tipo).equals("ADMIN")) {
-                    Admin admin = new Admin();
-                    admin.menu();
-                }
-                if(user.get(tipo).equals("DONO")) {
-                    DonoStand dono = new DonoStand();
-                    dono.menu();
-                }
-                if(user.get(tipo).equals("CLIENTE")) {
-                    Cliente cliente = new Cliente();
-                    cliente.menu();
-                }
+            String pword = logIn.nextLine();
+            System.out.println("done");
+
+            // mapa -> get indice 0 (1a lista) -> get nome (1o da lista)
+            if(map.get(0).get(0).equals(uname)) {
+                System.out.println("sucesso");
             }
-            else
-                throw new UtilizadorException("Dados de acesso errados!");
+//                if(map.get(tipo).equals("NULL")) {
+//                    throw new UtilizadorException("Aguarde ativação do administrador!");
+//                }
+//                if(map.get(tipo).equals("ADMIN")) {
+//                    Admin admin = new Admin();
+//                    admin.menu();
+//                }
+//                if(map.get(tipo).equals("DONO")) {
+//                    DonoStand dono = new DonoStand();
+//                    dono.menu();
+//                }
+//                if(map.get(tipo).equals("CLIENTE")) {
+//                    Cliente cliente = new Cliente();
+//                    cliente.menu();
+//                }
+//        }
     }
 
     public void signUp() throws UtilizadorException, IOException {
@@ -113,7 +114,7 @@ public class Utilizador {
             this.map.put(id, list);
             System.out.println("Sucesso a inserir!");
             apresentaDados();
-            Ficheiro.escreverFicheiro(map);
+            Ficheiro.escreverFicheiro("utilizadores", map);
     }
 
     public void apresentaDados(){
