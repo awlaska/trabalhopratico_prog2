@@ -3,7 +3,7 @@ import ENUM.estadoVeiculo;
 import java.util.Date;
 
 public class Veiculo {
-    private int nrCarro;
+    private int numCarro;
     private String marca;
     private String modelo;
     private Date dataStand;
@@ -16,7 +16,7 @@ public class Veiculo {
     }
 
     public Veiculo(Integer codigo, String marca, String modelo, Date dataEntradaStand){
-        this.nrCarro = codigo;
+        this.numCarro = codigo;
         this.marca = marca;
         this.modelo = modelo;
         this.dataStand = dataEntradaStand;

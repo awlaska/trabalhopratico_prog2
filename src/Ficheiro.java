@@ -43,9 +43,11 @@ public class Ficheiro {
                 List<String> list3 = Arrays.asList(replace1.split(";"));
                 System.out.println(list3);
                 //mudar list3 para string e dps list4 dividir list3 com ,
-                List<String> list4 = new ArrayList<String>(list3);
-                List<String> list5 = new ArrayList<String>(new ArrayList<String>(Arrays.asList(list4.split(",")));
-
+//                List<String> list4 = new ArrayList<String>(list3);
+//                List<String> list5 = new ArrayList<String>(new ArrayList<String>(Arrays.asList(list4.split(",")));
+                /*
+                for(
+                 */
 
                 //Fazer put das keys e dos values
 //                map.put(indice, listFinal);
