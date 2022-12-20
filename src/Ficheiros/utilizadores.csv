@@ -1,1 +1,4 @@
-0;[admin, admin, admin, 124w5356467, NULL]
+0;[admin, admin, admin, 124w5356467, ADMIN]
+1;[admin2, admin, admin, 124w5356467, CLIENTE]
+2;[admin3, admin, admin, 124w5356467, ADMIN]
+3;[cliente, admin, admin, 124w5356467, NULL]
