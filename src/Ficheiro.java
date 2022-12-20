@@ -2,21 +2,29 @@ import java.io.*;
 import java.util.*;
 
 public class Ficheiro {
-    public static void main(String[] args) throws IOException {
-        try {
-            loadMap("utilizadores");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    //DOING teste
+//    public static void main(String[] args) throws IOException {
+//        try {
+//            loadMap("utilizadores");
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
+    //Escrever no ficheiro utilizadores
     public static void escreverFicheiro(String ficheiro, LinkedHashMap<Integer, List<String>> map) throws IOException {
         try {
             File utilizadores = new File("src/Ficheiros/" + ficheiro + ".csv");
             BufferedWriter bf = null;
             bf = new BufferedWriter(new FileWriter(utilizadores));
             for (Map.Entry<Integer, List<String>> entry : map.entrySet()) {
-                bf.write(entry.getKey() + ";" + entry.getValue());
+                int key = entry.getKey();
+                String user = entry.getValue().get(0);
+                String password = entry.getValue().get(1);
+                String nome = entry.getValue().get(2);
+                String nr = entry.getValue().get(3);
+                String tipo = entry.getValue().get(4);
+                bf.write(key + ";" + user + ";" + password + ";" + nome + ";" + nr + ";" + tipo);
                 bf.newLine();
             }
             bf.flush();
@@ -27,9 +35,12 @@ public class Ficheiro {
         }
     }
 
-    public static LinkedHashMap<String, List<String>> loadMap(String ficheiro) throws IOException {
-        //--Alex--Stackoverflow
-        LinkedHashMap<String, List<String>> userData = new LinkedHashMap<>();
+    //TODO escrever no ficheiro veiculos
+    //TODO escrever no ficheiro reservas
+    //TODO escrever no ficheiro vendas
+
+    public static LinkedHashMap<Integer, List<String>> loadMap(String ficheiro, int size) throws IOException {
+        LinkedHashMap<Integer, List<String>> userData = new LinkedHashMap<>();
         String currentLine = "";
         String[] valuesTMP;
 
@@ -41,60 +52,17 @@ public class Ficheiro {
         }
 
         while ((currentLine = bf.readLine()) != null) {
-            valuesTMP = currentLine.split(", ");
-            ArrayList<String> values = new ArrayList<>();
-            String key = valuesTMP[0].split("\t ")[0].trim();
-            values.add(valuesTMP[0].split("\t ")[0].trim());
-            for (int i = 1; i < valuesTMP.length; i++) {
-                values.add(valuesTMP[i]);
-                System.out.println(valuesTMP[i]);
+            valuesTMP = currentLine.split("\n");
+            List<String> values = new ArrayList<>();
+            String key = valuesTMP[0].split(";")[0].trim();
+            int nkey = Integer.parseInt(key);
+            for (int i = 1; i < size; i++) {
+                values.add(valuesTMP[0].split(";")[i].trim());
             }
-            userData.put(key, values); // <--this line was moved out from internal for loop
+            userData.put(nkey, values); // <--this line was moved out from internal for loop
         }
-        System.out.println("linked hashmap:" + userData.keySet().size());
         return userData;
     }
-
-    //--Nao funciona:
-//    public static LinkedHashMap<Integer, List<String>> loadMap(String ficheiro) throws IOException{
-//        File utilizadores = new File("src/Ficheiros/" + ficheiro + ".csv");
-//        Scanner scanner = null;
-//        LinkedHashMap<Integer, List<String>> map = new LinkedHashMap<>();
-//        try {
-//            scanner = new Scanner(utilizadores);
-//            while (scanner.hasNext()) {
-//                //Dividir Key do resto
-//                String line = scanner.nextLine();
-//                List<String> list = Arrays.asList(line.split(";"));
-//                System.out.println(list);
-//                String indice = list.get(0);
-//                System.out.println(indice);
-//                //---------------------------
-//                //tornar String em List
-//                String replace = line.replace("[","");
-//                String replace1 = replace.replace("]","");
-////                String list2 = list.remove(0);
-//                List<String> list3 = Arrays.asList(replace1.split(";"));
-//                System.out.println(list3);
-//                //mudar list3 para string e dps list4 dividir list3 com ,
-////                List<String> list4 = new ArrayList<String>(list3);
-////                List<String> list5 = new ArrayList<String>(new ArrayList<String>(Arrays.asList(list4.split(",")));
-//                /*
-//                for(
-//                 */
-//
-//                //Fazer put das keys e dos values
-////                map.put(indice, listFinal);
-//            }
-//        }catch (InputMismatchException e) {
-//            System.out.println ("Mismatch exception:" + e );
-//        }
-//        catch (FileNotFoundException e) {
-//            System.out.println ("Ficheiro não encontrado!");
-//            System.exit (0);
-//        }
-//        return map;
-//    }
 
 
 //    public void escreverFicheiro(String ficheiro, String utilizador, String donoStand, String veiculo, String dataReserva){

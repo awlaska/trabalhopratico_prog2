@@ -3,6 +3,15 @@ import ENUM.estadoVeiculo;
 import java.util.Date;
 
 public class Veiculo {
+    //TODO metodos:
+        /*
+        Criar list para armazenar veiculos
+        adicionar veiculo á list
+        editar info de um veiculo na list
+        alterar estado do veiculo
+        remover veiculo da list
+        */
+    private Utilizador donoStand;
     private int numCarro;
     private String marca;
     private String modelo;
