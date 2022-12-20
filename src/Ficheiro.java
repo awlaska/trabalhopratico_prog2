@@ -43,8 +43,8 @@ public class Ficheiro {
         while ((currentLine = bf.readLine()) != null) {
             valuesTMP = currentLine.split(", ");
             ArrayList<String> values = new ArrayList<>();
-            String key = valuesTMP[0].split("; ")[0].trim();
-            values.add(valuesTMP[0].split(", ")[1].trim());
+            String key = valuesTMP[0].split("\t ")[0].trim();
+            values.add(valuesTMP[0].split("\t ")[0].trim());
             for (int i = 1; i < valuesTMP.length; i++) {
                 values.add(valuesTMP[i]);
                 System.out.println(valuesTMP[i]);
