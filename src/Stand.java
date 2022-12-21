@@ -5,4 +5,5 @@ public class Stand {
     private List<Veiculo> veiculos; //TODO verificar se List
 
     //Listar veiculos
+
 }
