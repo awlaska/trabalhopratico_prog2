@@ -90,7 +90,7 @@ public class Utilizador { //DONE :D
             }
             if (map.get(id).get(4).equals("CLIENTE")) {
                 Cliente cliente = new Cliente();
-                cliente.menu();
+                cliente.menu(id);
             }
         }
     }

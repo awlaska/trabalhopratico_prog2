@@ -21,9 +21,11 @@ public class Cliente extends Utilizador implements IListar{
     Editar Perfil:
     -edita só
      */
-    public void menu(){
+    public void menu(int idUserAtual){
         Scanner input = new Scanner(System.in);
-        System.out.print("0 - Sair || 1 - Listar veiculos || 2 - Listar compras || 3 - Listar reservas || 4 - Ver perfil || 5 - Editar perfil");
+        System.out.println("0 - Sair || 1 - Listar veiculos || 2 - Listar compras || 3 - Listar reservas || 4 - Ver perfil || 5 - Editar perfil");
+        System.out.println(">> ");
+//        System.out.println("Id do user atual: " + idUserAtual);
         int op = input.nextInt();
         switch (op) {
             case 0:
