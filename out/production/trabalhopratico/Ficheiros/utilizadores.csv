@@ -1,4 +1,4 @@
-0;[admin, admin, admin, 124w5356467, ADMIN]
-1;[admin2, admin, admin, 124w5356467, CLIENTE]
-2;[admin3, admin, admin, 124w5356467, ADMIN]
-3;[cliente, admin, admin, 124w5356467, NULL]
+0;admin1;admin2;admin3;124w5356467;ADMIN
+1;dono1;dono2;dono3;124w5356467;DONO
+2;cliente1;cliente2;cliente3;124w5356467;CLIENTE
+3;nulo1;nulo2;nulo3;124w5356467;NULL

@@ -1,11 +1,17 @@
 import java.util.Date;
 
 public class Reserva {
+
+    //TODO metodos para:
+        /*
+        adicionar reservas á list
+        alterar data da reserva
+        cacelar/apagar reserva
+         */
     private int nrReserva;
     private Date dataReserva;
     private Veiculo veiculo;
     private Utilizador cliente;
-    private Utilizador donoStand;
 
     public Date getDataReserva() {
         return dataReserva;
@@ -29,13 +35,5 @@ public class Reserva {
 
     public void setCliente(Utilizador cliente) {
         this.cliente = cliente;
-    }
-
-    public Utilizador getDonoStand() {
-        return donoStand;
-    }
-
-    public void setDonoStand(Utilizador donoStand) {
-        this.donoStand = donoStand;
     }
 }

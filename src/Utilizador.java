@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-public class Utilizador {
+public class Utilizador { //DONE :D
     public Map<Integer, List<String>> user;
     public List<String> info;
     protected String username;
@@ -53,48 +53,58 @@ public class Utilizador {
         this.nrTelemovel = nrTelemovel;
     }
 
-    public void login() throws UtilizadorException, IOException {
+    public void login(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
         Scanner logIn = new Scanner(System.in);
+        String uname = "", pword = "";
 
-//        while(!map.containsValue(uname) && !map.containsValue(pword)) {
+        while(!map.containsValue(uname) && !map.containsValue(pword)) {
             System.out.print(">> Username: ");
-            String uname = logIn.nextLine();
+            uname = logIn.nextLine();
             System.out.print(">> Password: ");
-            String pword = logIn.nextLine();
+            pword = logIn.nextLine();
             System.out.println("done");
 
-            // mapa -> get indice 0 (1a lista) -> get nome (1o da lista)
-            if(map.get(0).get(0).equals(uname)) {
-                System.out.println("sucesso");
+            for (int i = 0; i < map.size(); i++) {
+                if(map.get(i).get(0).equals(uname)){
+                    id = i;
+                }
             }
-//                if(map.get(tipo).equals("NULL")) {
-//                    throw new UtilizadorException("Aguarde ativação do administrador!");
-//                }
-//                if(map.get(tipo).equals("ADMIN")) {
-//                    Admin admin = new Admin();
-//                    admin.menu();
-//                }
-//                if(map.get(tipo).equals("DONO")) {
-//                    DonoStand dono = new DonoStand();
-//                    dono.menu();
-//                }
-//                if(map.get(tipo).equals("CLIENTE")) {
-//                    Cliente cliente = new Cliente();
-//                    cliente.menu();
-//                }
-//        }
+
+            // mapa -> get indice 0 (1a lista) -> get nome (1o da lista)
+            if(map.get(id).get(0).equals(uname) ) {
+                System.out.println("User existe");
+            } else {
+                throw new UtilizadorException("User não existente!");
+            }
+
+            if (map.get(id).get(4).equals("NULL")) {
+                throw new UtilizadorException("Aguarde ativação do administrador!");
+            }
+            if (map.get(id).get(4).equals("ADMIN")) {
+                Admin admin = new Admin();
+                admin.menu();
+            }
+            if (map.get(id).get(4).equals("DONO")) {
+                DonoStand dono = new DonoStand();
+                dono.menu();
+            }
+            if (map.get(id).get(4).equals("CLIENTE")) {
+                Cliente cliente = new Cliente();
+                cliente.menu();
+            }
+        }
     }
 
-    public void signUp() throws UtilizadorException, IOException {
-        Scanner signUp = new Scanner(System.in);
+    public void signUp(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
+        Scanner signup = new Scanner(System.in);
         System.out.print(">> Username: ");
-        String username = signUp.nextLine();
+        String username = signup.nextLine();
         System.out.print(">> Password: ");
-        String password = signUp.nextLine();
+        String password = signup.nextLine();
         System.out.print(">> Nome: ");
-        String nome = signUp.nextLine();
+        String nome = signup.nextLine();
         System.out.print(">> Número de telemovel: ");
-        String nrTelemovel = signUp.nextLine();
+        String nrTelemovel = signup.nextLine();
         tipoUser tipo = tipoUser.NULL;
 
         for(int i = 1; i <= map.size(); i++){
@@ -103,23 +113,19 @@ public class Utilizador {
             }
         }
 
+        list.add(username);
+        list.add(password);
+        list.add(nome);
+        list.add(nrTelemovel);
+        list.add(tipo.toString());
+        System.out.println(list);
+
         if(map.containsValue(list))
             throw new UtilizadorException("User já existente!");
-        else
-            list.add(username);
-            list.add(password);
-            list.add(nome);
-            list.add(nrTelemovel);
-            list.add(tipo.toString());
-            this.map.put(id, list);
+        else{
+            map.put(id, list);
             System.out.println("Sucesso a inserir!");
-            apresentaDados();
             Ficheiro.escreverFicheiro("utilizadores", map);
-    }
-
-    public void apresentaDados(){
-        for(Map.Entry<Integer, List<String>> info: map.entrySet()) {
-            System.out.println(info.getValue()+ ", ");
-        }
+            }
     }
 }

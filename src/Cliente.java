@@ -1,9 +1,29 @@
 import java.util.Scanner;
 
 public class Cliente extends Utilizador implements IListar{
+
+    //TODO completar switch do menu
+    /*
+    Apenas pode ver registos que lhe digam respeito (estão associados ao seu id)
+
+    Listar Veiculos (Apenas os que tem estado DISPONIVEL):
+    -Pode escolher um para reserva (diz o id do carro)
+
+    Listar Compras (Os veiculos comprados tem id do user associado e estado igual a VENDIDO)
+
+    Listar Reservas:
+    -Alterar data da visita ao stand
+    -Cancelar/Apagar reserva (Muda estado do veiculo de Reservado para Disponivel)
+
+    Ver Perfil:
+    -Lista a info do user que fez login
+
+    Editar Perfil:
+    -edita só
+     */
     public void menu(){
         Scanner input = new Scanner(System.in);
-        System.out.print("0 - Sair || 1 - Listar veiculos || 2 - Listar compras || 3 - Listar reservas || 4 - Ver Perfil");
+        System.out.print("0 - Sair || 1 - Listar veiculos || 2 - Listar compras || 3 - Listar reservas || 4 - Ver perfil || 5 - Editar perfil");
         int op = input.nextInt();
         switch (op) {
             case 0:
@@ -18,7 +38,7 @@ public class Cliente extends Utilizador implements IListar{
                 listarUser();
         }
     }
-
+    //TODO fazer metodos
     @Override
     public void listarCompras() {
 
