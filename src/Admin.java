@@ -52,9 +52,17 @@ public class Admin extends Utilizador implements IListar{
         //Logic goes here
     }
     public void apagarUser(){
+        Scanner input = new Scanner(System.in);
         listarUser();
         System.out.println("!!Apagar user!!");
         System.out.print("ID do user a apagar: \n>> ");
+        int id = input.nextInt();
+
+        for (int i = 0; i < users.size(); i++) {
+            if(users.get(i).equals(id)){
+
+            }
+        }
         //Logic goes here
     }
 
