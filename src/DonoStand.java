@@ -37,7 +37,7 @@ public class DonoStand extends Utilizador implements IListar{
 
     }
     @Override
-    public void listarUser(LinkedHashMap<Integer, List<String>> map) {
+    public void listarUser() {
 
     }
     @Override

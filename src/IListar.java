@@ -5,5 +5,5 @@ public interface IListar {
     void listarVeiculos();
     void listarReservas();
     void listarCompras();
-    void listarUser(LinkedHashMap<Integer, List<String>> map);
+    void listarUser();
 }

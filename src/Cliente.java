@@ -1,8 +1,12 @@
+import ENUM.tipoUser;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
 
 public class Cliente extends Utilizador implements IListar{
+
+    public Cliente(){super();}
 
     //TODO completar switch do menu
     /*
@@ -48,7 +52,7 @@ public class Cliente extends Utilizador implements IListar{
 
     }
     @Override
-    public void listarUser(LinkedHashMap<Integer, List<String>> map) {
+    public void listarUser() {
 
     }
     @Override
