@@ -1,3 +1,5 @@
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class Admin extends Utilizador implements IListar{
@@ -13,7 +15,8 @@ public class Admin extends Utilizador implements IListar{
         -Apagar Venda
         -Apagar Reserva
          */
-    public void menu(){
+    public void menuA(LinkedHashMap<Integer, List<String>> map){
+        LinkedHashMap<Integer, List<String>> mapaUtilizadores = map;
         Scanner input = new Scanner(System.in);
         System.out.println("0 - Sair || 1 - LogOut || 2 - Gerir Users || 3 - Gerir Registos");
         System.out.print(">> ");
@@ -21,6 +24,10 @@ public class Admin extends Utilizador implements IListar{
         switch (op) {
             case 0:
                 return;
+            case 1:
+                break;
+            case 2:
+                gerirUser();
         }
     }
 
@@ -40,7 +47,7 @@ public class Admin extends Utilizador implements IListar{
         }
     }
     public void alterarTipoUser(){
-        listarUser();
+//        listarUser();
         System.out.println("!!Alteração do tipo de user!!");
         System.out.print("ID do user a alterar: \n>> ");
         //Logic goes here
@@ -48,7 +55,7 @@ public class Admin extends Utilizador implements IListar{
         //Logic goes here
     }
     public void apagarUser(){
-        listarUser();
+//        listarUser();
         System.out.println("!!Apagar user!!");
         System.out.print("ID do user a apagar: \n>> ");
         //Logic goes here
@@ -59,12 +66,10 @@ public class Admin extends Utilizador implements IListar{
         O Admin consegue ver o mesmo que o Dono + contas de outros admins
          */
     @Override
-    public void listarCompras() {
-
-    }
+    public void listarCompras() {}
     @Override
-    public void listarUser() {
-
+    public void listarUser(LinkedHashMap<Integer, List<String>> map) {
+        System.out.println(map);
     }
     @Override
     public void listarReservas() {

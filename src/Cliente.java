@@ -1,3 +1,5 @@
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class Cliente extends Utilizador implements IListar{
@@ -37,7 +39,7 @@ public class Cliente extends Utilizador implements IListar{
             case 3:
                 listarReservas();
             case 4:
-                listarUser();
+//                listarUser();
         }
     }
     //TODO fazer metodos
@@ -46,7 +48,7 @@ public class Cliente extends Utilizador implements IListar{
 
     }
     @Override
-    public void listarUser() {
+    public void listarUser(LinkedHashMap<Integer, List<String>> map) {
 
     }
     @Override
