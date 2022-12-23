@@ -16,14 +16,14 @@ public class Admin extends Utilizador implements IListar{
     //--> MENUS
     public void menuA(){
         Scanner input = new Scanner(System.in);
-        System.out.print("0 - Sair\n1 - LogOut\n2 - Listagens\n3 - Alterar tipo de user\n4 - Apagar user\n5- algo registos...\n>> ");
+        System.out.print("0 - Sair\n1 - Listagens\n2 - Alterar tipo de user\n3 - Apagar user\n4- algo registos...\n>> ");
         int op = input.nextInt();
         switch (op) {
             case 0 -> {return;}
-            case 1 -> {break;}
-            case 2 -> {listagens();break;}
-            case 3 -> {alterarTipoUser();break;}
-            case 4 -> {apagarUser();break;}
+            case 1 -> {listagens();break;}
+            case 2 -> {alterarTipoUser();break;}
+            case 3 -> {apagarUser();break;}
+            default -> {break;}
         }
     }
 
@@ -38,6 +38,7 @@ public class Admin extends Utilizador implements IListar{
             case 3 -> {listarVeiculos();}
             case 4 -> {listarCompras();}
             case 5 -> {listarReservas();}
+            default -> {break;}
         }
     }
 

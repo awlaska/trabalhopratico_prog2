@@ -1,9 +1,5 @@
 import ENUM.tipoUser;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 public class Utilizador { //DONE :D
@@ -13,10 +9,9 @@ public class Utilizador { //DONE :D
     protected String nrTelemovel;
     protected int id;
     protected tipoUser tipo;
-    protected List<String> list;
+    protected List<String> dados;
 
     public Utilizador(){}
-
     public Utilizador(String user, String pass, String nome, String nrTelemovel, int id, tipoUser tipo){
         this.username = user;
         this.password = pass;
@@ -24,7 +19,7 @@ public class Utilizador { //DONE :D
         this.nrTelemovel = nrTelemovel;
         this.tipo = null;
         this.id = id;
-        list = new ArrayList<>();
+        dados = new ArrayList<>();
     }
 
     public int getNrUtilizadores(){
@@ -49,6 +44,9 @@ public class Utilizador { //DONE :D
         this.nrTelemovel = nrTelemovel;
     }
 
+    //-->MENU INICIAL
+
+    //--> Métodos de verificaçção e criação de utilizadores
     protected void login(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
         Scanner logIn = new Scanner(System.in);
         String uname = "", pword = "";
@@ -93,7 +91,6 @@ public class Utilizador { //DONE :D
             }
         }
     }
-
     protected void signUp(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
         Scanner signup = new Scanner(System.in);
         System.out.print("Username\n>> ");
@@ -112,17 +109,17 @@ public class Utilizador { //DONE :D
             }
         }
 
-        list.add(username);
-        list.add(password);
-        list.add(nome);
-        list.add(nrTelemovel);
-        list.add(tipo.toString());
-        System.out.println(list);
+        dados.add(username);
+        dados.add(password);
+        dados.add(nome);
+        dados.add(nrTelemovel);
+        dados.add(tipo.toString());
+        System.out.println(dados);
 
-        if(map.containsValue(list))
+        if(map.containsValue(dados)) {
             throw new UtilizadorException("!!User já existente!!");
-        else{
-            map.put(id, list);
+        }else{
+            map.put(id, dados);
             System.out.println("!!Sucesso a inserir!!");
             Ficheiro.escreverFicheiro("utilizadores", map);
             }
