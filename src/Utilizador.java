@@ -45,6 +45,22 @@ public class Utilizador { //DONE :D
     }
 
     //-->MENU INICIAL
+    public void menuIncial() throws IOException, UtilizadorException {
+        LinkedHashMap<Integer, List<String>> utilizadores = Ficheiro.loadMap("utilizadores", 6);
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("1 - Login\n2 - Signup\n0 - Sair");
+        System.out.print(">> ");
+        int op = input.nextInt();
+
+        //TODO adicionar escrita dos ficheiros em falta (veiculos, reservas, vendas)
+            switch (op) {
+            case 0 -> {Ficheiro.escreverFicheiro("utilizadores", utilizadores);return;}
+            case 1 -> login(utilizadores);
+            case 2 -> signUp(utilizadores);
+            default -> {break;}
+        }
+    }
 
     //--> Métodos de verificaçção e criação de utilizadores
     protected void login(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
@@ -64,7 +80,7 @@ public class Utilizador { //DONE :D
             }
 
             // mapa -> get indice 0 (1a lista) -> get nome (1o da lista)
-            if(map.get(id).get(0).equals(uname) ) {
+            if(map.get(id).get(0).equals(uname) && map.get(id).get(1).equals(pword)) {
                 System.out.println("User autenticado!");
             } else {
                 throw new UtilizadorException("User não existente!");
