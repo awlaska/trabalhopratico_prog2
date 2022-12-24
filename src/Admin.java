@@ -60,11 +60,9 @@ public class Admin extends Utilizador implements IListar{
 
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).equals(id)) {
-                users.get(id).get(0) = "null";
-                users.get(id).get(1) = "null";
-                users.get(id).get(2) = "null";
-                users.get(id).get(3) = "null";
-                users.get(id).get(4) = "null";
+                for (int j = 0; j < 5; j++){
+                    users.get(id).set(j, "null");//users.get(id).get(j) = "null";
+                }
             }
         }
     }
