@@ -23,7 +23,7 @@ public class Admin extends Utilizador implements IListar{
             case 1 -> {listagens();break;}
             case 2 -> {alterarTipoUser();break;}
             case 3 -> {apagarUser();break;}
-            case 4 -> {apagarVenda();break;}
+            case 4 -> {apagarVenda(1);break;}
             case 5 -> {apagarReserva();break;}
             default -> {break;}
         }
