@@ -9,7 +9,6 @@ public class Utilizador { //DONE :D
     protected String nrTelemovel;
     protected int id;
     protected tipoUser tipo;
-    protected List<String> dados;
 
     public Utilizador(){}
     public Utilizador(String user, String pass, String nome, String nrTelemovel, int id, tipoUser tipo){
@@ -19,7 +18,6 @@ public class Utilizador { //DONE :D
         this.nrTelemovel = nrTelemovel;
         this.tipo = null;
         this.id = id;
-        dados = new ArrayList<>();
     }
 
     public int getNrUtilizadores(){
@@ -49,16 +47,17 @@ public class Utilizador { //DONE :D
         LinkedHashMap<Integer, List<String>> utilizadores = Ficheiro.loadMap("utilizadores", 6);
         Scanner input = new Scanner(System.in);
 
-        System.out.println("1 - Login\n2 - Signup\n0 - Sair");
-        System.out.print(">> ");
+        System.out.print("1 - Login\n2 - Signup\n0 - Sair\n>> ");
         int op = input.nextInt();
+
+        System.out.println();
 
         //TODO adicionar escrita dos ficheiros em falta (veiculos, reservas, vendas)
             switch (op) {
             case 0 -> {Ficheiro.escreverFicheiro("utilizadores", utilizadores);return;}
             case 1 -> login(utilizadores);
             case 2 -> signUp(utilizadores);
-            default -> {break;}
+            default -> throw new IllegalStateException("Unexpected value: " + op);
         }
     }
 
@@ -79,9 +78,9 @@ public class Utilizador { //DONE :D
                 }
             }
 
-            // mapa -> get indice 0 (1a lista) -> get nome (1o da lista)
             if(map.get(id).get(0).equals(uname) && map.get(id).get(1).equals(pword)) {
                 System.out.println("User autenticado!");
+                System.out.println();
             } else {
                 throw new UtilizadorException("User não existente!");
             }
@@ -94,12 +93,12 @@ public class Utilizador { //DONE :D
                 }
                 if (map.get(id).get(4).equals("DONO")) {
                     DonoStand dono = new DonoStand();
-                    dono.menu();
+                    dono.menuD();
                     break;
                 }
                 if (map.get(id).get(4).equals("CLIENTE")) {
                     Cliente cliente = new Cliente();
-                    cliente.menu(id);
+                    cliente.menuC(id);
                     break;
                 }
             } else {
@@ -108,6 +107,8 @@ public class Utilizador { //DONE :D
         }
     }
     protected void signUp(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
+        List dados = new ArrayList();
+
         Scanner signup = new Scanner(System.in);
         System.out.print("Username\n>> ");
         String username = signup.nextLine();
@@ -119,25 +120,25 @@ public class Utilizador { //DONE :D
         String nrTelemovel = signup.nextLine();
         tipoUser tipo = tipoUser.NULL;
 
-        for(int i = 1; i <= map.size(); i++){
+        for(int i = 0; i <= map.size(); i++){
             if(!map.containsKey(i)){
                 id = i;
             }
         }
 
-        dados.add(username);
-        dados.add(password);
-        dados.add(nome);
-        dados.add(nrTelemovel);
-        dados.add(tipo.toString());
-        System.out.println(dados);
+        dados.add(0, username);
+        dados.add(1, password);
+        dados.add(2, nome);
+        dados.add(3, nrTelemovel);
+        dados.add(4, tipo.toString());
 
         if(map.containsValue(dados)) {
             throw new UtilizadorException("!!User já existente!!");
         }else{
             map.put(id, dados);
-            System.out.println("!!Sucesso a inserir!!");
             Ficheiro.escreverFicheiro("utilizadores", map);
-            }
+            System.out.println("\n\n");
+            menuIncial();
+        }
     }
 }

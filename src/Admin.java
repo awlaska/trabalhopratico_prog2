@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Admin extends Utilizador implements IListar{
     public Admin() throws IOException {super();}
-    LinkedHashMap<Integer, List<String>> users = Ficheiro.loadMap("utilizadores", 6);
+    LinkedHashMap<Integer, List<String>> utilizadores = Ficheiro.loadMap("utilizadores", 6);
 
     //TODO completar switch do menu
     //DONE Gerir Users:
@@ -14,43 +14,53 @@ public class Admin extends Utilizador implements IListar{
     //DOING -Apagar Reserva
 
     //--> MENUS
-    public void menuA() throws IOException {
+    protected void menuA() throws IOException {
         Scanner input = new Scanner(System.in);
+
         System.out.print("0 - Sair\n1 - Listagens\n2 - Alterar Tipo de User\n3 - Apagar User\n4 - Apagar Venda\n5 - Apagar Reserva\n>> ");
         int op = input.nextInt();
+
+        System.out.println();
+
         switch (op) {
-            case 0 -> {return;}
+            case 0 -> {Ficheiro.escreverFicheiro("utilizadores", utilizadores);break;}
             case 1 -> {listagens();break;}
-            //TODO perguntar ao user quais apagar ou alterar
+            //DONE perguntar ao user quais apagar ou alterar
             case 2 -> {alterarTipoUser();break;}
             case 3 -> {apagarUser();break;}
             //TODO meter para pedir qual venda e reserva a apagar
             case 4 -> {apagarVenda(1);break;}
             case 5 -> {apagarReserva();break;}
-            default -> {break;}
+            default -> throw new IllegalStateException("Unexpected value: " + op);
         }
     }
 
-    public void listagens() throws IOException {
+    private void listagens() throws IOException {
         Scanner input = new Scanner(System.in);
+
         System.out.print("0 - Sair\n1 - Retroceder\n2 - Listar User\n3 - Listar Veiculos\n4 - Listar Compras\n5 - Listar Reservas\n>> ");
         int op = input.nextInt();
+
+        System.out.println();
+
         switch (op) {
-            case 0 -> {return;}
+            case 0 -> {Ficheiro.escreverFicheiro("utilizadores", utilizadores);break;}
             case 1 -> {menuA();}
             case 2 -> {listarUser();}
             case 3 -> {listarVeiculos();}
             case 4 -> {listarCompras();}
             case 5 -> {listarReservas();}
-            default -> {break;}
+            default -> throw new IllegalStateException("Unexpected value: " + op);
         }
     }
 
     //-->METODOS ALTERAÇÃO E REMOÇÃO DE DADOS
-    public void alterarTipoUser() throws IOException {
+    private void alterarTipoUser() throws IOException {
         Scanner inputint = new Scanner(System.in);
         Scanner inputstring = new Scanner(System.in);
-        System.out.println(users);
+
+        for (Map.Entry<Integer,List<String>> entry : utilizadores.entrySet())
+            System.out.println(entry.getKey() + "->" + entry.getValue());
 
         System.out.println("\n!!Alteração do tipo de user!!");
         System.out.print("ID do user a alterar: \n>> ");
@@ -60,25 +70,31 @@ public class Admin extends Utilizador implements IListar{
 
 
         if (tipo.equalsIgnoreCase("ADMIN") || tipo.equalsIgnoreCase("DONO") || tipo.equalsIgnoreCase("CLIENTE")) {
-            users.get(id).set(4, tipo.toUpperCase());
+            utilizadores.get(id).set(4, tipo.toUpperCase());
         } else {
             System.out.println("Tipo inválido!");
         }
 
-        Ficheiro.escreverFicheiro("utilizadores", users);
+        Ficheiro.escreverFicheiro("utilizadores", utilizadores);
+        menuA();
     }
 
-    public void apagarUser() throws IOException {
+    private void apagarUser() throws IOException {
         Scanner input = new Scanner(System.in);
-        System.out.println(users);
+
+        for (Map.Entry<Integer,List<String>> entry : utilizadores.entrySet()){
+            System.out.println("ID: " + entry.getKey() + "->" + entry.getValue());
+        }
+
         System.out.println("!!Apagar user!!");
         System.out.print("ID do user a apagar: \n>> ");
         int id = input.nextInt();
 
         for (int i = 0; i < 5; i++)
-            users.get(id).set(i, "null");
+            utilizadores.get(id).set(i, "null");
 
-        Ficheiro.escreverFicheiro("utilizadores", users);
+        Ficheiro.escreverFicheiro("utilizadores", utilizadores);
+        menuA();
     }
 
     //TODO apagarVenda e apagarReserva
@@ -100,7 +116,7 @@ public class Admin extends Utilizador implements IListar{
 
     @Override
     public void listarUser() throws IOException {
-        System.out.println(users + "\n");
+        System.out.println(utilizadores + "\n");
         menuA();
     }
 

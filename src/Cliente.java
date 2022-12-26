@@ -1,12 +1,14 @@
 import ENUM.tipoUser;
 
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Cliente extends Utilizador implements IListar{
-
-    public Cliente(){super();}
+    public Cliente() throws IOException {super();}
+    LinkedHashMap<Integer, List<String>> utilizadores = Ficheiro.loadMap("utilizadores", 6);
 
     //TODO completar switch do menu
     /*
@@ -27,25 +29,35 @@ public class Cliente extends Utilizador implements IListar{
     Editar Perfil:
     -edita só
      */
-    public void menu(int idUserAtual){
+    public void menuC(int idUserAtual) throws IOException, UtilizadorException {
         Scanner input = new Scanner(System.in);
-        System.out.println("0 - Sair || 1 - Listar veiculos || 2 - Listar compras || 3 - Listar reservas || 4 - Ver perfil || 5 - Editar perfil");
-        System.out.println(">> ");
+
         System.out.println("Id do user atual: " + idUserAtual);
+
+        System.out.print("0 - Sair\n1 - Listar veiculos\n2 - Listar compras\n3 - Listar reservas\n4 - Apagar Reserva\n5 - Alterar Data de Visita\n6 - Ver/Editar perfil\n>> ");
         int op = input.nextInt();
+
         switch (op) {
-            case 0:
-                return;
-            case 1:
-                listarVeiculos();
-            case 2:
-                listarCompras();
-            case 3:
-                listarReservas();
-            case 4:
-//                listarUser();
+            case 0 -> {Ficheiro.escreverFicheiro("utilizadores", utilizadores);break;}
+            case 1 -> listarVeiculos();
+            case 2 -> listarCompras();
+            case 3 -> listarReservas();
+            case 4 -> {/*apagarReserva();*/}
+            case 5 -> {/*alterarData();*/}
+            case 6 -> editarUser(idUserAtual);
+            default -> throw new IllegalStateException("Unexpected value: " + op);
         }
     }
+
+    private void editarUser(int idUserAtual) throws UtilizadorException, IOException {
+        Scanner input = new Scanner(System.in);
+
+        //TODO print dos valores que correspondem ao idUserAtual, perguntar o que quer alterar, criar switch com alterações
+
+        Ficheiro.escreverFicheiro("utilizadores", utilizadores);
+        menuC(idUserAtual);
+    }
+
     //TODO fazer metodos
     @Override
     public void listarCompras() {
