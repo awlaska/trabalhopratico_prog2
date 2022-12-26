@@ -23,6 +23,8 @@ public class Admin extends Utilizador implements IListar{
             case 1 -> {listagens();break;}
             case 2 -> {alterarTipoUser();break;}
             case 3 -> {apagarUser();break;}
+            case 4 -> {apagarVenda();break;}
+            case 5 -> {apagarReserva();break;}
             default -> {break;}
         }
     }
@@ -65,6 +67,16 @@ public class Admin extends Utilizador implements IListar{
                 }
             }
         }
+    }
+
+    //TODO apagarVenda e apagarReserva
+    private void apagarVenda(int nr) {
+        for (int i = 0; i < venda.length()) {
+
+        }
+    }
+    private void apagarReserva() {
+
     }
 
     //TODO listagens: O Admin consegue ver o mesmo que o Dono + contas de outros admins
