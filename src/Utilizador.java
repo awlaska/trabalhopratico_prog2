@@ -62,7 +62,7 @@ public class Utilizador { //DONE :D
         }
     }
 
-    //--> Métodos de verificaçção e criação de utilizadores
+    //--> Métodos de verificação e criação de utilizadores
     protected void login(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
         Scanner logIn = new Scanner(System.in);
         String uname = "", pword = "";

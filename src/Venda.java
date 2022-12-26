@@ -1,4 +1,5 @@
-public class Venda {
+public class Venda extends Stand{
+    private int nrVenda;
     private int idCliente;
     private int idDonoStand;
     private int idCarro;
@@ -7,13 +8,21 @@ public class Venda {
         /*
         adicionar venda á list
          */
-    public Venda(int idCliente, int idDonoStand, int idCarro){
+    public Venda(int nrVenda, int idCliente, int idDonoStand, int idCarro){
+        this.nrVenda = nrVenda;
         this.idCliente = idCliente;
         this.idDonoStand = idDonoStand;
         this.idCarro = idCarro;
     }
 
+    //DONE
     public Venda(int nrReserva){
-        Reserva.getReservas()
+        for (int i = 0; i < vendas.size(); i++) {
+            if(reservas.get(i).getNrReserva() == nrReserva){
+                Venda venda = new Venda(reservas.get(i).getNrReserva(), reservas.get(i).getIdCliente(), reservas.get(i).getIdDonoStand(), reservas.get(i).getIdCarro());
+                vendas.add(venda);
+                reservas.remove(i);
+            }
+        }
     }
 }

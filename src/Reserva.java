@@ -1,14 +1,12 @@
 import java.util.Date;
 import java.util.List;
 
-public class Reserva {
+public class Reserva extends Stand{
     private int nrReserva;
     private Date dataReserva;
     private int idCliente;
     private int idDonoStand;
     private int idCarro;
-
-    private List<Reserva> reservas;
 
     public Reserva(int nrReserva, Date dataReserva, int idCliente, int idDonoStand, int idCarro) {
         this.nrReserva = nrReserva;
@@ -30,8 +28,16 @@ public class Reserva {
         return nrReserva;
     }
 
-    public List<Reserva> getReservas() {
-        return reservas;
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public int getIdDonoStand() {
+        return idDonoStand;
+    }
+
+    public int getIdCarro() {
+        return idCarro;
     }
 
     //DONE adicionarReserva a list ?? que list?
