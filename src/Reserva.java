@@ -10,13 +10,6 @@ public class Reserva {
 
     private List<Reserva> reservas;
 
-    //TODO metodos para:
-        /*
-        adicionar reservas á list
-        alterar data da reserva
-        cacelar/apagar reserva
-         */
-
     public Reserva(int nrReserva, Date dataReserva, int idCliente, int idDonoStand, int idCarro) {
         this.nrReserva = nrReserva;
         this.dataReserva = dataReserva;
