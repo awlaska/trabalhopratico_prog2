@@ -71,9 +71,9 @@ public class Admin extends Utilizador implements IListar{
 
     //TODO apagarVenda e apagarReserva
     private void apagarVenda(int nr) {
-        for (int i = 0; i < venda.length()) {
-
-        }
+//        for (int i = 0; i < venda.length()) {
+//
+//        }
     }
     private void apagarReserva() {
 
