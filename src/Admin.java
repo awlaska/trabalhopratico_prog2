@@ -14,7 +14,7 @@ public class Admin extends Utilizador implements IListar{
 //        -Apagar Reserva
 
     //--> MENUS
-    public void menuA(){
+    public void menuA() throws IOException {
         Scanner input = new Scanner(System.in);
         System.out.print("0 - Sair\n1 - Listagens\n2 - Alterar tipo de user\n3 - Apagar user\n4- algo registos...\n>> ");
         int op = input.nextInt();
@@ -29,7 +29,7 @@ public class Admin extends Utilizador implements IListar{
         }
     }
 
-    public void listagens(){
+    public void listagens() throws IOException {
         Scanner input = new Scanner(System.in);
         System.out.print("0 - Sair\n1 - Retroceder\n2 - Listar User\n3 - Listar Veiculos\n4 - Listar Compras\n5 - Listar Reservas\n>> ");
         int op = input.nextInt();
@@ -45,7 +45,7 @@ public class Admin extends Utilizador implements IListar{
     }
 
     //-->METODOS ALTERAÇÃO E REMOÇÃO DE DADOS
-    public void alterarTipoUser(){
+    public void alterarTipoUser() throws IOException {
         listarUser();
         System.out.println("!!Alteração do tipo de user!!");
         System.out.print("ID do user a alterar: \n>> ");
@@ -53,20 +53,18 @@ public class Admin extends Utilizador implements IListar{
         System.out.print("\nTipo de user a atribuir (ADMIN, DONO, CLIENTE): \n>> ");
         //Logic goes here
     }
-    public void apagarUser(){
+    public void apagarUser() throws IOException {
         Scanner input = new Scanner(System.in);
-        listarUser();
+//        listarUser();
+        System.out.println(users);
         System.out.println("!!Apagar user!!");
         System.out.print("ID do user a apagar: \n>> ");
         int id = input.nextInt();
 
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).equals(id)) {
-                for (int j = 0; j < 5; j++){
-                    users.get(id).set(j, "null");//users.get(id).get(j) = "null";
-                }
-            }
-        }
+        for (int i = 0; i < 5; i++)
+            users.get(id).set(i, "null");
+
+        Ficheiro.escreverFicheiro("utilizadores", users);
     }
 
     //TODO apagarVenda e apagarReserva
@@ -83,25 +81,25 @@ public class Admin extends Utilizador implements IListar{
 
     //--> METODOS LISTAGEM
     @Override
-    public void listarCompras() {
+    public void listarCompras() throws IOException {
 //        System.out.println(compras + "\n");
         menuA();
     }
 
     @Override
-    public void listarUser() {
+    public void listarUser() throws IOException {
         System.out.println(users + "\n");
         menuA();
     }
 
     @Override
-    public void listarReservas() {
+    public void listarReservas() throws IOException {
 //        System.out.println(reservas + "\n");
         menuA();
     }
 
     @Override
-    public void listarVeiculos() {
+    public void listarVeiculos() throws IOException {
 //        System.out.println(veiculos);
         menuA();
     }
