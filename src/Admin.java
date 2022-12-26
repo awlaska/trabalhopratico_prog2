@@ -5,13 +5,13 @@ public class Admin extends Utilizador implements IListar{
     public Admin() throws IOException {super();}
     LinkedHashMap<Integer, List<String>> users = Ficheiro.loadMap("utilizadores", 6);
 
-//  TODO completar switch do menu
-//        Gerir Users:
-//        - Alterar tipo de user
-//        - Apagar user
-//        Gerir Registos:
-//        -Apagar Venda
-//        -Apagar Reserva
+    //TODO completar switch do menu
+    //DONE Gerir Users:
+    //DONE - Alterar tipo de user
+    //TODO - Apagar user
+    //DONE Gerir Registos:
+    //DOING -Apagar Venda
+    //DOING -Apagar Reserva
 
     //--> MENUS
     public void menuA() throws IOException {
@@ -46,16 +46,28 @@ public class Admin extends Utilizador implements IListar{
 
     //-->METODOS ALTERAÇÃO E REMOÇÃO DE DADOS
     public void alterarTipoUser() throws IOException {
-        listarUser();
-        System.out.println("!!Alteração do tipo de user!!");
+        Scanner inputint = new Scanner(System.in);
+        Scanner inputstring = new Scanner(System.in);
+        System.out.println(users);
+
+        System.out.println("\n!!Alteração do tipo de user!!");
         System.out.print("ID do user a alterar: \n>> ");
-        //Logic goes here
-        System.out.print("\nTipo de user a atribuir (ADMIN, DONO, CLIENTE): \n>> ");
-        //Logic goes here
+        int id = inputint.nextInt();
+        System.out.print("Tipo de user a atribuir (ADMIN, DONO, CLIENTE): \n>> ");
+        String tipo = inputstring.nextLine();
+
+
+        if (tipo.equalsIgnoreCase("ADMIN") || tipo.equalsIgnoreCase("DONO") || tipo.equalsIgnoreCase("CLIENTE")) {
+            users.get(id).set(4, tipo.toUpperCase());
+        } else {
+            System.out.println("Tipo inválido!");
+        }
+
+        Ficheiro.escreverFicheiro("utilizadores", users);
     }
+
     public void apagarUser() throws IOException {
         Scanner input = new Scanner(System.in);
-//        listarUser();
         System.out.println(users);
         System.out.println("!!Apagar user!!");
         System.out.print("ID do user a apagar: \n>> ");
