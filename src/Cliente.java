@@ -52,7 +52,28 @@ public class Cliente extends Utilizador implements IListar{
     private void editarUser(int idUserAtual) throws UtilizadorException, IOException {
         Scanner input = new Scanner(System.in);
 
-        //TODO print dos valores que correspondem ao idUserAtual, perguntar o que quer alterar, criar switch com alterações
+        //DONE print dos valores que correspondem ao idUserAtual
+        for (Map.Entry<Integer,List<String>> entry : utilizadores.entrySet())
+            if (entry.getKey().equals(idUserAtual))
+                System.out.println("ID: " + entry.getKey() + "->" + entry.getValue());
+
+        //TODO criar switch com alterações
+        System.out.println();
+
+        System.out.println("\n!!Editar perfil!!");
+        System.out.print("Username: \n>> ");
+        String user = input.nextLine();
+        System.out.print("Password: \n>> ");
+        String pass = input.nextLine();
+        System.out.print("Nome: \n>> ");
+        String nome = input.nextLine();
+        System.out.print("Telefone: \n>> ");
+        String tele = input.nextLine();
+
+        utilizadores.get(idUserAtual).set(0, user);
+        utilizadores.get(idUserAtual).set(1, pass);
+        utilizadores.get(idUserAtual).set(2, nome);
+        utilizadores.get(idUserAtual).set(4, tele);
 
         Ficheiro.escreverFicheiro("utilizadores", utilizadores);
         menuC(idUserAtual);
