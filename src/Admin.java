@@ -16,11 +16,12 @@ public class Admin extends Utilizador implements IListar{
     //--> MENUS
     public void menuA() throws IOException {
         Scanner input = new Scanner(System.in);
-        System.out.print("0 - Sair\n1 - Listagens\n2 - Alterar tipo de user\n3 - Apagar user\n4- algo registos...\n>> ");
+        System.out.print("0 - Sair\n1 - Listagens\n2 - Alterar Tipo de User\n3 - Apagar User\n4 - Apagar Venda\n5 - Apagar Reserva\n>> ");
         int op = input.nextInt();
         switch (op) {
             case 0 -> {return;}
             case 1 -> {listagens();break;}
+            //TODO perguntar ao user quais apagar ou alterar
             case 2 -> {alterarTipoUser();break;}
             case 3 -> {apagarUser();break;}
             case 4 -> {apagarVenda(1);break;}
@@ -85,9 +86,7 @@ public class Admin extends Utilizador implements IListar{
 //
 //        }
     }
-    private void apagarReserva() {
-
-    }
+    private void apagarReserva() {}
 
     //TODO listagens: O Admin consegue ver o mesmo que o Dono + contas de outros admins
 
