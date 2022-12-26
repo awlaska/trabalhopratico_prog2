@@ -24,6 +24,7 @@ public class Admin extends Utilizador implements IListar{
             //TODO perguntar ao user quais apagar ou alterar
             case 2 -> {alterarTipoUser();break;}
             case 3 -> {apagarUser();break;}
+            //TODO meter para pedir qual venda e reserva a apagar
             case 4 -> {apagarVenda(1);break;}
             case 5 -> {apagarReserva();break;}
             default -> {break;}
