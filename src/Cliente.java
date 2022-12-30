@@ -1,14 +1,15 @@
-import ENUM.tipoUser;
-
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Cliente extends Utilizador implements IListar{
-    public Cliente() throws IOException {super();}
+public class Cliente extends Utilizador {
     LinkedHashMap<Integer, List<String>> utilizadores = Ficheiro.loadMap("utilizadores", 6);
+    LinkedHashMap<Integer, List<String>> veiculos = Ficheiro.loadMap("veiculos", 6);
+    public Cliente() throws IOException {
+        super();
+    }
 
     //TODO completar switch do menu
     /*
@@ -38,7 +39,7 @@ public class Cliente extends Utilizador implements IListar{
         int op = input.nextInt();
 
         switch (op) {
-            case 0 -> {Ficheiro.escreverFicheiro("utilizadores", utilizadores);break;}
+            case 0 -> {Ficheiro.saveAll(utilizadores, veiculos);}
             case 1 -> listarVeiculos();
             case 2 -> listarCompras();
             case 3 -> listarReservas();
@@ -51,49 +52,77 @@ public class Cliente extends Utilizador implements IListar{
 
     private void editarUser(int idUserAtual) throws UtilizadorException, IOException {
         Scanner input = new Scanner(System.in);
-
-        //DONE print dos valores que correspondem ao idUserAtual
-        for (Map.Entry<Integer,List<String>> entry : utilizadores.entrySet())
-            if (entry.getKey().equals(idUserAtual))
-                System.out.println("ID: " + entry.getKey() + "->" + entry.getValue());
-
-        //TODO criar switch com alterações
-        System.out.println();
-
-        System.out.println("\n!!Editar perfil!!");
-        System.out.print("Username: \n>> ");
-        String user = input.nextLine();
-        System.out.print("Password: \n>> ");
-        String pass = input.nextLine();
-        System.out.print("Nome: \n>> ");
-        String nome = input.nextLine();
-        System.out.print("Telefone: \n>> ");
-        String tele = input.nextLine();
-
-        utilizadores.get(idUserAtual).set(0, user);
-        utilizadores.get(idUserAtual).set(1, pass);
-        utilizadores.get(idUserAtual).set(2, nome);
-        utilizadores.get(idUserAtual).set(4, tele);
-
-        Ficheiro.escreverFicheiro("utilizadores", utilizadores);
-        menuC(idUserAtual);
+        Scanner inputOP = new Scanner(System.in);
+        int op = -1;
+        while (op != 0) {
+            //DONE print dos valores que correspondem ao idUserAtual
+            listarUsers(idUserAtual);
+            System.out.println("\n!!Editar perfil!!\n");
+            System.out.print("0 - Sair\n1 - Username\n2 - Password\n3 - Nome\n4 - Telefone\n>> ");
+            op = inputOP.nextInt();
+            switch (op) {
+                case 0 -> {
+                    Ficheiro.saveAll(utilizadores, veiculos);
+                    menuC(idUserAtual);
+                }
+                case 1 -> {
+                    System.out.print("Username: \n>> ");
+                    String user = input.nextLine();
+                    utilizadores.get(idUserAtual).set(0, user);
+                }
+                case 2 -> {
+                    System.out.print("Password: \n>> ");
+                    String pass = input.nextLine();
+                    utilizadores.get(idUserAtual).set(1, pass);
+                }
+                case 3 -> {
+                    System.out.print("Nome: \n>> ");
+                    String nome = input.nextLine();
+                    utilizadores.get(idUserAtual).set(2, nome);
+                }
+                case 4 -> {
+                    System.out.print("Telefone: \n>> ");
+                    String tele = input.nextLine();
+                    utilizadores.get(idUserAtual).set(4, tele);
+                }
+                default -> throw new IllegalStateException("Unexpected value: " + op);
+            }
+        }
     }
 
     //TODO fazer metodos
-    @Override
     public void listarCompras() {
-
+        System.out.println();
     }
-    @Override
-    public void listarUser() {
 
+    private void listarUsers(int idUserAtual) {
+        System.out.println("\nid -> username, password, nome, telefone");
+        for (Map.Entry<Integer, List<String>> entry : utilizadores.entrySet())
+            if (entry.getKey().equals(idUserAtual))
+                System.out.println(entry.getKey() +
+                        " -> " + entry.getValue().get(0) +
+                        ", " + entry.getValue().get(1) +
+                        ", " + entry.getValue().get(2) +
+                        ", " + entry.getValue().get(3));
+        System.out.println();
     }
-    @Override
+
     public void listarReservas() {
+        System.out.println();
 
     }
-    @Override
+
     public void listarVeiculos() {
+        System.out.println("\nid -> marca, modelo, matricula, data de entrada");
+        for (Map.Entry<Integer, List<String>> entry : veiculos.entrySet())
+            if (entry.getValue().contains("DISPONIVEL")){
+                System.out.println(entry.getKey() +
+                        " -> " + entry.getValue().get(0) +
+                        ", " + entry.getValue().get(1) +
+                        ", " + entry.getValue().get(2) +
+                        ", " + entry.getValue().get(3));
+            }
+        System.out.println();
 
     }
 }

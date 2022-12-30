@@ -1,12 +1,9 @@
-import java.util.*;
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 public class Stand {
-    private Utilizador donoStand;
-    private List<Veiculo> veiculos; //TODO verificar se List
-
     protected List<Reserva> reservas;
     protected List<Venda> vendas;
-
-    //Listar veiculos
-
+    public Stand() throws IOException {}
 }

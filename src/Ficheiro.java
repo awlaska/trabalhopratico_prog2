@@ -1,17 +1,10 @@
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Ficheiro {
-    //DOING teste
-//    public static void main(String[] args) throws IOException {
-//        try {
-//            loadMap("utilizadores");
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-
-    //Escrever no ficheiro utilizadores
     public static void escreverFicheiro(String ficheiro, LinkedHashMap<Integer, List<String>> map) throws IOException {
         try {
             File utilizadores = new File("src/Ficheiros/" + ficheiro + ".csv");
@@ -28,19 +21,60 @@ public class Ficheiro {
                 bf.newLine();
             }
             bf.flush();
-            System.out.println("Escreveu com successo.");
-        }catch (IOException e) {
-            System.out.println("Ocorreu um erro.");
+            System.out.println("Escreveu com successo.\n");
+        } catch (IOException e) {
+            System.out.println("Ocorreu um erro.\n");
+            e.printStackTrace();
+        }
+    }
+    public static void escreverFicheiro2(String ficheiro, LinkedHashMap<Integer, List<String>> map) throws IOException {
+        try {
+            File veiculos = new File("src/Ficheiros/" + ficheiro + ".csv");
+            BufferedWriter bf = null;
+            bf = new BufferedWriter(new FileWriter(veiculos));
+            for (Map.Entry<Integer, List<String>> entry : map.entrySet()) {
+                int key = entry.getKey();
+                String user = entry.getValue().get(0);
+                String password = entry.getValue().get(1);
+                String nome = entry.getValue().get(2);
+                String nr = entry.getValue().get(3);
+                String tipo = entry.getValue().get(4);
+                bf.write(key + ";" + user + ";" + password + ";" + nome + ";" + nr + ";" + tipo);
+                bf.newLine();
+            }
+            bf.flush();
+            System.out.println("Escreveu com successo.\n");
+        } catch (IOException e) {
+            System.out.println("Ocorreu um erro.\n");
             e.printStackTrace();
         }
     }
 
-    //TODO escrever no ficheiro veiculos
-    //TODO escrever no ficheiro reservas
-    //TODO escrever no ficheiro vendas
+    public static void escreverFicheiroVeiculo(String ficheiro, LinkedHashMap<Integer, List<String>> map) {
+        try {
+            File veiculos = new File("src/Ficheiros/" + ficheiro + ".csv");
+            BufferedWriter bf = null;
+            bf = new BufferedWriter(new FileWriter(veiculos));
+            for (Map.Entry<Integer, List<String>> entry : map.entrySet()) {
+                int key = entry.getKey();
+                String marca = entry.getValue().get(0);
+                String modelo = entry.getValue().get(1);
+                String matricula = entry.getValue().get(2);
+                String data = entry.getValue().get(3);
+                String tipo = entry.getValue().get(4);
+                bf.write(key + ";" + marca + ";" + modelo + ";" + matricula + ";" + data + ";" + tipo);
+                bf.newLine();
+            }
+            bf.flush();
+            System.out.println("Escreveu com successo.\n");
+        } catch (IOException e) {
+            System.out.println("Ocorreu um erro.\n");
+            e.printStackTrace();
+        }
+    }
 
     public static LinkedHashMap<Integer, List<String>> loadMap(String ficheiro, int size) throws IOException {
-        LinkedHashMap<Integer, List<String>> userData = new LinkedHashMap<>();
+        LinkedHashMap<Integer, List<String>> data = new LinkedHashMap<>();
         String currentLine = "";
         String[] valuesTMP;
 
@@ -59,21 +93,13 @@ public class Ficheiro {
             for (int i = 1; i < size; i++) {
                 values.add(valuesTMP[0].split(";")[i].trim());
             }
-            userData.put(nkey, values); // <--this line was moved out from internal for loop
+            data.put(nkey, values); // <--this line was moved out from internal for loop
         }
-        return userData;
+        return data;
     }
 
-
-//    public void escreverFicheiro(String ficheiro, String utilizador, String donoStand, String veiculo, String dataReserva){
-//        try {
-//            FileWriter infoE = new FileWriter("src/Ficheiros/" + ficheiro + ".csv");
-//            infoE.write(utilizador + ";" + donoStand + ";" + veiculo + ";" + dataReserva + "\n");
-//            infoE.close();
-//            System.out.println("Escreveu com successo.");
-//        } catch (IOException e) {
-//            System.out.println("Ocorreu um erro.");
-//            e.printStackTrace();
-//        }
-//    }
+    public static void saveAll(LinkedHashMap<Integer, List<String>> mapU, LinkedHashMap<Integer, List<String>> mapV) throws IOException {
+        escreverFicheiro("utilizadores", mapU);
+        escreverFicheiroVeiculo("veiculos", mapV);
+    }
 }
