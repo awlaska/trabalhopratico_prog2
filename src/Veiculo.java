@@ -1,8 +1,9 @@
 import ENUM.estadoVeiculo;
 
+import java.io.IOException;
 import java.util.Date;
 
-public class Veiculo {
+public class Veiculo extends Stand{
     //TODO metodos:
         /*
         Criar list para armazenar veiculos
@@ -11,31 +12,24 @@ public class Veiculo {
         alterar estado do veiculo
         remover veiculo da list
         */
-    private Utilizador donoStand;
+
     private int numCarro;
     private String marca;
     private String modelo;
     private Date dataStand;
-    private estadoVeiculo estado = estadoVeiculo.DISPONIVEL;
+    private String matricula;
+    private final estadoVeiculo estado = estadoVeiculo.DISPONIVEL;
 
-    private int quantidadeCarros;
-
-    public Veiculo(){
-        this.quantidadeCarros++;
+    public Veiculo() throws IOException {
+        super();
     }
 
-    public Veiculo(Integer codigo, String marca, String modelo, Date dataEntradaStand){
+    public Veiculo(Integer codigo, String marca, String modelo, String matricula, Date dataEntradaStand) throws IOException {
+        super();
         this.numCarro = codigo;
         this.marca = marca;
         this.modelo = modelo;
+        this.matricula = matricula;
         this.dataStand = dataEntradaStand;
-        quantidadeCarros++;
-    }
-
-    public void apresentaDados(){
-        for(int i = 0; i < quantidadeCarros; i++){
-                System.out.print("Marca: " + this.marca + "Modelo: " + this.modelo
-                        + "Data de entrada no stand" + this.dataStand);
-        }
     }
 }

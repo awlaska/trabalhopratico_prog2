@@ -1,14 +1,15 @@
+import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 
-public class Reserva extends Stand{
-    private int nrReserva;
+public class Reserva extends Stand {
+    private final int nrReserva;
     private Date dataReserva;
-    private int idCliente;
-    private int idDonoStand;
-    private int idCarro;
+    private final int idCliente;
+    private final int idDonoStand;
+    private final int idCarro;
 
-    public Reserva(int nrReserva, Date dataReserva, int idCliente, int idDonoStand, int idCarro) {
+    public Reserva(int nrReserva, Date dataReserva, int idCliente, int idDonoStand, int idCarro) throws IOException {
+        super();
         this.nrReserva = nrReserva;
         this.dataReserva = dataReserva;
         this.idCliente = idCliente;
@@ -41,23 +42,23 @@ public class Reserva extends Stand{
     }
 
     //DONE adicionarReserva a list ?? que list?
-    public void adicionarReserva(int nrReserva, Date dataReserva, int idCliente, int idDonoStand, int idCarro){
+    public void adicionarReserva(int nrReserva, Date dataReserva, int idCliente, int idDonoStand, int idCarro) throws IOException {
         new Reserva(nrReserva, dataReserva, idCliente, idDonoStand, idCarro);
     }
 
     //DONE alterarDataReserva
-    public void alterarDataReserva(int nrReserva, Date novaDataReserva){
+    public void alterarDataReserva(int nrReserva, Date novaDataReserva) {
         for (int i = 0; i < reservas.size(); i++) {
-            if(reservas.get(i).getNrReserva() == nrReserva){
+            if (reservas.get(i).getNrReserva() == nrReserva) {
                 reservas.get(i).setDataReserva(novaDataReserva);
             }
         }
     }
 
     //DONE apagarReserva
-    public void apagarReserva(int nrReserva){
+    public void apagarReserva(int nrReserva) {
         for (int i = 0; i < reservas.size(); i++) {
-            if(reservas.get(i).getNrReserva() == nrReserva){
+            if (reservas.get(i).getNrReserva() == nrReserva) {
                 reservas.remove(i);
             }
         }

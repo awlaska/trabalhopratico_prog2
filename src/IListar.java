@@ -1,10 +1,11 @@
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.List;
 
 public interface IListar {
-    void listarVeiculos() throws IOException;
-    void listarReservas() throws IOException;
-    void listarCompras() throws IOException;
-    void listarUser() throws IOException;
+    void listarVeiculos() throws IOException, UtilizadorException;
+
+    void listarReservas() throws IOException, UtilizadorException;
+
+    void listarCompras() throws IOException, UtilizadorException;
+
+    void listarUsers() throws IOException, UtilizadorException;
 }
