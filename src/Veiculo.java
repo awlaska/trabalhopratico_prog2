@@ -26,16 +26,7 @@ public class Veiculo extends Stand{
         super();
     }
 
-    public Veiculo(Integer codigo, String marca, String modelo, String matricula, String dataManufatura) throws IOException {
-        super();
-        this.numCarro = codigo;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.matricula = matricula;
-        this.dataManufatura = dataManufatura;
-    }
-
-    public void adicionarVeiculo(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
+    public void adicionarVeiculo(LinkedHashMap<Integer, List<String>> map) throws IOException {
         List dados = new ArrayList();
 
 //        while (!veiculos.containsValue(dados1)) {
