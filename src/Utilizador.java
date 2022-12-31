@@ -13,21 +13,23 @@ public class Utilizador { //DONE :D
     protected String nrTelemovel;
     protected int id;
     protected tipoUser tipo;
+    protected List<String> dados;
 
     public Utilizador() throws IOException {}
 
-    public Utilizador(String user, String pass, String nome, String nrTelemovel, int id, tipoUser tipo) throws IOException {
+    public Utilizador(String user, String pass, String nome, String nrTelemovel, int id, tipoUser tipo, List<String> dados) throws IOException {
         this.username = user;
         this.password = pass;
         this.nome = nome;
         this.nrTelemovel = nrTelemovel;
         this.tipo = null;
         this.id = id;
+        this.dados = dados;
     }
 
     public void menuIncial() throws IOException, UtilizadorException {
         LinkedHashMap<Integer, List<String>> utilizadores = Ficheiro.loadMap("utilizadores", 6);
-        LinkedHashMap<Integer, List<String>> veiculos = Ficheiro.loadMap("veiculos", 5);
+        LinkedHashMap<Integer, List<String>> veiculos = Ficheiro.loadMap("veiculos", 6);
         Scanner input = new Scanner(System.in);
 
         System.out.print("1 - Login\n2 - Signup\n0 - Sair\n>> ");
@@ -91,18 +93,18 @@ public class Utilizador { //DONE :D
 
     //TODO verificar se existe no map
     protected void signUp(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
-        List dados = new ArrayList();
-
+        this.dados = new ArrayList();
         Scanner signup = new Scanner(System.in);
+
         System.out.print("Username\n>> ");
-        String username = signup.nextLine();
+        this.username = signup.nextLine();
         System.out.print("Password\n>> ");
-        String password = signup.nextLine();
+        this.password = signup.nextLine();
         System.out.print("Nome\n>> ");
-        String nome = signup.nextLine();
+        this.nome = signup.nextLine();
         System.out.print("Número de telemovel\n>> ");
-        String nrTelemovel = signup.nextLine();
-        tipoUser tipo = tipoUser.NULL;
+        this.nrTelemovel = signup.nextLine();
+        this.tipo = tipoUser.NULL;
 
         for (int i = 0; i <= map.size(); i++) {
             if (!map.containsKey(i)) {
