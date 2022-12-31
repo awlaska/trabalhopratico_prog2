@@ -86,7 +86,7 @@ public class DonoStand extends Utilizador implements IListar {
     protected void adicionarVeiculo(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
         List dados = new ArrayList();
 
-//        while (!veiculos.containsValue(dados1)) {
+        while (!veiculos.containsValue(dados)) {
             Scanner adicionar = new Scanner(System.in);
             System.out.print("Marca\n>> ");
             String marca = adicionar.nextLine();
@@ -97,7 +97,6 @@ public class DonoStand extends Utilizador implements IListar {
             System.out.print("Data entrada no stand (dd-mm-aaaa)\n>> ");
             String data = adicionar.nextLine();
             estadoVeiculo tipo = estadoVeiculo.DISPONIVEL;
-//            dados1.add(0,matricula);
 
             for (int i = 0; i <= map.size(); i++) {
                 if (!map.containsKey(i)) {
@@ -111,13 +110,6 @@ public class DonoStand extends Utilizador implements IListar {
             dados.add(3, data);
             dados.add(4, tipo.toString());
 
-//            boolean existe = false;
-//            for (int i = 0; i < veiculos.size(); i++) {
-//                if(veiculos.get(i).contains(matricula)){
-//                    existe = true;
-//                }
-//            }
-
             if (map.containsValue(dados)) {
                 System.out.println("Matricula ja existente!");
             } else {
@@ -127,7 +119,7 @@ public class DonoStand extends Utilizador implements IListar {
                 System.out.println("\n\n");
                 menuD();
             }
-//        }
+        }
     }
 
     private void alterarEstado() throws UtilizadorException, IOException {
@@ -214,5 +206,4 @@ public class DonoStand extends Utilizador implements IListar {
                         ", " + entry.getValue().get(4));
         System.out.println();
     }
-
 }
