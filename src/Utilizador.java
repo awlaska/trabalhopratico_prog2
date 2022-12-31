@@ -37,7 +37,7 @@ public class Utilizador { //DONE :D
 
         //TODO adicionar escrita dos ficheiros em falta (veiculos, reservas, vendas)
         switch (op) {
-            case 0 -> {Ficheiro.saveAll(utilizadores, veiculos);break;}
+            case 0 -> {break;}
             case 1 -> login(utilizadores);
             case 2 -> signUp(utilizadores);
             default -> throw new IllegalStateException("Unexpected value: " + op);
@@ -93,7 +93,7 @@ public class Utilizador { //DONE :D
     protected void signUp(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
         List dados = new ArrayList();
 
-        while (!map.get(0).get(0).equals(username)) {
+        while (map.get(0).get(0).equals(username)){
             Scanner signup = new Scanner(System.in);
             System.out.print("Username\n>> ");
             this.username = signup.nextLine();
@@ -118,7 +118,8 @@ public class Utilizador { //DONE :D
             dados.add(4, tipo.toString());
 
             if (map.get(0).get(0).equals(username)) {
-                throw new UtilizadorException("!!User já existente!!");
+//                throw new UtilizadorException("!!User já existente!!");
+                System.out.println("User já existe!");
             } else {
                 map.put(id, dados);
                 Ficheiro.escreverFicheiro("utilizadores", map);

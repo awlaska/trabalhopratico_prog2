@@ -85,15 +85,15 @@ public class DonoStand extends Utilizador implements IListar {
     //TODO verificar se existe no map
     protected void adicionarVeiculo(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
         List dados = new ArrayList();
-
-        while (!veiculos.containsValue(dados)) {
+        String matricula = "";
+//        while (map.get(0).get(2).contains(matricula)) {
             Scanner adicionar = new Scanner(System.in);
             System.out.print("Marca\n>> ");
             String marca = adicionar.nextLine();
             System.out.print("Modelo\n>> ");
             String modelo = adicionar.nextLine();
             System.out.print("Matricula\n>> ");
-            String matricula = adicionar.nextLine();
+            matricula = adicionar.nextLine();
             System.out.print("Data entrada no stand (dd-mm-aaaa)\n>> ");
             String data = adicionar.nextLine();
             estadoVeiculo tipo = estadoVeiculo.DISPONIVEL;
@@ -115,11 +115,10 @@ public class DonoStand extends Utilizador implements IListar {
             } else {
                 map.put(id, dados);
                 Ficheiro.escreverFicheiro2("veiculos", map);
-                System.out.println(veiculos);
                 System.out.println("\n\n");
                 menuD();
             }
-        }
+//        }
     }
 
     private void alterarEstado() throws UtilizadorException, IOException {
