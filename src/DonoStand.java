@@ -89,6 +89,94 @@ public class DonoStand extends Utilizador implements IListar {
         menuD();
     }
 
+<<<<<<< HEAD
+=======
+    //TODO verificar se existe no map
+    protected void adicionarVeiculo(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
+        List dados = new ArrayList();
+        String matricula = "";
+//        while (map.get(0).get(2).contains(matricula)) {
+            Scanner adicionar = new Scanner(System.in);
+            System.out.print("Marca\n>> ");
+            String marca = adicionar.nextLine();
+            System.out.print("Modelo\n>> ");
+            String modelo = adicionar.nextLine();
+            System.out.print("Matricula\n>> ");
+            matricula = adicionar.nextLine();
+            System.out.print("Data entrada no stand (dd-mm-aaaa)\n>> ");
+            String data = adicionar.nextLine();
+            estadoVeiculo tipo = estadoVeiculo.DISPONIVEL;
+
+            for (int i = 0; i <= map.size(); i++) {
+                if (!map.containsKey(i)) {
+                    id = i;
+                }
+            }
+
+            dados.add(0, marca);
+            dados.add(1, modelo);
+            dados.add(2, matricula);
+            dados.add(3, data);
+            dados.add(4, tipo.toString());
+
+            if (map.containsValue(dados)) {
+                System.out.println("Matricula ja existente!");
+            } else {
+                map.put(id, dados);
+                Ficheiro.escreverFicheiro2("veiculos", map);
+                System.out.println("\n\n");
+                menuD();
+            }
+//        }
+    }
+
+    private void alterarEstado() throws UtilizadorException, IOException {
+        Scanner inputint = new Scanner(System.in);
+        Scanner inputstring = new Scanner(System.in);
+
+        listarVeiculos();
+
+        System.out.println("\n!!Alteração do estado do veiculo!!");
+        System.out.print("ID do veiculo:\n>> ");
+        int id = inputint.nextInt();
+        System.out.print("Estado a atribuir (DESATIVADO, RESERVADO, VENDIDO): \n>> ");
+        String estado = inputstring.nextLine();
+
+
+        if (estado.equalsIgnoreCase("DESATIVADO") || estado.equalsIgnoreCase("RESERVADO") || estado.equalsIgnoreCase("VENDIDO")) {
+            veiculos.get(id).set(4, estado.toUpperCase());
+        } else {
+            System.out.println("Tipo inválido!");
+        }
+
+        Ficheiro.escreverFicheiro("veiculos", veiculos);
+        menuD();
+    }
+
+    private void apagarVeiculo() throws IOException, UtilizadorException {
+        Scanner input = new Scanner(System.in);
+
+        listarVeiculos();
+
+        System.out.println("\n!!Apagar veiculo!!");
+        System.out.print("ID do veiculo: \n>> ");
+        int id = input.nextInt();
+
+        for (int i = 0; i < 5; i++)
+            veiculos.get(id).set(i, "null");
+
+        Ficheiro.escreverFicheiro("veiculos", veiculos);
+        menuD();
+    }
+
+    //TODO listagens:
+        /*
+        DONE Consegue ver tudo menos as contas de admins
+        DOING Listagem de reservas por ordem de data de visita, data mais proxima para menos
+         */
+
+
+>>>>>>> main
     @Override
     public void listarCompras() throws IOException, UtilizadorException {
         System.out.println();
@@ -127,5 +215,4 @@ public class DonoStand extends Utilizador implements IListar {
                         ", " + entry.getValue().get(4));
         System.out.println();
     }
-
 }

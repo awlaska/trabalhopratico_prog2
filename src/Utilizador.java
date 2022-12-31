@@ -39,7 +39,7 @@ public class Utilizador { //DONE :D
 
         //TODO adicionar escrita dos ficheiros em falta (veiculos, reservas, vendas)
         switch (op) {
-            case 0 -> {Ficheiro.saveAll(utilizadores, veiculos);break;}
+            case 0 -> {break;}
             case 1 -> login(utilizadores);
             case 2 -> signUp(utilizadores);
             default -> throw new IllegalStateException("Unexpected value: " + op);
@@ -93,6 +93,7 @@ public class Utilizador { //DONE :D
 
     //TODO verificar se existe no map
     protected void signUp(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
+<<<<<<< HEAD
         this.dados = new ArrayList();
         Scanner signup = new Scanner(System.in);
 
@@ -105,26 +106,43 @@ public class Utilizador { //DONE :D
         System.out.print("Número de telemovel\n>> ");
         this.nrTelemovel = signup.nextLine();
         this.tipo = tipoUser.NULL;
+=======
+        List dados = new ArrayList();
 
-        for (int i = 0; i <= map.size(); i++) {
-            if (!map.containsKey(i)) {
-                id = i;
+        while (map.get(0).get(0).equals(username)){
+            Scanner signup = new Scanner(System.in);
+            System.out.print("Username\n>> ");
+            this.username = signup.nextLine();
+            System.out.print("Password\n>> ");
+            this.password = signup.nextLine();
+            System.out.print("Nome\n>> ");
+            this.nome = signup.nextLine();
+            System.out.print("Número de telemovel\n>> ");
+            this.nrTelemovel = signup.nextLine();
+            this.tipo = tipoUser.NULL;
+>>>>>>> main
+
+            for (int i = 0; i <= map.size(); i++) {
+                if (!map.containsKey(i)) {
+                    id = i;
+                }
             }
-        }
 
-        dados.add(0, username);
-        dados.add(1, password);
-        dados.add(2, nome);
-        dados.add(3, nrTelemovel);
-        dados.add(4, tipo.toString());
+            dados.add(0, username);
+            dados.add(1, password);
+            dados.add(2, nome);
+            dados.add(3, nrTelemovel);
+            dados.add(4, tipo.toString());
 
-        if (map.containsValue(dados)) {
-            throw new UtilizadorException("!!User já existente!!");
-        } else {
-            map.put(id, dados);
-            Ficheiro.escreverFicheiro("utilizadores", map);
-            System.out.println("\n\n");
-            menuIncial();
+            if (map.get(0).get(0).equals(username)) {
+//                throw new UtilizadorException("!!User já existente!!");
+                System.out.println("User já existe!");
+            } else {
+                map.put(id, dados);
+                Ficheiro.escreverFicheiro("utilizadores", map);
+                System.out.println("\n\n");
+                menuIncial();
+            }
         }
     }
 }
