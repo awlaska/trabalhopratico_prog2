@@ -40,7 +40,6 @@ public class Veiculo extends Stand{
         System.out.print("Data entrada no stand (dd-mm-aaaa)\n>> ");
         this.dataManufatura = adicionar.nextLine();
         this.estado = estadoVeiculo.DISPONIVEL;
-//            dados1.add(0,matricula);
 
         for (int i = 0; i <= map.size(); i++) {
             if (!map.containsKey(i)) {

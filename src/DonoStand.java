@@ -89,8 +89,6 @@ public class DonoStand extends Utilizador implements IListar {
         menuD();
     }
 
-<<<<<<< HEAD
-=======
     //TODO verificar se existe no map
     protected void adicionarVeiculo(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
         List dados = new ArrayList();
@@ -175,8 +173,6 @@ public class DonoStand extends Utilizador implements IListar {
         DOING Listagem de reservas por ordem de data de visita, data mais proxima para menos
          */
 
-
->>>>>>> main
     @Override
     public void listarCompras() throws IOException, UtilizadorException {
         System.out.println();

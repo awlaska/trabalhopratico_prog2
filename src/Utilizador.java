@@ -29,7 +29,6 @@ public class Utilizador { //DONE :D
 
     public void menuIncial() throws IOException, UtilizadorException {
         LinkedHashMap<Integer, List<String>> utilizadores = Ficheiro.loadMap("utilizadores", 6);
-        LinkedHashMap<Integer, List<String>> veiculos = Ficheiro.loadMap("veiculos", 6);
         Scanner input = new Scanner(System.in);
 
         System.out.print("1 - Login\n2 - Signup\n0 - Sair\n>> ");
@@ -93,24 +92,10 @@ public class Utilizador { //DONE :D
 
     //TODO verificar se existe no map
     protected void signUp(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
-<<<<<<< HEAD
         this.dados = new ArrayList();
         Scanner signup = new Scanner(System.in);
 
-        System.out.print("Username\n>> ");
-        this.username = signup.nextLine();
-        System.out.print("Password\n>> ");
-        this.password = signup.nextLine();
-        System.out.print("Nome\n>> ");
-        this.nome = signup.nextLine();
-        System.out.print("Número de telemovel\n>> ");
-        this.nrTelemovel = signup.nextLine();
-        this.tipo = tipoUser.NULL;
-=======
-        List dados = new ArrayList();
-
         while (map.get(0).get(0).equals(username)){
-            Scanner signup = new Scanner(System.in);
             System.out.print("Username\n>> ");
             this.username = signup.nextLine();
             System.out.print("Password\n>> ");
@@ -120,7 +105,6 @@ public class Utilizador { //DONE :D
             System.out.print("Número de telemovel\n>> ");
             this.nrTelemovel = signup.nextLine();
             this.tipo = tipoUser.NULL;
->>>>>>> main
 
             for (int i = 0; i <= map.size(); i++) {
                 if (!map.containsKey(i)) {
@@ -135,8 +119,7 @@ public class Utilizador { //DONE :D
             dados.add(4, tipo.toString());
 
             if (map.get(0).get(0).equals(username)) {
-//                throw new UtilizadorException("!!User já existente!!");
-                System.out.println("User já existe!");
+                throw new UtilizadorException("!!User já existente!!");
             } else {
                 map.put(id, dados);
                 Ficheiro.escreverFicheiro("utilizadores", map);
