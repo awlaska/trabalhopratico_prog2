@@ -19,14 +19,14 @@ public class Venda extends Stand {
     }
 
     //DONE
-    public Venda(int nrReserva) throws IOException {
-        super();
-        for (int i = 0; i < vendas.size(); i++) {
-            if (reservas.get(i).getNrReserva() == nrReserva) {
-                Venda venda = new Venda(reservas.get(i).getNrReserva(), reservas.get(i).getIdCliente(), reservas.get(i).getIdDonoStand(), reservas.get(i).getIdCarro());
-                vendas.add(venda);
-                reservas.remove(i);
-            }
-        }
-    }
+//    public Venda(int nrReserva) throws IOException {
+//        super();
+//        for (int i = 0; i < vendas.size(); i++) {
+//            if (reservas.get(i).getNrReserva() == nrReserva) {
+//                Venda venda = new Venda(reservas.get(i).getNrReserva(), reservas.get(i).getIdCliente(), reservas.get(i).getIdDonoStand(), reservas.get(i).getIdCarro());
+//                vendas.add(venda);
+//                reservas.remove(i);
+//            }
+//        }
+//    }
 }

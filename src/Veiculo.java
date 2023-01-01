@@ -57,7 +57,7 @@ public class Veiculo extends Stand{
             System.out.println("Matricula ja existente!");
         } else {
             map.put(numCarro, dados);
-            Ficheiro.escreverFicheiro2("veiculos", map);
+            Ficheiro.escreverFicheiroVeiculo("veiculos", map);
             System.out.println(veiculos);
             System.out.println("\n\n");
         }

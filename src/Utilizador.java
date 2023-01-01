@@ -27,6 +27,8 @@ public class Utilizador { //DONE :D
         this.dados = dados;
     }
 
+    Veiculo veic = new Veiculo();
+    Reserva reserva = new Reserva();
     public void menuIncial() throws IOException, UtilizadorException {
         LinkedHashMap<Integer, List<String>> utilizadores = Ficheiro.loadMap("utilizadores", 6);
         Scanner input = new Scanner(System.in);
@@ -95,7 +97,7 @@ public class Utilizador { //DONE :D
         this.dados = new ArrayList();
         Scanner signup = new Scanner(System.in);
 
-        while (map.get(0).get(0).equals(username)){
+//        while (map.get(0).get(0).equals(this.username)){
             System.out.print("Username\n>> ");
             this.username = signup.nextLine();
             System.out.print("Password\n>> ");
@@ -126,6 +128,6 @@ public class Utilizador { //DONE :D
                 System.out.println("\n\n");
                 menuIncial();
             }
-        }
+//        }
     }
 }

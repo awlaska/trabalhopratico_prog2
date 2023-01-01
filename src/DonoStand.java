@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.*;
 
 public class DonoStand extends Utilizador implements IListar {
-    Veiculo veic = new Veiculo();
     LinkedHashMap<Integer, List<String>> utilizadores = Ficheiro.loadMap("utilizadores", 6);
     LinkedHashMap<Integer, List<String>> veiculos = Ficheiro.loadMap("veiculos", 6);
     public DonoStand() throws IOException {
@@ -121,7 +120,7 @@ public class DonoStand extends Utilizador implements IListar {
                 System.out.println("Matricula ja existente!");
             } else {
                 map.put(id, dados);
-                Ficheiro.escreverFicheiro2("veiculos", map);
+                Ficheiro.escreverFicheiroVeiculo("veiculos", map);
                 System.out.println("\n\n");
                 menuD();
             }
