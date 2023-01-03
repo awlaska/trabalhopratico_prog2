@@ -1,9 +1,6 @@
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Scanner;
 
 public class Reserva extends Stand {
@@ -44,7 +41,6 @@ public class Reserva extends Stand {
         return idCarro;
     }
 
-    //DONE adicionarReserva a list ?? que list?
     public void adicionarReserva(int user) throws IOException {
         Scanner input = new Scanner(System.in);
         LocalDate currentdate = LocalDate.now();
