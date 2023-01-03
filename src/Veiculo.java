@@ -42,9 +42,8 @@ public class Veiculo extends Stand{
         this.estado = estadoVeiculo.DISPONIVEL;
 
         for (int i = 0; i <= map.size(); i++) {
-            if (!map.containsKey(i)) {
+            if (!map.containsKey(i))
                 numCarro = i;
-            }
         }
 
         dados.add(0, marca);

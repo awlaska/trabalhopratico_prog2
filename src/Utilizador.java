@@ -6,7 +6,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
 
-public class Utilizador { //DONE :D
+public class Utilizador {
+    //DONE variaveis
     protected String username;
     protected String password;
     protected String nome;
@@ -15,6 +16,7 @@ public class Utilizador { //DONE :D
     protected tipoUser tipo;
     protected List<String> dados;
 
+    //DONE constructors
     public Utilizador() throws IOException {}
 
     public Utilizador(String user, String pass, String nome, String nrTelemovel, int id, tipoUser tipo, List<String> dados) throws IOException {
@@ -27,9 +29,13 @@ public class Utilizador { //DONE :D
         this.dados = dados;
     }
 
+    //DONE instancias
     Veiculo veic = new Veiculo();
     Reserva reserva = new Reserva();
-    public void menuIncial() throws IOException, UtilizadorException {
+
+    //DONE metodos
+    //DONE menuInicial
+    public void menuInicial() throws IOException, UtilizadorException {
         LinkedHashMap<Integer, List<String>> utilizadores = Ficheiro.loadMap("utilizadores", 6);
         Scanner input = new Scanner(System.in);
 
@@ -92,11 +98,11 @@ public class Utilizador { //DONE :D
         }
     }
 
-    //TODO verificar se existe no map
     protected void signUp(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
         this.dados = new ArrayList();
         Scanner signup = new Scanner(System.in);
 
+        //TODO meter while a funcionar
 //        while (map.get(0).get(0).equals(this.username)){
             System.out.print("Username\n>> ");
             this.username = signup.nextLine();
@@ -109,9 +115,8 @@ public class Utilizador { //DONE :D
             this.tipo = tipoUser.NULL;
 
             for (int i = 0; i <= map.size(); i++) {
-                if (!map.containsKey(i)) {
+                if (!map.containsKey(i))
                     id = i;
-                }
             }
 
             dados.add(0, username);
@@ -126,7 +131,7 @@ public class Utilizador { //DONE :D
                 map.put(id, dados);
                 Ficheiro.escreverFicheiro("utilizadores", map);
                 System.out.println("\n\n");
-                menuIncial();
+                menuInicial();
             }
 //        }
     }

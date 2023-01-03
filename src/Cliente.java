@@ -35,7 +35,7 @@ public class Cliente extends Utilizador {
 
         System.out.println("Id do user atual: " + idUserAtual);
 
-        System.out.print("0 - Sair\n1 - Listar veiculos\n2 - Listar compras\n3 - Listar reservas\n4 - Apagar Reserva\n5 - Alterar Data de Visita\n6 - Ver/Editar perfil\n>> ");
+        System.out.print("1 - Listar veiculos\n2 - Listar compras\n3 - Listar reservas\n4 - Apagar Reserva\n5 - Alterar Data de Visita\n6 - Ver/Editar perfil\n0 - Sair\n>> ");
         int op = input.nextInt();
 
         switch (op) {

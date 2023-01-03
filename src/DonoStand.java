@@ -27,7 +27,7 @@ public class DonoStand extends Utilizador implements IListar {
         LinkedHashMap<Integer, List<String>> veiculos = Ficheiro.loadMap("veiculos", 6);
         Scanner input = new Scanner(System.in);
 
-        System.out.print("0 - Sair\n1 - LogOut\n2 - Apagar cliente\n3 - Adicionar Veiculo\n4 - Alterar Estado Veiculo\n5 - Apagar Veiculo\n6 - Listagens\n>> ");
+        System.out.print("1 - LogOut\n2 - Apagar cliente\n3 - Adicionar Veiculo\n4 - Alterar Estado Veiculo\n5 - Apagar Veiculo\n6 - Listagens\n0 - Sair\n>> ");
         int op = input.nextInt();
 
         System.out.println();
@@ -35,7 +35,7 @@ public class DonoStand extends Utilizador implements IListar {
         switch (op) {
             case 0 -> {Ficheiro.saveAll(utilizadores, veiculos);break;}
             case 1 -> menuIncial();
-            case 2 -> apagarCliente();
+            case 2 -> apagarUsers();
             case 3 -> veic.adicionarVeiculo(veiculos);
             case 4 -> veic.alterarEstado();
             case 5 -> veic.apagarVeiculo();
@@ -49,7 +49,7 @@ public class DonoStand extends Utilizador implements IListar {
         LinkedHashMap<Integer, List<String>> veiculos = Ficheiro.loadMap("veiculos", 6);
         Scanner input = new Scanner(System.in);
 
-        System.out.println("0 - Sair\n1 - Listar Clientes\n2 - Listar Vendas\n3 - Listar Reservas\n4 - Listar Veiculos\n>> ");
+        System.out.println("1 - Listar Clientes\n2 - Listar Vendas\n3 - Listar Reservas\n4 - Listar Veiculos\n0 - Sair\n>> ");
         int op = input.nextInt();
 
         switch (op) {
@@ -68,7 +68,7 @@ public class DonoStand extends Utilizador implements IListar {
         DOING Listagem de reservas por ordem de data de visita, data mais proxima para menos
          */
 
-    private void apagarCliente() throws IOException, UtilizadorException {
+    private void apagarUsers() throws IOException, UtilizadorException {
         Scanner input = new Scanner(System.in);
 
         listarUsers();
@@ -88,7 +88,7 @@ public class DonoStand extends Utilizador implements IListar {
         menuD();
     }
 
-    //TODO verificar se existe no map
+    //TODO ver while loop
     protected void adicionarVeiculo(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
         List dados = new ArrayList();
         String matricula = "";
@@ -105,9 +105,8 @@ public class DonoStand extends Utilizador implements IListar {
             estadoVeiculo tipo = estadoVeiculo.DISPONIVEL;
 
             for (int i = 0; i <= map.size(); i++) {
-                if (!map.containsKey(i)) {
+                if (!map.containsKey(i))
                     id = i;
-                }
             }
 
             dados.add(0, marca);
@@ -138,7 +137,6 @@ public class DonoStand extends Utilizador implements IListar {
         int id = inputint.nextInt();
         System.out.print("Estado a atribuir (DESATIVADO, RESERVADO, VENDIDO): \n>> ");
         String estado = inputstring.nextLine();
-
 
         if (estado.equalsIgnoreCase("DESATIVADO") || estado.equalsIgnoreCase("RESERVADO") || estado.equalsIgnoreCase("VENDIDO")) {
             veiculos.get(id).set(4, estado.toUpperCase());
@@ -174,7 +172,6 @@ public class DonoStand extends Utilizador implements IListar {
 
     @Override
     public void listarCompras() throws IOException, UtilizadorException {
-        System.out.println();
     }
 
     @Override

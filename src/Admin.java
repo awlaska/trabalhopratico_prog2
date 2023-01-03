@@ -12,7 +12,6 @@ public class Admin extends Utilizador implements IListar {
         super();
     }
 
-    //TODO completar switch do menu
     //DONE Gerir Users:
     //DONE - Alterar tipo de user
     //DONE - Apagar user
@@ -24,7 +23,7 @@ public class Admin extends Utilizador implements IListar {
     protected void menuA() throws IOException, UtilizadorException {
         Scanner input = new Scanner(System.in);
 
-        System.out.print("0 - Sair\n1 - LogOut\n2 - Listagens\n3 - Alterar Tipo de User\n4 - Apagar User\n5 - Apagar Veiculo\n6 - Apagar Venda\n7 - Apagar Reserva\n>> ");
+        System.out.print("1 - LogOut\n2 - Listagens\n3 - Alterar Tipo de User\n4 - Apagar User\n5 - Apagar Veiculo\n6 - Apagar Venda\n7 - Apagar Reserva\n0 - Sair\n>> ");
         int op = input.nextInt();
 
         System.out.println();
@@ -56,7 +55,7 @@ public class Admin extends Utilizador implements IListar {
             }
             //TODO meter para pedir qual venda e reserva a apagar
             case 6 -> {
-                apagarVenda(1);
+                apagarVenda();
                 break;
             }
             case 7 -> {
@@ -70,7 +69,7 @@ public class Admin extends Utilizador implements IListar {
     private void listagens() throws IOException, UtilizadorException {
         Scanner input = new Scanner(System.in);
 
-        System.out.print("0 - Sair\n1 - Retroceder\n2 - Listar User\n3 - Listar Veiculos\n4 - Listar Compras\n5 - Listar Reservas\n>> ");
+        System.out.print("2 - Listar User\n3 - Listar Veiculos\n4 - Listar Compras\n5 - Listar Reservas\n0 - Sair\n1 - Retroceder\n>> ");
         int op = input.nextInt();
 
         System.out.println();
@@ -158,7 +157,7 @@ public class Admin extends Utilizador implements IListar {
         menuA();
     }
     //TODO apagarVenda e apagarReserva
-    private void apagarVenda(int nr) {
+    private void apagarVenda() {
 //        for (int i = 0; i < venda.length()) {
 //
 //        }
