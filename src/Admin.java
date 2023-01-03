@@ -34,7 +34,7 @@ public class Admin extends Utilizador implements IListar {
                 break;
             }
             case 1 -> {
-                menuIncial();
+                menuInicial();
             }
             case 2 -> {
                 listagens();
