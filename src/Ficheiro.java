@@ -93,7 +93,7 @@ public class Ficheiro {
             for (int i = 1; i < size; i++) {
                 values.add(valuesTMP[0].split(";")[i].trim());
             }
-            data.put(nkey, values); // <--this line was moved out from internal for loop
+            data.put(nkey, values);
         }
         return data;
     }
