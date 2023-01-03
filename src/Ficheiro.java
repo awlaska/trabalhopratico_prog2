@@ -110,22 +110,31 @@ public class Ficheiro {
             e.printStackTrace();
         }
 
+        int nrRes = 0;
+        int diaVis = 0;
+        int mesVis = 0;
+        int anoVis=0;
+        int nUser=0;
+        int nCarro=0;
+
         while ((currentLine = bf.readLine()) != null) {
             valuesTMP = currentLine.split("\n");
-            ArrayList<String> values = new ArrayList<>();
-            for (int i = 1; i < size; i++) {
+            List<String> values = new ArrayList<>();
+            for (int i = 0; i < 1; i++) {
                 values.add(valuesTMP[0].split(";")[i].trim());
             }
 
-            int nrRes = Integer.parseInt(values.get(0));
-            int diaVis = Integer.parseInt(values.get(1));
-            int mesVis = Integer.parseInt(values.get(2));
-            int anoVis = Integer.parseInt(values.get(3));
-            int nUser = Integer.parseInt(values.get(4));
-            int nCarro = Integer.parseInt(values.get(5));
+            nrRes = Integer.parseInt(values.get(0));
+//            diaVis = Integer.parseInt(values.get(1));
+//            mesVis = Integer.parseInt(values.get(2));
+//            anoVis = Integer.parseInt(values.get(3));
+//            nUser = Integer.parseInt(values.get(4));
+//            nCarro = Integer.parseInt(values.get(5));
+            System.out.println(nrRes + " " + diaVis + " " + mesVis + " " + anoVis+ " " + nUser + " " + nCarro);
+//
 
-            res.add(new Reserva(nrRes, diaVis, mesVis, anoVis, nUser, nCarro));
         }
+        res.add(new Reserva(nrRes, diaVis, mesVis, anoVis, nUser, nCarro));
 //        }
         return res;
     }
