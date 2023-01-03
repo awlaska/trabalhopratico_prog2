@@ -34,7 +34,7 @@ public class DonoStand extends Utilizador implements IListar {
 
         switch (op) {
             case 0 -> {Ficheiro.saveAll(utilizadores, veiculos);break;}
-            case 1 -> menuIncial();
+            case 1 -> menuInicial();
             case 2 -> apagarUsers();
             case 3 -> veic.adicionarVeiculo(veiculos);
             case 4 -> veic.alterarEstado();
