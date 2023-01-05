@@ -75,10 +75,8 @@ public class Reserva extends Stand {
             } while (anoVisita < 2023);
 
             diaAtual = currentdate.getDayOfMonth();
-            mesAtual = LocalDate.EPOCH.getMonthValue();//Integer.parseInt(String.valueOf(currentdate.getMonth()));
+            mesAtual = LocalDate.EPOCH.getMonthValue();
             anoAtual = currentdate.getYear();
-
-            // if((diaAtual < diaVisita) && (mesAtual < mesVisita) && (anoAtual < anoVisita)) System.out.println("A data tem de ser válida!");
 
             if(anoAtual > anoVisita)
                 System.out.println("A data tem de ser válida!1");
