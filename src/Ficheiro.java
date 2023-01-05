@@ -120,16 +120,16 @@ public class Ficheiro {
         while ((currentLine = bf.readLine()) != null) {
             valuesTMP = currentLine.split("\n");
             List<String> values = new ArrayList<>();
-            for (int i = 0; i < 1; i++) {
+            for (int i = 0; i < size; i++) {
                 values.add(valuesTMP[0].split(";")[i].trim());
             }
 
             nrRes = Integer.parseInt(values.get(0));
-//            diaVis = Integer.parseInt(values.get(1));
-//            mesVis = Integer.parseInt(values.get(2));
-//            anoVis = Integer.parseInt(values.get(3));
-//            nUser = Integer.parseInt(values.get(4));
-//            nCarro = Integer.parseInt(values.get(5));
+            diaVis = Integer.parseInt(values.get(1));
+            mesVis = Integer.parseInt(values.get(2));
+            anoVis = Integer.parseInt(values.get(3));
+            nUser = Integer.parseInt(values.get(4));
+            nCarro = Integer.parseInt(values.get(5));
             System.out.println(nrRes + " " + diaVis + " " + mesVis + " " + anoVis+ " " + nUser + " " + nCarro);
 //
 

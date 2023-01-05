@@ -10,7 +10,7 @@ public class Reserva extends Stand {
     private int anoVisita;
     private int idCliente;
     private int idCarro;
-    protected ArrayList<Reserva> reserva = Ficheiro.loadList("reservas", 6);
+    protected ArrayList<Reserva> resLoad = new ArrayList<>();
     public Reserva() throws IOException {}
 
     public Reserva(int nrReserva, int diaVisita, int mesVisita, int anoVisita, int idCliente, int idCarro) throws IOException {
@@ -42,13 +42,17 @@ public class Reserva extends Stand {
     }
 
     public void adicionarReserva(int user) throws IOException {
+        resLoad = Ficheiro.loadList("reservas", 6);
         Scanner input = new Scanner(System.in);
         LocalDate currentdate = LocalDate.now();
+        Reserva res1 = null;
+        boolean certo = false;
 
         int diaAtual;
         int mesAtual;
         int anoAtual;
 
+        System.out.println(resLoad);
         System.out.println("Criação de reserva!");
         System.out.println("Número do carro que deseja reservar: ");
         idCarro = input.nextInt();
@@ -71,16 +75,29 @@ public class Reserva extends Stand {
             } while (anoVisita < 2023);
 
             diaAtual = currentdate.getDayOfMonth();
-            mesAtual = Integer.parseInt(String.valueOf(currentdate.getMonth()));
+            mesAtual = LocalDate.EPOCH.getMonthValue();//Integer.parseInt(String.valueOf(currentdate.getMonth()));
             anoAtual = currentdate.getYear();
 
-            if((diaAtual < diaVisita) && (mesAtual< mesVisita) && (anoAtual < anoVisita)) System.out.println("A data tem de ser válida!");
-        } while ((diaAtual < diaVisita) && (mesAtual< mesVisita) && (anoAtual < anoVisita));
-        nrReserva = reserva.size();
+            // if((diaAtual < diaVisita) && (mesAtual < mesVisita) && (anoAtual < anoVisita)) System.out.println("A data tem de ser válida!");
 
-        Reserva res = new Reserva(nrReserva, diaVisita, mesVisita, anoVisita, user, idCarro);
-        reserva.add(res);
-        Ficheiro.escreverFicheiroReserva("reservas", reserva);
+            if(anoAtual > anoVisita)
+                System.out.println("A data tem de ser válida!1");
+            else if(anoAtual == anoVisita && mesAtual > mesVisita)
+                    System.out.println("A data tem de ser válida!2");
+            else if(anoAtual == anoVisita && mesAtual == mesVisita && diaAtual >= diaVisita)
+                System.out.println("A data tem de ser válida!3");
+            else if((anoAtual == anoVisita && mesAtual < mesVisita) || (anoAtual < anoVisita && mesAtual == mesVisita && diaAtual < diaVisita))
+                nrReserva = resLoad.size();
+                res1 = new Reserva(nrReserva, diaVisita, mesVisita, anoVisita, user, idCarro);
+                certo = true;
+                //TODO verificar
+        } while (!certo);
+        // nrReserva = resLoad.size();
+        System.out.println(res1);
+        // Reserva res1 = new Reserva(nrReserva, diaVisita, mesVisita, anoVisita, user, idCarro);
+        resLoad.add(res1);
+        System.out.println(resLoad);
+        Ficheiro.escreverFicheiroReserva("reservas", resLoad);
     }
 
     //DONE alterarDataVisita
