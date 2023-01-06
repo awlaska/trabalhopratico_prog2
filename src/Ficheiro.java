@@ -1,3 +1,5 @@
+import ENUM.estadoReserva;
+
 import java.io.*;
 import java.time.*;
 import java.util.*;
@@ -36,7 +38,8 @@ public class Ficheiro {
                         + ";" + entry.getValue().get(1)
                         + ";" + entry.getValue().get(2)
                         + ";" + entry.getValue().get(3)
-                        + ";" + entry.getValue().get(4));
+                        + ";" + entry.getValue().get(4)
+                        + ";" + entry.getValue().get(5));
                 bf.newLine();
             }
             bf.flush();
@@ -83,7 +86,8 @@ public class Ficheiro {
                         + ";" + entry.getMesVisita()
                         + ";" + entry.getAnoVisita()
                         + ";" + entry.getIdCliente()
-                        + ";" + entry.getIdCarro());
+                        + ";" + entry.getIdCarro()
+                        + ";" + entry.getEstado());
                 bf.newLine();
             }
             System.out.println(reserva);
@@ -106,12 +110,8 @@ public class Ficheiro {
             e.printStackTrace();
         }
 
-        int nrRes = 0;
-        int diaVis = 0;
-        int mesVis = 0;
-        int anoVis=0;
-        int nUser=0;
-        int nCarro=0;
+        int nrRes = 0, diaVis = 0, mesVis = 0, anoVis=0, nUser=0, nCarro=0;
+        estadoReserva estado;
 
         while ((currentLine = bf.readLine()) != null) {
             valuesTMP = currentLine.split("\n");
@@ -126,8 +126,9 @@ public class Ficheiro {
             anoVis = Integer.parseInt(values.get(3));
             nUser = Integer.parseInt(values.get(4));
             nCarro = Integer.parseInt(values.get(5));
+            estado = estadoReserva.valueOf(values.get(6));
 
-            res.add(new Reserva(nrRes, diaVis, mesVis, anoVis, nUser, nCarro));
+            res.add(new Reserva(nrRes, diaVis, mesVis, anoVis, nUser, nCarro, estado));
         }
         return res;
     }

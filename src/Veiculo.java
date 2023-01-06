@@ -3,29 +3,23 @@ import java.io.IOException;
 import java.util.*;
 
 public class Veiculo{
-    //TODO metodos:
-        /*
-        editar info de um veiculo na list
-        alterar estado do veiculo
-        remover veiculo da list
-        */
-
     private int numCarro;
     private String marca;
     private String modelo;
     private String dataManufatura;
     private String matricula;
+    private float precoBase;
     private estadoVeiculo estado = estadoVeiculo.DISPONIVEL;
 
     protected LinkedHashMap<Integer, List<String>> veiculos = new LinkedHashMap<>();
 
     public Veiculo() throws IOException {
-        super();
+
     }
 
     //DONE Load do mapa e Escrita do ficheiro
     public LinkedHashMap<Integer, List<String>> loadMapVeiculo() throws IOException {
-        veiculos = Ficheiro.loadMap("veiculos", 6);
+        veiculos = Ficheiro.loadMap("veiculos", 7);
         return veiculos;
     }
     public void writeMapVeiculo() throws IOException {
@@ -41,6 +35,7 @@ public class Veiculo{
 
 //        while (!veiculos.containsValue(dados1)) {
         Scanner adicionar = new Scanner(System.in);
+        Scanner adicionarfl = new Scanner(System.in);
         System.out.print("Marca\n>> ");
         this.marca = adicionar.nextLine();
         System.out.print("Modelo\n>> ");
@@ -49,6 +44,8 @@ public class Veiculo{
         this.matricula = adicionar.nextLine();
         System.out.print("Data entrada no stand (dd-mm-aaaa)\n>> ");
         this.dataManufatura = adicionar.nextLine();
+        System.out.print("Preço base\n>> ");
+        this.precoBase = adicionarfl.nextFloat();
         this.estado = estadoVeiculo.DISPONIVEL;
 
         for (int i = 0; i <= veiculos.size(); i++) {
@@ -60,7 +57,8 @@ public class Veiculo{
         dados.add(1, modelo);
         dados.add(2, matricula);
         dados.add(3, dataManufatura);
-        dados.add(4, estado.toString());
+        dados.add(4, precoBase);
+        dados.add(5, estado.toString());
 
         if (veiculos.containsValue(dados)) {
             System.out.println("Matricula ja existente!");
@@ -96,24 +94,6 @@ public class Veiculo{
 //        menuD();
     }
 
-    //DOING corrigir apagar veiculo
-    //DOING path para o menu anterior
-    public void apagarVeiculo() throws IOException {
-        Scanner input = new Scanner(System.in);
-
-//        listarVeiculos();
-
-        System.out.println("\n!!Apagar veiculo!!");
-        System.out.print("ID do veiculo: \n>> ");
-        int id = input.nextInt();
-
-        for (int i = 0; i < 5; i++)
-            veiculos.get(id).set(i, "null");
-
-        writeMapVeiculo();
-//        menuD();
-    }
-
     //DOING corrigir listar veiculo (caso não esteja em estado ATIVO o cliente não pode ver)
     //DOING path para o menu anterior
     public void listarVeiculos(int idUserAtual) throws IOException {
@@ -127,7 +107,8 @@ public class Veiculo{
                         ", " + entry.getValue().get(1) +
                         ", " + entry.getValue().get(2) +
                         ", " + entry.getValue().get(3) +
-                        ", " + entry.getValue().get(4));
+                        ", " + entry.getValue().get(4) +
+                        ", " + entry.getValue().get(5));
         System.out.println();
         //else
         System.out.println("\nid -> marca, modelo, matricula, data de entrada");
@@ -137,7 +118,8 @@ public class Veiculo{
                         " -> " + entry.getValue().get(0) +
                         ", " + entry.getValue().get(1) +
                         ", " + entry.getValue().get(2) +
-                        ", " + entry.getValue().get(3));
+                        ", " + entry.getValue().get(3) +
+                        ", " + entry.getValue().get(4));
             }
         System.out.println();
     }

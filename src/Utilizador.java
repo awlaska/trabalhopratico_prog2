@@ -25,6 +25,7 @@ public class Utilizador {
 
     Veiculo veic = new Veiculo();
     Reserva reserva = new Reserva();
+    Venda venda = new Venda();
 
     //DONE Load do mapa e Escrita do ficheiro
     public LinkedHashMap<Integer, List<String>> loadMapUtilizador() throws IOException {
@@ -40,6 +41,7 @@ public class Utilizador {
         loadMapUtilizador();
         Scanner input = new Scanner(System.in);
 
+        System.out.println(">>Menu Inicial<<");
         System.out.print("1 - Login\n2 - Signup\n0 - Sair\n>> ");
         int op = input.nextInt();
         System.out.println();

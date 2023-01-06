@@ -1,3 +1,5 @@
+import ENUM.estadoReserva;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
@@ -9,16 +11,19 @@ public class Reserva {
     private int anoVisita;
     private int idCliente;
     private int idCarro;
+    protected estadoReserva estado;
     protected ArrayList<Reserva> resLoad = new ArrayList<>();
+
     public Reserva() throws IOException {}
 
-    public Reserva(int nrReserva, int diaVisita, int mesVisita, int anoVisita, int idCliente, int idCarro) throws IOException {
+    public Reserva(int nrReserva, int diaVisita, int mesVisita, int anoVisita, int idCliente, int idCarro, estadoReserva estado) throws IOException {
         this.nrReserva = nrReserva;
         this.diaVisita = diaVisita;
         this.mesVisita = mesVisita;
         this.anoVisita = anoVisita;
         this.idCliente = idCliente;
         this.idCarro = idCarro;
+        this.estado = estado;
     }
 
     public int getNrReserva() {
@@ -38,6 +43,9 @@ public class Reserva {
     }
     public int getIdCarro() {
         return idCarro;
+    }
+    public estadoReserva getEstado() {
+        return estado;
     }
 
     public ArrayList<Reserva> loadListReserva() throws IOException {
@@ -98,7 +106,7 @@ public class Reserva {
                 System.out.println("A data tem de ser válida!");
             else if((anoAtual == anoVisita && mesAtual < mesVisita) || (anoAtual < anoVisita && mesAtual == mesVisita && diaAtual < diaVisita))
                 nrRes = resLoad.size();
-                res1 = new Reserva(nrRes, diaVisita, mesVisita, anoVisita, user, idCarro);
+                res1 = new Reserva(nrRes, diaVisita, mesVisita, anoVisita, user, idCarro, estadoReserva.CRIADA);
                 certo = true;
         } while (!certo);
         resLoad.add(res1);

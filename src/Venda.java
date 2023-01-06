@@ -12,6 +12,7 @@ public class Venda {
     private int idCarro;
     protected ArrayList<Venda> venda = new ArrayList<>();
 
+    public Venda(){}
     public Venda(int nrVenda, int diaVenda, int mesVenda, int anoVenda, int idCliente, int idCarro) {
         this.nrVenda = nrVenda;
         this.diaVenda = diaVenda;
@@ -51,6 +52,7 @@ public class Venda {
     //DOING o método tem de ser verificado, funciona mas pode ter "lixo"
     //DOING adicionar uma venda (apenas dono consegue)
     //DOING altera o estado do carro para VENDIDO
+    //DOING se venda for de uma reserva, muda estado da reserva para CONCLUIDA
     public int adicionarVenda(int user) throws IOException {
         Scanner input = new Scanner(System.in);
         LocalDate currentdate = LocalDate.now();
@@ -108,5 +110,5 @@ public class Venda {
 
     //DOING listar vendas -> dono e admin veem tudo
     //DOING cliente apenas vê as dele
-    public void listarVenda(int user){}
+    public void listarVenda(int idUser){}
 }

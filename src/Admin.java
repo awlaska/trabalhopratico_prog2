@@ -1,53 +1,91 @@
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
-public class Admin extends Utilizador{
+public class Admin extends Utilizador implements IMenu {
 
     public Admin() throws IOException {
         super();
     }
 
-    //DOING melhorar menus -> criar mais submenus
-    //DOING adicionar métodos que faltam
-    //DOING adicionar métodos que faltam de guardar ao sair do programa
-    protected void menuA(int idUser) throws IOException, UtilizadorException {
-        loadMapUtilizador();
+    //DONE melhorar menus -> criar mais submenus
+    //DONE adicionar métodos que faltam
+    //DONE adicionar métodos que faltam de guardar ao sair do programa
+    public void menuA(int idUser) throws IOException, UtilizadorException {
         Scanner input = new Scanner(System.in);
 
-        System.out.print("1 - LogOut\n2 - Listagens\n3 - Alterar Tipo de User\n4 - Apagar User\n5 - Apagar Veiculo\n6 - Apagar Venda\n7 - Apagar Reserva\n0 - Sair\n>> ");
+        System.out.println(">>Menu Administrador<<");
+        System.out.print("0 - Sair\n1 - LogOut\n2 - Utilizadores\n3 - Veiculos\n4 - Reservas\n5 - Vendas\n>> ");
         int op = input.nextInt();System.out.println();
 
         switch (op) {
-            case 0 -> {writeMapUtilizador();veic.writeMapVeiculo();break;}
+            case 0 -> {break;}
             case 1 -> {menuInicial();}
-            case 2 -> {listagens(idUser);break;}
-            case 3 -> {alterarTipoUser();break;}
-            case 4 -> {apagarUsers();break;}
-            case 5 -> {veic.apagarVeiculo();break;}
-            case 6 -> {break;}//venda.apagarVenda();
-            case 7 -> {break;}//res.apagarReserva();
+            case 2 -> {menuUtilizadores(idUser);}
+            case 3 -> {menuVeiculos(idUser);}
+            case 4 -> {menuReservas(idUser);}
+            case 5 -> {menuVendas(idUser);}
             default -> throw new IllegalStateException("Unexpected value: " + op);
         }
     }
-
-    //DOING adicionar métodos que faltam
-    //DOING adicionar métodos que faltam de guardar ao sair do programa
-    private void listagens(int idUser) throws IOException, UtilizadorException {
+    public void menuUtilizadores(int idUser) throws IOException, UtilizadorException {
         Scanner input = new Scanner(System.in);
 
-        System.out.print("2 - Listar User\n3 - Listar Veiculos\n4 - Listar Compras\n5 - Listar Reservas\n0 - Sair\n1 - Retroceder\n>> ");
+        System.out.println(">>Menu Utilizadores<<");
+        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Apagar Utilizador\n3 - Alterar Tipo Utilizador\n4 - Listar Utilizadores\n>> ");
         int op = input.nextInt();System.out.println();
 
         switch (op) {
-            case 0 -> {writeMapUtilizador();break;}
+            case 0 -> {break;}
             case 1 -> {menuA(idUser);}
-            case 2 -> {listarUsers(idUser);}
-            case 3 -> {veic.listarVeiculos(idUser);}
-            case 4 -> {}//venda.listarCompras(idUser);
+            case 2 -> {apagarUsers();}
+            case 3 -> {alterarTipoUser();}
+            case 4 -> {listarUsers(idUser);}
+            default -> throw new IllegalStateException("Unexpected value: " + op);
+        }
+    }
+    public void menuVeiculos(int idUser) throws IOException, UtilizadorException {
+        Scanner input = new Scanner(System.in);
+
+        System.out.println(">>Menu Veiculos<<");
+        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Alterar Estado Veiculo\n3 - Listar Veiculos\n>> ");
+        int op = input.nextInt();System.out.println();
+
+        switch (op) {
+            case 0 -> {break;}
+            case 1 -> {menuA(idUser);}
+            case 2 -> {veic.alterarEstado();}
+            case 4 -> {veic.listarVeiculos(idUser);}
+            default -> throw new IllegalStateException("Unexpected value: " + op);
+        }
+    }
+    public void menuReservas(int idUser) throws IOException, UtilizadorException {
+        Scanner input = new Scanner(System.in);
+
+        System.out.println(">>Menu Reservas<<");
+        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Alterar Data Visita\n3 - Listar Reservas\n>> ");
+        int op = input.nextInt();System.out.println();
+
+        switch (op) {
+            case 0 -> {break;}
+            case 1 -> {menuA(idUser);}
+            case 2 -> {reserva.alterarDataVisita(idUser);}
+            case 4 -> {reserva.apagarReserva(idUser);}
             case 5 -> {reserva.listarRes(idUser);}
+            default -> throw new IllegalStateException("Unexpected value: " + op);
+        }
+    }
+    public void menuVendas(int idUser) throws IOException, UtilizadorException {
+        Scanner input = new Scanner(System.in);
+
+        System.out.println(">>Menu Vendas<<");
+        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Apagar Venda\n3 - Listar Vendas\n>> ");
+        int op = input.nextInt();System.out.println();
+
+        switch (op) {
+            case 0 -> {break;}
+            case 1 -> {menuA(idUser);}
+            case 2 -> {venda.apagarVenda();}
+            case 3 -> {venda.listarVenda(idUser);}
             default -> throw new IllegalStateException("Unexpected value: " + op);
         }
     }
