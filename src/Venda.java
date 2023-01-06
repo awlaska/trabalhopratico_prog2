@@ -1,15 +1,13 @@
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class Venda extends Stand {
+public class Venda {
     private int nrVenda;
     private int idCliente;
     private int idDonoStand;
     private int idCarro;
+    protected ArrayList<Venda> venda = new ArrayList<>();
 
-    //TODO metodos para:
-        /*
-        adicionar venda á list
-         */
     public Venda(int nrVenda, int idCliente, int idDonoStand, int idCarro) throws IOException {
         super();
         this.nrVenda = nrVenda;
@@ -18,19 +16,22 @@ public class Venda extends Stand {
         this.idCarro = idCarro;
     }
 
-    public void loadMapCompra() throws IOException {
-//        veiculos = Ficheiro.loadMap("veiculos", 6);
-    }
-
-    //DONE
-//    public Venda(int nrReserva) throws IOException {
-//        super();
-//        for (int i = 0; i < vendas.size(); i++) {
-//            if (reservas.get(i).getNrReserva() == nrReserva) {
-//                Venda venda = new Venda(reservas.get(i).getNrReserva(), reservas.get(i).getIdCliente(), reservas.get(i).getIdDonoStand(), reservas.get(i).getIdCarro());
-//                vendas.add(venda);
-//                reservas.remove(i);
-//            }
-//        }
+//    public ArrayList<Venda> loadListVenda() {
+//        venda = Ficheiro.loadListVenda("vendas", x);
+//        return venda;
 //    }
+//    public void writeListVenda() throws IOException {
+//        Ficheiro.escreverFicheiroVenda("Vendas", venda);
+//    }
+
+    //DOING adicionar uma venda (apenas dono consegue)
+    //DOING altera o estado do carro para VENDIDO
+
+
+    //DOING apagar venda (apenas dono consegue)
+    //DOING altera estado do carro para DISPONIVEL
+
+
+    //DOING listar vendas -> dono e admin veem tudo
+    //DOING cliente apenas vê as dele
 }

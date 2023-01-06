@@ -1,11 +1,8 @@
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
-public class Reserva extends Stand {
+public class Reserva {
     private int nrReserva;
     private int diaVisita;
     private int mesVisita;
@@ -43,12 +40,19 @@ public class Reserva extends Stand {
         return idCarro;
     }
 
-    public void loadListReserva() throws IOException {
-//        veiculos = Ficheiro.loadMap("veiculos", 6);
+    public ArrayList<Reserva> loadListReserva() throws IOException {
+        resLoad = Ficheiro.loadListReserva("reservas", 6);
+        return resLoad;
+    }
+    public void writeListReserva() throws IOException {
+        Ficheiro.escreverFicheiroReserva("reservas", resLoad);
     }
 
+    //DOING o método tem de ser verificado, funciona mas pode ter "lixo"
+    //DOING path para o menu anterior
+    //DOING alterar o estado do veiculo para RESERVADO quando uma reserva é concluida
+    //DOING apenas permitir reservar veiculos que se encontram no estado DISPONIVEL
     public int adicionarReserva(int user) throws IOException {
-        resLoad = Ficheiro.loadList("reservas", 6);
         Scanner input = new Scanner(System.in);
         LocalDate currentdate = LocalDate.now();
         Reserva res1 = null;
@@ -96,11 +100,6 @@ public class Reserva extends Stand {
                 nrRes = resLoad.size();
                 res1 = new Reserva(nrRes, diaVisita, mesVisita, anoVisita, user, idCarro);
                 certo = true;
-
-            //TODO listar veiculos
-            //TODO verificar se é possivel reservar veiculo escolhido
-            //TODO alterar estado do veiculo selecionado (class veiculo ou aqui?)
-
         } while (!certo);
         resLoad.add(res1);
         Ficheiro.escreverFicheiroReserva("reservas", resLoad);
@@ -108,30 +107,34 @@ public class Reserva extends Stand {
         return idCarro;
     }
 
-    //DOING alterarDataVisita -> apenas permite alterar as que dizem respeito ás que tem aquele idUser
+    //DOING alterarDataVisita -> apenas permite alterar as reservas que contem o idUser passado como parametro
+    //DOING path para o menu anterior
     public void alterarDataVisita(int idUser) {
-        for (int i = 0; i < reservas.size(); i++) {
-            if (reservas.get(i).getNrReserva() == nrReserva) {
-                //...
-            }
-        }
+//        for (int i = 0; i < reservas.size(); i++) {
+//            if (reservas.get(i).getNrReserva() == nrReserva) {
+//                //...
+//            }
+//        }
     }
 
-    //TODO apagarReserva -> testar
+    //DOING apagarReserva -> corrigir e testar o método
+    //DOING cliente apenas pode apagar as dele
+    //DOING dono e admin podem apagar a reserva que quiser
     public void apagarReserva(int idUser) {
-        for (int i = 0; i < reservas.size(); i++) {
-            if (reservas.get(i).getNrReserva() == nrReserva) {
-                reservas.remove(i);
-            }
-        }
+//        for (int i = 0; i < reservas.size(); i++) {
+//            if (reservas.get(i).getNrReserva() == nrReserva) {
+//                reservas.remove(i);
+//            }
+//        }
     }
 
-    //DONE
+    //DOING Listagem de reservas por ordem de data de visita, data mais proxima para menos
+    //DOING !!se der tempo!! listar em conjunto a info do carro reservado
     public void listarRes(int idUser) throws IOException {
-        resLoad = Ficheiro.loadList("reservas", 6);
+        //if(idUserAtual contem tipo != 'CLIENTE')
         System.out.println("\nNum. Reserva, dia, mês, ano, id user, id carro");
-        //TODO recebe metodo load map do utilizador, se id passado for de tipo "CLIENTE" apenas mostra o que tiver id dele, caso contrario mostra tudo
-//        if(){
+        //TODO se id passado for de tipo "CLIENTE" apenas mostra o que tiver id dele
+        //else
 //            for (Reserva reserva : resLoad) {
 //                System.out.println(reserva);
 //            }

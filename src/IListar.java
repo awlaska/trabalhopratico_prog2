@@ -1,11 +1,11 @@
 import java.io.IOException;
 
 public interface IListar {
-    void listarVeiculos() throws IOException, UtilizadorException;
+    void listarVeiculos(int idUserAtual) throws IOException, UtilizadorException;
 
-    void listarReservas() throws IOException, UtilizadorException;
+    void listarReservas(int idUserAtual) throws IOException, UtilizadorException;
 
-    void listarCompras() throws IOException, UtilizadorException;
+    void listarCompras(int idUserAtual) throws IOException, UtilizadorException;
 
-    void listarUsers() throws IOException, UtilizadorException;
+    void listarUsers(int idUserAtual) throws IOException, UtilizadorException;
 }

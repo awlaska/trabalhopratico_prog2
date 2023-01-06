@@ -1,13 +1,9 @@
 import java.io.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.*;
+import java.util.*;
 
 public class Ficheiro {
-    public static void escreverFicheiro(String ficheiro, LinkedHashMap<Integer, List<String>> map) throws IOException {
+    public static void escreverFicheiroUtilizador(String ficheiro, LinkedHashMap<Integer, List<String>> map) throws IOException {
         try {
             File file = new File("src/Ficheiros/" + ficheiro + ".csv");
             BufferedWriter bf = null;
@@ -28,7 +24,6 @@ public class Ficheiro {
             e.printStackTrace();
         }
     }
-
     public static void escreverFicheiroVeiculo(String ficheiro, LinkedHashMap<Integer, List<String>> map) {
         try {
             File veiculos = new File("src/Ficheiros/" + ficheiro + ".csv");
@@ -50,30 +45,6 @@ public class Ficheiro {
             e.printStackTrace();
         }
     }
-
-    public static void escreverFicheiroReserva(String ficheiro, ArrayList<Reserva> reserva) throws IOException {
-        try {
-            File reservas = new File("src/Ficheiros/" + ficheiro + ".csv");
-            BufferedWriter bf = null;
-            bf = new BufferedWriter(new FileWriter(reservas));
-            for (Reserva entry : reserva) {
-                bf.write(entry.getNrReserva()
-                        + ";" + entry.getDiaVisita()
-                        + ";" + entry.getMesVisita()
-                        + ";" + entry.getAnoVisita()
-                        + ";" + entry.getIdCliente()
-                        + ";" + entry.getIdCarro());
-                bf.newLine();
-            }
-            System.out.println(reserva);
-            bf.flush();
-            System.out.println("Escreveu com successo.\n");
-        } catch (IOException e) {
-            System.out.println("Ocorreu um erro.\n");
-            e.printStackTrace();
-        }
-    }
-
     public static LinkedHashMap<Integer, List<String>> loadMap(String ficheiro, int size) throws IOException {
         LinkedHashMap<Integer, List<String>> data = new LinkedHashMap<>();
         String currentLine = "";
@@ -99,7 +70,29 @@ public class Ficheiro {
         return data;
     }
 
-    public static ArrayList<Reserva> loadList(String ficheiro, int size) throws IOException {
+    public static void escreverFicheiroReserva(String ficheiro, ArrayList<Reserva> reserva) throws IOException {
+        try {
+            File reservas = new File("src/Ficheiros/" + ficheiro + ".csv");
+            BufferedWriter bf = null;
+            bf = new BufferedWriter(new FileWriter(reservas));
+            for (Reserva entry : reserva) {
+                bf.write(entry.getNrReserva()
+                        + ";" + entry.getDiaVisita()
+                        + ";" + entry.getMesVisita()
+                        + ";" + entry.getAnoVisita()
+                        + ";" + entry.getIdCliente()
+                        + ";" + entry.getIdCarro());
+                bf.newLine();
+            }
+            System.out.println(reserva);
+            bf.flush();
+            System.out.println("Escreveu com successo.\n");
+        } catch (IOException e) {
+            System.out.println("Ocorreu um erro.\n");
+            e.printStackTrace();
+        }
+    }
+    public static ArrayList<Reserva> loadListReserva(String ficheiro, int size) throws IOException {
         ArrayList<Reserva> res = new ArrayList<>();
         String currentLine = "";
         String[] valuesTMP;
@@ -137,8 +130,63 @@ public class Ficheiro {
         return res;
     }
 
-    public static void saveAll(LinkedHashMap<Integer, List<String>> mapU, LinkedHashMap<Integer, List<String>> mapV) throws IOException {
-        escreverFicheiro("utilizadores", mapU);
-        escreverFicheiroVeiculo("veiculos", mapV);
+    public static void escreverFicheiroVenda(String ficheiro, ArrayList<Reserva> reserva) throws IOException {
+        try {
+            File reservas = new File("src/Ficheiros/" + ficheiro + ".csv");
+            BufferedWriter bf = null;
+            bf = new BufferedWriter(new FileWriter(reservas));
+            for (Reserva entry : reserva) {
+                bf.write(entry.getNrReserva()
+                        + ";" + entry.getDiaVisita()
+                        + ";" + entry.getMesVisita()
+                        + ";" + entry.getAnoVisita()
+                        + ";" + entry.getIdCliente()
+                        + ";" + entry.getIdCarro());
+                bf.newLine();
+            }
+            System.out.println(reserva);
+            bf.flush();
+            System.out.println("Escreveu com successo.\n");
+        } catch (IOException e) {
+            System.out.println("Ocorreu um erro.\n");
+            e.printStackTrace();
+        }
+    }
+    public static ArrayList<Venda> loadListVenda(String ficheiro, int size) throws IOException {
+        ArrayList<Venda> venda = new ArrayList<>();
+        String currentLine = "";
+        String[] valuesTMP;
+        BufferedReader bf = null;
+
+        try {
+            bf = new BufferedReader(new FileReader("src/Ficheiros/" + ficheiro + ".csv"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        int nrVenda = 0;
+        int diaVis = 0;
+        int mesVis = 0;
+        int anoVis=0;
+        int nUser=0;
+        int nCarro=0;
+
+        while ((currentLine = bf.readLine()) != null) {
+            valuesTMP = currentLine.split("\n");
+            List<String> values = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                values.add(valuesTMP[0].split(";")[i].trim());
+            }
+
+            nrVenda = Integer.parseInt(values.get(0));
+            diaVis = Integer.parseInt(values.get(1));
+            mesVis = Integer.parseInt(values.get(2));
+            anoVis = Integer.parseInt(values.get(3));
+            nUser = Integer.parseInt(values.get(4));
+            nCarro = Integer.parseInt(values.get(5));
+
+//            venda.add(new Venda());
+        }
+        return venda;
     }
 }

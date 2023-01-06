@@ -1,8 +1,8 @@
 package ENUM;
 
 public enum tipoUser {
-    USER,
-    MANAGER,
+    CLIENTE,
+    DONO,
     ADMIN,
     NULL
 }
