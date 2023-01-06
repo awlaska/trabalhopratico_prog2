@@ -20,14 +20,18 @@ public class Veiculo extends Stand{
     private String matricula;
     private estadoVeiculo estado = estadoVeiculo.DISPONIVEL;
 
-    LinkedHashMap<Integer, List<String>> veiculos = Ficheiro.loadMap("veiculos", 6);
+    protected LinkedHashMap<Integer, List<String>> veiculos = new LinkedHashMap<>();
 
+    public void loadMap() throws IOException {
+        veiculos = Ficheiro.loadMap("veiculos", 6);
+    }
     public Veiculo() throws IOException {
         super();
     }
 
     public void adicionarVeiculo(LinkedHashMap<Integer, List<String>> map) throws IOException {
         List dados = new ArrayList();
+        loadMap();
 
 //        while (!veiculos.containsValue(dados1)) {
         Scanner adicionar = new Scanner(System.in);

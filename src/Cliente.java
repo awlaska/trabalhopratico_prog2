@@ -43,7 +43,7 @@ public class Cliente extends Utilizador {
             case 2 -> listarCompras();
             case 3 -> listarReservas();
             case 4 -> {reserva.adicionarReserva(idUserAtual);}
-            case 5 -> {/*alterarData();*/}
+            case 5 -> {reserva.alterarDataVisita(idUserAtual);}
             case 6 -> editarUser(idUserAtual);
             default -> throw new IllegalStateException("Unexpected value: " + op);
         }

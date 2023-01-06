@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Reserva extends Stand {
@@ -41,20 +43,22 @@ public class Reserva extends Stand {
         return idCarro;
     }
 
-    public void adicionarReserva(int user) throws IOException {
+    public int adicionarReserva(int user) throws IOException {
         resLoad = Ficheiro.loadList("reservas", 6);
         Scanner input = new Scanner(System.in);
         LocalDate currentdate = LocalDate.now();
         Reserva res1 = null;
         boolean certo = false;
 
+        int nrRes = 0;
         int diaAtual;
         int mesAtual;
         int anoAtual;
 
-        System.out.println(resLoad);
-        System.out.println("Criação de reserva!");
-        System.out.println("Número do carro que deseja reservar: ");
+        listarRes();
+
+        System.out.println("\nCriação de reserva!");
+        System.out.println("ID do carro que deseja reservar: ");
         idCarro = input.nextInt();
         System.out.println("Data para visitar o Stand:");
         do {
@@ -79,40 +83,62 @@ public class Reserva extends Stand {
             anoAtual = currentdate.getYear();
 
             if(anoAtual > anoVisita)
-                System.out.println("A data tem de ser válida!1");
+                System.out.println("A data tem de ser válida!");
             else if(anoAtual == anoVisita && mesAtual > mesVisita)
-                    System.out.println("A data tem de ser válida!2");
+                    System.out.println("A data tem de ser válida!");
             else if(anoAtual == anoVisita && mesAtual == mesVisita && diaAtual >= diaVisita)
-                System.out.println("A data tem de ser válida!3");
+                System.out.println("A data tem de ser válida!");
             else if((anoAtual == anoVisita && mesAtual < mesVisita) || (anoAtual < anoVisita && mesAtual == mesVisita && diaAtual < diaVisita))
-                nrReserva = resLoad.size();
-                res1 = new Reserva(nrReserva, diaVisita, mesVisita, anoVisita, user, idCarro);
+                nrRes = resLoad.size();
+                res1 = new Reserva(nrRes, diaVisita, mesVisita, anoVisita, user, idCarro);
                 certo = true;
-                //TODO verificar
+
+            //TODO listar veiculos
+            //TODO verificar se é possivel reservar veiculo escolhido
+            //TODO alterar estado do veiculo selecionado (class veiculo ou aqui?)
+
         } while (!certo);
-        // nrReserva = resLoad.size();
-        System.out.println(res1);
-        // Reserva res1 = new Reserva(nrReserva, diaVisita, mesVisita, anoVisita, user, idCarro);
         resLoad.add(res1);
-        System.out.println(resLoad);
         Ficheiro.escreverFicheiroReserva("reservas", resLoad);
+
+        return idCarro;
     }
 
-    //DONE alterarDataVisita
-//    public void alterarDataVisita(int nrReserva, LocalDate novaDataVisita) {
-//        for (int i = 0; i < reservas.size(); i++) {
-//            if (reservas.get(i).getNrReserva() == nrReserva) {
-//                reservas.get(i).setDataVisita(novaDataVisita);
-//            }
-//        }
-//    }
+    //DOING alterarDataVisita -> apenas permite alterar as que dizem respeito ás que tem aquele idUser
+    public void alterarDataVisita(int idUser) {
+        for (int i = 0; i < reservas.size(); i++) {
+            if (reservas.get(i).getNrReserva() == nrReserva) {
+                //...
+            }
+        }
+    }
 
-    //DONE apagarReserva
+    //TODO apagarReserva -> testar
     public void apagarReserva(int nrReserva) {
         for (int i = 0; i < reservas.size(); i++) {
             if (reservas.get(i).getNrReserva() == nrReserva) {
                 reservas.remove(i);
             }
         }
+    }
+
+    //DONE
+    public void listarRes() throws IOException {
+        resLoad = Ficheiro.loadList("reservas", 6);
+        System.out.println("\nNum. Reserva, dia, mês, ano, id user, id carro");
+        for(Reserva reserva: resLoad) {
+            System.out.println(reserva);
+        }
+    }
+
+    //DONE
+    @Override
+    public String toString() {
+        return  + this.getNrReserva() + ", "
+                + this.getDiaVisita() + ", "
+                + this.getMesVisita() + ", "
+                + this.getAnoVisita() + ", "
+                + this.getIdCliente() + ", "
+                + this.getIdCarro() + ";";
     }
 }

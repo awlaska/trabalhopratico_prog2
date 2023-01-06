@@ -51,7 +51,7 @@ public class Ficheiro {
         }
     }
 
-    public static void escreverFicheiroReserva(String ficheiro, List<Reserva> reserva) throws IOException {
+    public static void escreverFicheiroReserva(String ficheiro, ArrayList<Reserva> reserva) throws IOException {
         try {
             File reservas = new File("src/Ficheiros/" + ficheiro + ".csv");
             BufferedWriter bf = null;
@@ -65,6 +65,7 @@ public class Ficheiro {
                         + ";" + entry.getIdCarro());
                 bf.newLine();
             }
+            System.out.println(reserva);
             bf.flush();
             System.out.println("Escreveu com successo.\n");
         } catch (IOException e) {
@@ -130,12 +131,9 @@ public class Ficheiro {
             anoVis = Integer.parseInt(values.get(3));
             nUser = Integer.parseInt(values.get(4));
             nCarro = Integer.parseInt(values.get(5));
-            System.out.println(nrRes + " " + diaVis + " " + mesVis + " " + anoVis+ " " + nUser + " " + nCarro);
-//
 
+            res.add(new Reserva(nrRes, diaVis, mesVis, anoVis, nUser, nCarro));
         }
-        res.add(new Reserva(nrRes, diaVis, mesVis, anoVis, nUser, nCarro));
-//        }
         return res;
     }
 
