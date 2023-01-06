@@ -32,8 +32,8 @@ public class Veiculo{
         Ficheiro.escreverFicheiroVeiculo("veiculos", veiculos);
     }
 
-    //DOING verificar se o novo já existe no map
-    //DOING Corrigir ciclo while caso algo errado volta a pedir dados
+    //DOING verificar se o novo tem matricula já existente no map
+    //DOING corrigir ciclo while caso algo errado volta a pedir dados
     //DOING path para o menu anterior
     public void adicionarVeiculo() throws IOException {
         List dados = new ArrayList();
@@ -98,7 +98,7 @@ public class Veiculo{
 
     //DOING corrigir apagar veiculo
     //DOING path para o menu anterior
-    public void apagarVeiculo() throws IOException, UtilizadorException {
+    public void apagarVeiculo() throws IOException {
         Scanner input = new Scanner(System.in);
 
 //        listarVeiculos();

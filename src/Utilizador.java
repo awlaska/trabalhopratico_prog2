@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.util.*;
 
 public class Utilizador {
-    //DONE variaveis
     protected String username;
     protected String password;
     protected String nome;
@@ -11,12 +10,9 @@ public class Utilizador {
     protected int id;
     protected tipoUser tipo;
 
-    //TODO alterar os tipos de dados do mapa
-    //TODO -> na escrita de ficheiro vai dar erro, corrigir a passagem e escrita de dados
     protected LinkedHashMap<Integer, List<String>> utilizadores = new LinkedHashMap<>();
     protected List<String> dados;
 
-    //DONE constructors
     public Utilizador() throws IOException {}
 
     public Utilizador(String user, String pass, String nome, String nrTelemovel, tipoUser tipo) throws IOException {
@@ -198,8 +194,7 @@ public class Utilizador {
         } else {
             throw new UtilizadorException("Não tem permissões para apagar este utilizador!");
         }
-
-        Ficheiro.escreverFicheiroUtilizador("utilizadores", utilizadores);
+        writeMapUtilizador();
 //        menuD(id);
     }
 

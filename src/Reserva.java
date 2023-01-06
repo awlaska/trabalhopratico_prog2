@@ -102,7 +102,7 @@ public class Reserva {
                 certo = true;
         } while (!certo);
         resLoad.add(res1);
-        Ficheiro.escreverFicheiroReserva("reservas", resLoad);
+        writeListReserva();
 
         return idCarro;
     }

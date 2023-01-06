@@ -6,4 +6,3 @@ public class StandUI { //DONE :D
         user.menuInicial();
     }
 }
-//TODO Alterar List do Map utilizadores e veiculos de String para os tipos de classe
