@@ -14,6 +14,10 @@ public class Utilizador {
     protected String nrTelemovel;
     protected int id;
     protected tipoUser tipo;
+
+    //TODO alterar os tipos de dados do mapa
+    //TODO -> na escrita de ficheiro vai dar erro, corrigir a passagem e escrita de dados
+    protected LinkedHashMap<Integer, List<String>> utilizadores = new LinkedHashMap<>();
     protected List<String> dados;
 
     //DONE constructors
@@ -29,19 +33,23 @@ public class Utilizador {
         this.dados = dados;
     }
 
-    //DONE instancias
     Veiculo veic = new Veiculo();
     Reserva reserva = new Reserva();
 
+    public LinkedHashMap<Integer, List<String>> loadMapUtilizador() throws IOException {
+        this.utilizadores = Ficheiro.loadMap("utilizadores", 6);
+        return utilizadores;
+    }
+
+    //TODO metodo loadmaps
     //DONE metodos
     //DONE menuInicial
     public void menuInicial() throws IOException, UtilizadorException {
-        LinkedHashMap<Integer, List<String>> utilizadores = Ficheiro.loadMap("utilizadores", 6);
+        loadMapUtilizador();
         Scanner input = new Scanner(System.in);
 
         System.out.print("1 - Login\n2 - Signup\n0 - Sair\n>> ");
         int op = input.nextInt();
-
         System.out.println();
 
         //TODO adicionar escrita dos ficheiros em falta (veiculos, reservas, vendas)
@@ -79,12 +87,12 @@ public class Utilizador {
             if (!map.get(id).get(4).equals("NULL")) {
                 if (map.get(id).get(4).equals("ADMIN")) {
                     Admin admin = new Admin();
-                    admin.menuA();
+                    admin.menuA(id);
                     break;
                 }
                 if (map.get(id).get(4).equals("DONO")) {
                     DonoStand dono = new DonoStand();
-                    dono.menuD();
+                    dono.menuD(id);
                     break;
                 }
                 if (map.get(id).get(4).equals("CLIENTE")) {

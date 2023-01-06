@@ -20,7 +20,7 @@ public class Admin extends Utilizador implements IListar {
     //DOING -Apagar Reserva
 
     //--> MENUS
-    protected void menuA() throws IOException, UtilizadorException {
+    protected void menuA(int idUser) throws IOException, UtilizadorException {
         Scanner input = new Scanner(System.in);
 
         System.out.print("1 - LogOut\n2 - Listagens\n3 - Alterar Tipo de User\n4 - Apagar User\n5 - Apagar Veiculo\n6 - Apagar Venda\n7 - Apagar Reserva\n0 - Sair\n>> ");
@@ -37,7 +37,7 @@ public class Admin extends Utilizador implements IListar {
                 menuInicial();
             }
             case 2 -> {
-                listagens();
+                listagens(idUser);
                 break;
             }
             //DONE perguntar ao user quais apagar ou alterar
@@ -66,7 +66,7 @@ public class Admin extends Utilizador implements IListar {
         }
     }
 
-    private void listagens() throws IOException, UtilizadorException {
+    private void listagens(int idUser) throws IOException, UtilizadorException {
         Scanner input = new Scanner(System.in);
 
         System.out.print("2 - Listar User\n3 - Listar Veiculos\n4 - Listar Compras\n5 - Listar Reservas\n0 - Sair\n1 - Retroceder\n>> ");
@@ -80,7 +80,7 @@ public class Admin extends Utilizador implements IListar {
                 break;
             }
             case 1 -> {
-                menuA();
+                menuA(idUser);
             }
             case 2 -> {
                 listarUsers();
@@ -120,7 +120,7 @@ public class Admin extends Utilizador implements IListar {
         }
 
         Ficheiro.escreverFicheiro("utilizadores", utilizadores);
-        menuA();
+//        menuA(id);
     }
 
     private void apagarUser() throws IOException, UtilizadorException {
@@ -138,7 +138,7 @@ public class Admin extends Utilizador implements IListar {
             utilizadores.get(id).set(i, "null");
 
         Ficheiro.escreverFicheiro("utilizadores", utilizadores);
-        menuA();
+//        menuA(id);
     }
 
     private void apagarVeiculo() throws IOException, UtilizadorException {
@@ -154,7 +154,7 @@ public class Admin extends Utilizador implements IListar {
             veiculos.get(id).set(i, "null");
 
         Ficheiro.escreverFicheiro("veiculos", veiculos);
-        menuA();
+//        menuA(id);
     }
     //TODO apagarVenda e apagarReserva
     private void apagarVenda() {
@@ -179,7 +179,7 @@ public class Admin extends Utilizador implements IListar {
 //                    ", " + entry.getValue().get(2) +
 //                    ", " + entry.getValue().get(3));
         System.out.println();
-        menuA();
+//        menuA(id);
     }
 
     @Override
@@ -193,7 +193,7 @@ public class Admin extends Utilizador implements IListar {
                     ", " + entry.getValue().get(3) +
                     ", " + entry.getValue().get(4));
         System.out.println();
-        menuA();
+//        menuA(id);
     }
 
     @Override
@@ -206,7 +206,7 @@ public class Admin extends Utilizador implements IListar {
 //                    ", " + entry.getValue().get(2) +
 //                    ", " + entry.getValue().get(3));
         System.out.println();
-        menuA();
+//        menuA(id);
     }
 
     @Override
@@ -220,6 +220,6 @@ public class Admin extends Utilizador implements IListar {
                         ", " + entry.getValue().get(3) +
                         ", " + entry.getValue().get(4));
         System.out.println();
-        menuA();
+//        menuA(id);
     }
 }

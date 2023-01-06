@@ -13,8 +13,6 @@ public class Cliente extends Utilizador {
 
     //TODO completar switch do menu
     /*
-    Apenas pode ver registos que lhe digam respeito (estão associados ao seu id)
-
     Listar Veiculos (Apenas os que tem estado DISPONIVEL):
     -Pode escolher um para reserva (diz o id do carro)
 
@@ -34,27 +32,29 @@ public class Cliente extends Utilizador {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Id do user atual: " + idUserAtual);
-        System.out.print("1 - Listar veiculos\n2 - Listar compras\n3 - Listar reservas\n4 - Apagar Reserva\n5 - Alterar Data de Visita\n6 - Ver/Editar perfil\n0 - Sair\n>> ");
+        System.out.print("1 - Listar veiculos\n2 - Listar compras\n3 - Listar reservas\n4 - Apagar Reserva\n5 - Alterar Data de Visita\n6 - Apagar Reserva\n7 - Ver/Editar perfil\n0 - Sair\n>> ");
         int op = input.nextInt();
 
         switch (op) {
             case 0 -> {Ficheiro.saveAll(utilizadores, veiculos);}
-            case 1 -> listarVeiculos();
-            case 2 -> listarCompras();
-            case 3 -> listarReservas();
+            case 1 -> listarVeiculos(idUserAtual);
+            case 2 -> listarCompras(idUserAtual);
+            case 3 -> {reserva.listarRes(idUserAtual); }
             case 4 -> {reserva.adicionarReserva(idUserAtual);}
             case 5 -> {reserva.alterarDataVisita(idUserAtual);}
-            case 6 -> editarUser(idUserAtual);
+            case 6 -> {reserva.apagarReserva(idUserAtual);}
+            case 7 -> editarUser(idUserAtual);
             default -> throw new IllegalStateException("Unexpected value: " + op);
         }
     }
 
+
+    //DONE
     private void editarUser(int idUserAtual) throws UtilizadorException, IOException {
         Scanner input = new Scanner(System.in);
         Scanner inputOP = new Scanner(System.in);
         int op = -1;
         while (op != 0) {
-            //DONE print dos valores que correspondem ao idUserAtual
             listarUsers(idUserAtual);
             System.out.println("\n!!Editar perfil!!\n");
             System.out.print("0 - Sair\n1 - Username\n2 - Password\n3 - Nome\n4 - Telefone\n>> ");
@@ -82,7 +82,7 @@ public class Cliente extends Utilizador {
                 case 4 -> {
                     System.out.print("Telefone: \n>> ");
                     String tele = input.nextLine();
-                    utilizadores.get(idUserAtual).set(4, tele);
+                    utilizadores.get(idUserAtual).set(3, tele);
                 }
                 default -> throw new IllegalStateException("Unexpected value: " + op);
             }
@@ -90,7 +90,7 @@ public class Cliente extends Utilizador {
     }
 
     //TODO fazer metodos
-    public void listarCompras() {
+    public void listarCompras(int idUserAtual) {
         System.out.println();
     }
 
@@ -106,12 +106,13 @@ public class Cliente extends Utilizador {
         System.out.println();
     }
 
-    public void listarReservas() {
-        System.out.println();
-
+    public void listarReservas(int idUser) throws IOException {
+        reserva.listarRes(idUser);
     }
 
-    public void listarVeiculos() {
+    //TODO fazer com que método apenas invoque
+    public void listarVeiculos(int idUser) {
+        //veiculo.listarVeic(idUser);
         System.out.println("\nid -> marca, modelo, matricula, data de entrada");
         for (Map.Entry<Integer, List<String>> entry : veiculos.entrySet())
             if (entry.getValue().contains("DISPONIVEL")){

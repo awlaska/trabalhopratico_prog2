@@ -22,7 +22,7 @@ public class DonoStand extends Utilizador implements IListar {
         -Alterar data de visita
         -Apagar veiculo
          */
-    protected void menuD() throws IOException, UtilizadorException {
+    protected void menuD(int idUser) throws IOException, UtilizadorException {
         LinkedHashMap<Integer, List<String>> utilizadores = Ficheiro.loadMap("utilizadores", 6);
         LinkedHashMap<Integer, List<String>> veiculos = Ficheiro.loadMap("veiculos", 6);
         Scanner input = new Scanner(System.in);
@@ -85,7 +85,7 @@ public class DonoStand extends Utilizador implements IListar {
         }
 
         Ficheiro.escreverFicheiro("utilizadores", utilizadores);
-        menuD();
+        menuD(id);
     }
 
     //TODO ver while loop
@@ -121,7 +121,7 @@ public class DonoStand extends Utilizador implements IListar {
                 map.put(id, dados);
                 Ficheiro.escreverFicheiroVeiculo("veiculos", map);
                 System.out.println("\n\n");
-                menuD();
+//                menuD(id);
             }
 //        }
     }
@@ -145,7 +145,7 @@ public class DonoStand extends Utilizador implements IListar {
         }
 
         Ficheiro.escreverFicheiro("veiculos", veiculos);
-        menuD();
+//        menuD(id);
     }
 
     private void apagarVeiculo() throws IOException, UtilizadorException {
@@ -161,7 +161,7 @@ public class DonoStand extends Utilizador implements IListar {
             veiculos.get(id).set(i, "null");
 
         Ficheiro.escreverFicheiro("veiculos", veiculos);
-        menuD();
+//        menuD();
     }
 
     //TODO listagens:

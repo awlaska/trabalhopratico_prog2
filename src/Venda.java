@@ -18,6 +18,10 @@ public class Venda extends Stand {
         this.idCarro = idCarro;
     }
 
+    public void loadMapCompra() throws IOException {
+//        veiculos = Ficheiro.loadMap("veiculos", 6);
+    }
+
     //DONE
 //    public Venda(int nrReserva) throws IOException {
 //        super();

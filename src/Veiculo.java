@@ -22,7 +22,7 @@ public class Veiculo extends Stand{
 
     protected LinkedHashMap<Integer, List<String>> veiculos = new LinkedHashMap<>();
 
-    public void loadMap() throws IOException {
+    public void loadMapVeiculo() throws IOException {
         veiculos = Ficheiro.loadMap("veiculos", 6);
     }
     public Veiculo() throws IOException {
@@ -31,7 +31,7 @@ public class Veiculo extends Stand{
 
     public void adicionarVeiculo(LinkedHashMap<Integer, List<String>> map) throws IOException {
         List dados = new ArrayList();
-        loadMap();
+        loadMapVeiculo();
 
 //        while (!veiculos.containsValue(dados1)) {
         Scanner adicionar = new Scanner(System.in);
@@ -108,4 +108,9 @@ public class Veiculo extends Stand{
 //        menuD();
     }
 
+    public void listarVeiculos(){}
+
+//    public String toString(){
+//        return ;
+//    }
 }

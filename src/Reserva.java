@@ -43,6 +43,10 @@ public class Reserva extends Stand {
         return idCarro;
     }
 
+    public void loadListReserva() throws IOException {
+//        veiculos = Ficheiro.loadMap("veiculos", 6);
+    }
+
     public int adicionarReserva(int user) throws IOException {
         resLoad = Ficheiro.loadList("reservas", 6);
         Scanner input = new Scanner(System.in);
@@ -55,7 +59,7 @@ public class Reserva extends Stand {
         int mesAtual;
         int anoAtual;
 
-        listarRes();
+        listarRes(user);
 
         System.out.println("\nCriação de reserva!");
         System.out.println("ID do carro que deseja reservar: ");
@@ -114,7 +118,7 @@ public class Reserva extends Stand {
     }
 
     //TODO apagarReserva -> testar
-    public void apagarReserva(int nrReserva) {
+    public void apagarReserva(int idUser) {
         for (int i = 0; i < reservas.size(); i++) {
             if (reservas.get(i).getNrReserva() == nrReserva) {
                 reservas.remove(i);
@@ -123,12 +127,15 @@ public class Reserva extends Stand {
     }
 
     //DONE
-    public void listarRes() throws IOException {
+    public void listarRes(int idUser) throws IOException {
         resLoad = Ficheiro.loadList("reservas", 6);
         System.out.println("\nNum. Reserva, dia, mês, ano, id user, id carro");
-        for(Reserva reserva: resLoad) {
-            System.out.println(reserva);
-        }
+        //TODO recebe metodo load map do utilizador, se id passado for de tipo "CLIENTE" apenas mostra o que tiver id dele, caso contrario mostra tudo
+//        if(){
+//            for (Reserva reserva : resLoad) {
+//                System.out.println(reserva);
+//            }
+//        }
     }
 
     //DONE
