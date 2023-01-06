@@ -11,7 +11,7 @@ public class Veiculo{
     private float precoBase;
     private estadoVeiculo estado = estadoVeiculo.DISPONIVEL;
 
-    protected LinkedHashMap<Integer, List<String>> veiculos = new LinkedHashMap<>();
+    public LinkedHashMap<Integer, List<String>> veiculos = new LinkedHashMap<>();
 
     public Veiculo() throws IOException {
 

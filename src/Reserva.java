@@ -48,6 +48,8 @@ public class Reserva {
         return estado;
     }
 
+    Veiculo v = new Veiculo();
+
     public ArrayList<Reserva> loadListReserva() throws IOException {
         resLoad = Ficheiro.loadListReserva("reservas", 6);
         return resLoad;
@@ -56,62 +58,57 @@ public class Reserva {
         Ficheiro.escreverFicheiroReserva("reservas", resLoad);
     }
 
-    //DOING o método tem de ser verificado, funciona mas pode ter "lixo"
     //DOING path para o menu anterior
-    //DOING alterar o estado do veiculo para RESERVADO quando uma reserva é concluida
-    //DOING apenas permitir reservar veiculos que se encontram no estado DISPONIVEL
+    //DOING o método tem de ser verificado, funciona mas pode ter "lixo"
+    //DOING metodo while caso o veiculo n esteja disponivel para pedir novamente um id de veiculo
+    //DONE alterar o estado do veiculo para RESERVADO quando uma reserva é concluida
+    //DONE apenas permitir reservar veiculos que se encontram no estado DISPONIVEL
     public int adicionarReserva(int user) throws IOException {
+        v.loadMapVeiculo();
         Scanner input = new Scanner(System.in);
         LocalDate currentdate = LocalDate.now();
         Reserva res1 = null;
         boolean certo = false;
-
-        int nrRes = 0;
-        int diaAtual;
-        int mesAtual;
-        int anoAtual;
+        int nrRes = 0, diaAtual = currentdate.getDayOfMonth(), mesAtual = LocalDate.EPOCH.getMonthValue(), anoAtual = currentdate.getYear();
 
         listarRes(user);
 
-        System.out.println("\nCriação de reserva!");
+        System.out.println("\n>>Criar Reserva<<");
         System.out.println("ID do carro que deseja reservar: ");
         idCarro = input.nextInt();
-        System.out.println("Data para visitar o Stand:");
-        do {
+        if(v.veiculos.get(idCarro).get(5).equals("DISPONIVEL")){
+            System.out.println("Data para visitar o Stand:");
             do {
-                System.out.println("Dia >> ");
-                diaVisita = input.nextInt();
-                if (diaVisita > 31) System.out.println("O dia inserido não é válido!");
-            } while (diaVisita > 31);
-            do {
-                System.out.println("Mês >> ");
-                mesVisita = input.nextInt();
-                if (mesVisita > 12) System.out.println("O mês inserido não é válido!");
-            } while (mesVisita > 12);
-            do {
-                System.out.println("Ano >> ");
-                anoVisita = input.nextInt();
-                if (anoVisita < 2023) System.out.println("O ano inserido não é válido!");
-            } while (anoVisita < 2023);
+                do {
+                    System.out.println("Dia >> ");
+                    diaVisita = input.nextInt();
+                    if (diaVisita > 31) System.out.println("O dia inserido não é válido!");
+                } while (diaVisita > 31);
+                do {
+                    System.out.println("Mês >> ");
+                    mesVisita = input.nextInt();
+                    if (mesVisita > 12) System.out.println("O mês inserido não é válido!");
+                } while (mesVisita > 12);
+                do {
+                    System.out.println("Ano >> ");
+                    anoVisita = input.nextInt();
+                    if (anoVisita < 2023) System.out.println("O ano inserido não é válido!");
+                } while (anoVisita < 2023);
 
-            diaAtual = currentdate.getDayOfMonth();
-            mesAtual = LocalDate.EPOCH.getMonthValue();
-            anoAtual = currentdate.getYear();
-
-            if(anoAtual > anoVisita)
-                System.out.println("A data tem de ser válida!");
-            else if(anoAtual == anoVisita && mesAtual > mesVisita)
+                if (anoAtual > anoVisita)
                     System.out.println("A data tem de ser válida!");
-            else if(anoAtual == anoVisita && mesAtual == mesVisita && diaAtual >= diaVisita)
-                System.out.println("A data tem de ser válida!");
-            else if((anoAtual == anoVisita && mesAtual < mesVisita) || (anoAtual < anoVisita && mesAtual == mesVisita && diaAtual < diaVisita))
-                nrRes = resLoad.size();
+                else if (anoAtual == anoVisita && mesAtual > mesVisita)
+                    System.out.println("A data tem de ser válida!");
+                else if (anoAtual == anoVisita && mesAtual == mesVisita && diaAtual >= diaVisita)
+                    System.out.println("A data tem de ser válida!");
+                else if ((anoAtual == anoVisita && mesAtual < mesVisita) || (anoAtual < anoVisita && mesAtual == mesVisita && diaAtual < diaVisita))
+                    nrRes = resLoad.size();
                 res1 = new Reserva(nrRes, diaVisita, mesVisita, anoVisita, user, idCarro, estadoReserva.CRIADA);
                 certo = true;
-        } while (!certo);
-        resLoad.add(res1);
-        writeListReserva();
-
+            } while (!certo);
+            resLoad.add(res1);
+            writeListReserva();
+        }else{System.out.println("O veiculo selecionado não se encontra disponivel para reserva!");}
         return idCarro;
     }
 

@@ -139,22 +139,19 @@ public class Utilizador {
             }
         }
 
-    //DOING metodo Guardar Tudo (guarda os mapas em ficheiro ao sair do programa)
     //DOING path para o menu anterior
     protected void editarUser(int idUserAtual) throws UtilizadorException, IOException {
+        loadMapUtilizador();
         Scanner input = new Scanner(System.in);
         Scanner inputOP = new Scanner(System.in);
         int op = -1;
         while (op != 0) {
             listarUsers(idUserAtual);
-            System.out.println("\n!!Editar perfil!!\n");
+            System.out.println("\n>>Editar perfil<<\n");
             System.out.print("0 - Sair\n1 - Username\n2 - Password\n3 - Nome\n4 - Telefone\n>> ");
             op = inputOP.nextInt();
             switch (op) {
-                case 0 -> {
-//                    Ficheiro.saveAll(utilizadores, veiculos);
-//                    menuC(idUserAtual);
-                }
+                case 0 -> {break;}
                 case 1 -> {
                     System.out.print("Username: \n>> ");
                     String user = input.nextLine();
@@ -177,11 +174,13 @@ public class Utilizador {
                 }
                 default -> throw new IllegalStateException("Unexpected value: " + op);
             }
+            writeMapUtilizador();
         }
     }
 
     //DOING path para o menu anterior
     protected void apagarUsers() throws IOException, UtilizadorException {
+        loadMapUtilizador();
         Scanner input = new Scanner(System.in);
 
         listarUsers(id);
@@ -202,6 +201,7 @@ public class Utilizador {
 
     //DOING path para o menu anterior
     protected void alterarTipoUser() throws IOException, UtilizadorException {
+        loadMapUtilizador();
         Scanner inputint = new Scanner(System.in);
         Scanner inputstring = new Scanner(System.in);
 
@@ -226,27 +226,41 @@ public class Utilizador {
     }
 
     //DOING path para o menu anterior
-    //DOING adicionar ao método listarUsers if() de forma a verificar o id e mostrar consoante a permissão
+    //DONE adicionar ao método listarUsers if() de forma a verificar o id e mostrar consoante a permissão
     public void listarUsers(int idUserAtual) throws IOException, UtilizadorException {
-        //if(idUserAtual contem tipo != 'CLIENTE')
-        System.out.println("\nid -> username, password, nome, telefone, tipo");
-        for (Map.Entry<Integer, List<String>> entry : utilizadores.entrySet())
-            System.out.println(entry.getKey() +
-                    " -> " + entry.getValue().get(0) +
-                    ", " + entry.getValue().get(1) +
-                    ", " + entry.getValue().get(2) +
-                    ", " + entry.getValue().get(3) +
-                    ", " + entry.getValue().get(4));
-        System.out.println();
-        //else
-        System.out.println("\nid -> username, password, nome, telefone");
-        for (Map.Entry<Integer, List<String>> entry : utilizadores.entrySet())
-            if (entry.getKey().equals(idUserAtual))
+        loadMapUtilizador();
+        if(utilizadores.get(idUserAtual).get(4).contains("CLIENTE")) {
+            System.out.println("\n>>Utilizador Atual<<");
+            System.out.println("id -> username, password, nome, telefone");
+            for (Map.Entry<Integer, List<String>> entry : utilizadores.entrySet())
+                if (entry.getKey().equals(idUserAtual))
+                    System.out.println(entry.getKey() +
+                            " -> " + entry.getValue().get(0) +
+                            ", " + entry.getValue().get(1) +
+                            ", " + entry.getValue().get(2) +
+                            ", " + entry.getValue().get(3));
+            System.out.println();
+        }else {
+            System.out.println("\n>>Utilizadores no Sistema<<");
+            System.out.println("id -> username, password, nome, telefone, tipo");
+            for (Map.Entry<Integer, List<String>> entry : utilizadores.entrySet())
                 System.out.println(entry.getKey() +
                         " -> " + entry.getValue().get(0) +
                         ", " + entry.getValue().get(1) +
                         ", " + entry.getValue().get(2) +
-                        ", " + entry.getValue().get(3));
-        System.out.println();
+                        ", " + entry.getValue().get(3) +
+                        ", " + entry.getValue().get(4));
+            System.out.println("\n>>Utilizador Atual<<");
+            System.out.println("id -> username, password, nome, telefone, estado");
+            for (Map.Entry<Integer, List<String>> entry : utilizadores.entrySet())
+                if (entry.getKey().equals(idUserAtual))
+                    System.out.println(entry.getKey() +
+                            " -> " + entry.getValue().get(0) +
+                            ", " + entry.getValue().get(1) +
+                            ", " + entry.getValue().get(2) +
+                            ", " + entry.getValue().get(3) +
+                            ", " + entry.getValue().get(4));
+            System.out.println();
+        }
     }
 }
