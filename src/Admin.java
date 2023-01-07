@@ -117,6 +117,8 @@ public class Admin extends Utilizador implements IMenu {
             }
             case 4 -> {
                 reserva.listarRes(idUser);
+                System.out.println("\n\n");
+                menuReservas(idUser);
             }
             default -> throw new IllegalStateException("Unexpected value: " + op);
         }

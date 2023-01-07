@@ -2,5 +2,6 @@ package ENUM;
 
 public enum estadoReserva {
     CRIADA,
-    CONLCUIDA
+    CONLCUIDA,
+    APAGADA
 }

@@ -119,6 +119,8 @@ public class DonoStand extends Utilizador implements IMenu {
             }
             case 5 -> {
                 reserva.listarRes(idUser);
+                System.out.println("\n\n");
+                menuReservas(idUser);
             }
             default -> throw new IllegalStateException("Unexpected value: " + op);
         }
