@@ -1,8 +1,10 @@
 import ENUM.estadoReserva;
 
 import java.io.*;
-import java.time.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Ficheiro {
     //DONE MAPS
@@ -27,6 +29,7 @@ public class Ficheiro {
             e.printStackTrace();
         }
     }
+
     public static void escreverFicheiroVeiculo(String ficheiro, LinkedHashMap<Integer, List<String>> map) {
         try {
             File veiculos = new File("src/Ficheiros/" + ficheiro + ".csv");
@@ -49,6 +52,7 @@ public class Ficheiro {
             e.printStackTrace();
         }
     }
+
     public static LinkedHashMap<Integer, List<String>> loadMap(String ficheiro, int size) throws IOException {
         LinkedHashMap<Integer, List<String>> data = new LinkedHashMap<>();
         String currentLine = "";
@@ -98,6 +102,7 @@ public class Ficheiro {
             e.printStackTrace();
         }
     }
+
     public static ArrayList<Reserva> loadListReserva(String ficheiro, int size) throws IOException {
         ArrayList<Reserva> res = new ArrayList<>();
         String currentLine = "";
@@ -110,7 +115,7 @@ public class Ficheiro {
             e.printStackTrace();
         }
 
-        int nrRes = 0, diaVis = 0, mesVis = 0, anoVis=0, nUser=0, nCarro=0;
+        int nrRes = 0, diaVis = 0, mesVis = 0, anoVis = 0, nUser = 0, nCarro = 0;
         estadoReserva estado;
 
         while ((currentLine = bf.readLine()) != null) {
@@ -155,6 +160,7 @@ public class Ficheiro {
             e.printStackTrace();
         }
     }
+
     public static ArrayList<Venda> loadListVenda(String ficheiro, int size) throws IOException {
         ArrayList<Venda> venda = new ArrayList<>();
         String currentLine = "";

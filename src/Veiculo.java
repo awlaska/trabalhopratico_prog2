@@ -1,8 +1,10 @@
 import ENUM.estadoVeiculo;
+
 import java.io.IOException;
 import java.util.*;
 
-public class Veiculo{
+public class Veiculo {
+    public LinkedHashMap<Integer, List<String>> veiculos = new LinkedHashMap<>();
     private int numCarro;
     private String marca;
     private String modelo;
@@ -10,8 +12,6 @@ public class Veiculo{
     private String matricula;
     private String precoBase;
     private estadoVeiculo estado = estadoVeiculo.DISPONIVEL;
-
-    public LinkedHashMap<Integer, List<String>> veiculos = new LinkedHashMap<>();
 
     public Veiculo() throws IOException {
 
@@ -22,6 +22,7 @@ public class Veiculo{
         veiculos = Ficheiro.loadMap("veiculos", 7);
         return veiculos;
     }
+
     public void writeMapVeiculo() throws IOException {
         Ficheiro.escreverFicheiroVeiculo("veiculos", veiculos);
     }
@@ -73,7 +74,7 @@ public class Veiculo{
                 writeMapVeiculo();
                 System.out.println("\n");
             }
-        }while (existe == true);
+        } while (existe);
     }
 
     //DONE alterar estado veiculo
@@ -92,9 +93,9 @@ public class Veiculo{
 
 
         if (estado.equalsIgnoreCase("DESATIVADO") ||
-            estado.equalsIgnoreCase("RESERVADO") ||
-            estado.equalsIgnoreCase("VENDIDO") ||
-            estado.equalsIgnoreCase("DISPONIVEL")) {
+                estado.equalsIgnoreCase("RESERVADO") ||
+                estado.equalsIgnoreCase("VENDIDO") ||
+                estado.equalsIgnoreCase("DISPONIVEL")) {
             veiculos.get(id).set(5, estado.toUpperCase());
         } else {
             System.out.println("Tipo inválido!");
@@ -109,10 +110,10 @@ public class Veiculo{
         Utilizador uM = new Utilizador();
         uM.loadMapUtilizador();
         loadMapVeiculo();
-        if(uM.utilizadores.get(idUserAtual).get(4).equals("CLIENTE")){
+        if (uM.utilizadores.get(idUserAtual).get(4).equals("CLIENTE")) {
             System.out.println("\nid -> marca, modelo, data manufatura, matricula, preço base");
             for (Map.Entry<Integer, List<String>> entry : veiculos.entrySet())
-                if (entry.getValue().contains("DISPONIVEL")){
+                if (entry.getValue().contains("DISPONIVEL")) {
                     System.out.println(entry.getKey() +
                             " -> " + entry.getValue().get(0) +
                             ", " + entry.getValue().get(1) +
@@ -121,7 +122,7 @@ public class Veiculo{
                             ", " + entry.getValue().get(4) + "€");
                 }
             System.out.println();
-        }else {
+        } else {
             System.out.println("\nid -> marca, modelo, data manufatura, matricula, preço base, estado");
             for (Map.Entry<Integer, List<String>> entry : veiculos.entrySet())
                 System.out.println(entry.getKey() +

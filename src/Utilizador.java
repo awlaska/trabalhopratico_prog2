@@ -1,20 +1,22 @@
 import ENUM.tipoUser;
+
 import java.io.IOException;
 import java.util.*;
 
 public class Utilizador {
+    public LinkedHashMap<Integer, List<String>> utilizadores = new LinkedHashMap<>();
     protected String username;
     protected String password;
     protected String nome;
     protected String nrTelemovel;
     protected int id;
     protected tipoUser tipo;
-
-    public LinkedHashMap<Integer, List<String>> utilizadores = new LinkedHashMap<>();
     protected List<String> dados;
-
-    public Utilizador() throws IOException {}
-
+    Veiculo veic = new Veiculo();
+    Reserva reserva = new Reserva();
+    Venda venda = new Venda();
+    public Utilizador() throws IOException {
+    }
     public Utilizador(String user, String pass, String nome, String nrTelemovel, tipoUser tipo) throws IOException {
         this.username = user;
         this.password = pass;
@@ -23,15 +25,12 @@ public class Utilizador {
         this.tipo = null;
     }
 
-    Veiculo veic = new Veiculo();
-    Reserva reserva = new Reserva();
-    Venda venda = new Venda();
-
     //DONE Load do mapa e Escrita do ficheiro
     public LinkedHashMap<Integer, List<String>> loadMapUtilizador() throws IOException {
         this.utilizadores = Ficheiro.loadMap("utilizadores", 6);
         return utilizadores;
     }
+
     public void writeMapUtilizador() throws IOException {
         Ficheiro.escreverFicheiroUtilizador("utilizadores", utilizadores);
     }
@@ -48,7 +47,9 @@ public class Utilizador {
 
         //TODO adicionar escrita dos ficheiros em falta (veiculos, reservas, vendas)
         switch (op) {
-            case 0 -> {break;}
+            case 0 -> {
+                break;
+            }
             case 1 -> login(utilizadores);
             case 2 -> signUp(utilizadores);
             default -> throw new IllegalStateException("Unexpected value: " + op);
@@ -108,36 +109,36 @@ public class Utilizador {
 
         //TODO meter while a funcionar
 //        while (map.get(0).get(0).equals(username)){
-            System.out.print("Username\n>> ");
-            this.username = signup.nextLine();
-            System.out.print("Password\n>> ");
-            this.password = signup.nextLine();
-            System.out.print("Nome\n>> ");
-            this.nome = signup.nextLine();
-            System.out.print("Número de telemovel\n>> ");
-            this.nrTelemovel = signup.nextLine();
-            this.tipo = tipoUser.NULL;
+        System.out.print("Username\n>> ");
+        this.username = signup.nextLine();
+        System.out.print("Password\n>> ");
+        this.password = signup.nextLine();
+        System.out.print("Nome\n>> ");
+        this.nome = signup.nextLine();
+        System.out.print("Número de telemovel\n>> ");
+        this.nrTelemovel = signup.nextLine();
+        this.tipo = tipoUser.NULL;
 
-            for (int i = 0; i <= map.size(); i++) {
-                if (!map.containsKey(i))
-                    id = i;
-            }
-
-            dados.add(0, username);
-            dados.add(1, password);
-            dados.add(2, nome);
-            dados.add(3, nrTelemovel);
-            dados.add(4, tipo.toString());
-
-            if (map.get(0).get(0).equals(username)) {
-                throw new UtilizadorException("!!User já existente!!");
-            } else {
-                map.put(id, dados);
-                writeMapUtilizador();
-                System.out.println("\n\n");
-                menuInicial();
-            }
+        for (int i = 0; i <= map.size(); i++) {
+            if (!map.containsKey(i))
+                id = i;
         }
+
+        dados.add(0, username);
+        dados.add(1, password);
+        dados.add(2, nome);
+        dados.add(3, nrTelemovel);
+        dados.add(4, tipo.toString());
+
+        if (map.get(0).get(0).equals(username)) {
+            throw new UtilizadorException("!!User já existente!!");
+        } else {
+            map.put(id, dados);
+            writeMapUtilizador();
+            System.out.println("\n\n");
+            menuInicial();
+        }
+    }
 
     //DOING path para o menu anterior
     protected void editarUser(int idUserAtual) throws UtilizadorException, IOException {
@@ -151,7 +152,9 @@ public class Utilizador {
             System.out.print("0 - Sair\n1 - Username\n2 - Password\n3 - Nome\n4 - Telefone\n>> ");
             op = inputOP.nextInt();
             switch (op) {
-                case 0 -> {break;}
+                case 0 -> {
+                    break;
+                }
                 case 1 -> {
                     System.out.print("Username: \n>> ");
                     String user = input.nextLine();
@@ -229,7 +232,7 @@ public class Utilizador {
     //DONE adicionar ao método listarUsers if() de forma a verificar o id e mostrar consoante a permissão
     public void listarUsers(int idUserAtual) throws IOException, UtilizadorException {
         loadMapUtilizador();
-        if(utilizadores.get(idUserAtual).get(4).contains("CLIENTE")) {
+        if (utilizadores.get(idUserAtual).get(4).contains("CLIENTE")) {
             System.out.println("\n>>Utilizador Atual<<");
             System.out.println("id -> username, password, nome, telefone");
             for (Map.Entry<Integer, List<String>> entry : utilizadores.entrySet())
@@ -240,7 +243,7 @@ public class Utilizador {
                             ", " + entry.getValue().get(2) +
                             ", " + entry.getValue().get(3));
             System.out.println();
-        }else {
+        } else {
             System.out.println("\n>>Utilizadores no Sistema<<");
             System.out.println("id -> username, password, nome, telefone, tipo");
             for (Map.Entry<Integer, List<String>> entry : utilizadores.entrySet())
