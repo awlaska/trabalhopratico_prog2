@@ -102,27 +102,28 @@ public class Utilizador {
         }
     }
 
-    //DOING Corrigir ciclo while caso algo errado volta a pedir dados
+    //DOING rever ciclo while caso algo errado volta a pedir dados
     protected void signUp(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
         this.dados = new ArrayList();
         Scanner signup = new Scanner(System.in);
 
         //TODO meter while a funcionar
-//        while (map.get(0).get(0).equals(username)){
-        System.out.print("Username\n>> ");
-        this.username = signup.nextLine();
-        System.out.print("Password\n>> ");
-        this.password = signup.nextLine();
-        System.out.print("Nome\n>> ");
-        this.nome = signup.nextLine();
-        System.out.print("Número de telemovel\n>> ");
-        this.nrTelemovel = signup.nextLine();
-        this.tipo = tipoUser.NULL;
+        while (!map.get(0).get(0).contains(username)) {
+            System.out.print("Username\n>> ");
+            this.username = signup.nextLine();
+            System.out.print("Password\n>> ");
+            this.password = signup.nextLine();
+            System.out.print("Nome\n>> ");
+            this.nome = signup.nextLine();
+            System.out.print("Número de telemovel\n>> ");
+            this.nrTelemovel = signup.nextLine();
+            this.tipo = tipoUser.NULL;
 
         for (int i = 0; i <= map.size(); i++) {
             if (!map.containsKey(i))
                 id = i;
         }
+    }
 
         dados.add(0, username);
         dados.add(1, password);
