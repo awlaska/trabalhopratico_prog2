@@ -4,5 +4,6 @@ public enum tipoUser {
     CLIENTE,
     DONO,
     ADMIN,
-    NULL
+    NULL,
+    APAGADO
 }

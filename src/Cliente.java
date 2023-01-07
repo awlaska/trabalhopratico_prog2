@@ -6,9 +6,8 @@ public class Cliente extends Utilizador implements IMenu {
         super();
     }
 
-    //DOING melhorar menus -> criar mais submenus
-    //DOING adicionar métodos que faltam
-    //DOING adicionar métodos que faltam de guardar ao sair do programa
+    //DONE melhorar menus -> criar mais submenus
+    //DONE adicionar métodos que faltam
     public void menuC(int idUser) throws IOException, UtilizadorException {
         Scanner input = new Scanner(System.in);
 

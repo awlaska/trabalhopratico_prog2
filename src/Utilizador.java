@@ -52,75 +52,67 @@ public class Utilizador {
             case 0 -> {
                 break;
             }
-            case 1 -> login(utilizadores);
-            case 2 -> signUp(utilizadores);
+            case 1 -> login();
+            case 2 -> signUp();
             default -> throw new IllegalStateException("Unexpected value: " + op);
         }
     }
 
     //DOING while para que passa dados outra vez e não parar de correr
-    public void login(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
+    public void login() throws UtilizadorException, IOException {
         Scanner logIn = new Scanner(System.in);
         String uname = "", pword = "";
+
+        loadMapUtilizador();
 
         System.out.print("Username\n>> ");
         uname = logIn.nextLine();
         System.out.print("Password\n>> ");
         pword = logIn.nextLine();
 
-        for (int i = 0; i < map.size(); i++) {
-            if (map.get(i).get(0).equals(uname)) {
+        for (int i = 0; i < utilizadores.size(); i++) {
+            if (utilizadores.get(i).get(0).equals(uname)) {
                 id = i;
             }
         }
 
-        if (map.get(id).get(0).equals(uname) && map.get(id).get(1).equals(pword)) {
+        if (utilizadores.get(id).get(0).equals(uname) && utilizadores.get(id).get(1).equals(pword)) {
             System.out.println("User autenticado!\n");
         } else {
             throw new UtilizadorException("User não existente!");
         }
 
-        if (!map.get(id).get(4).equals("NULL")) {
-            if (map.get(id).get(4).equals("ADMIN")) {
-                Admin admin = new Admin();
-                admin.menuA(id);
-            }
-            if (map.get(id).get(4).equals("DONO")) {
-                DonoStand dono = new DonoStand();
-                dono.menuD(id);
-            }
-            if (map.get(id).get(4).equals("CLIENTE")) {
-                Cliente cliente = new Cliente();
-                cliente.menuC(id);
-            }
+        if (!utilizadores.get(id).get(4).equals("NULL")) {
+            menuAnt(id);
         } else {
             throw new UtilizadorException("!!Aguarde ativação do administrador!!");
         }
     }
 
     //DOING rever ciclo while caso algo errado volta a pedir dados
-    protected void signUp(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
+    protected void signUp() throws UtilizadorException, IOException {
         this.dados = new ArrayList();
         Scanner signup = new Scanner(System.in);
 
-            System.out.print("Username\n>> ");
-            this.username = signup.nextLine();
-            System.out.print("Password\n>> ");
-            this.password = signup.nextLine();
-            System.out.print("Nome\n>> ");
-            this.nome = signup.nextLine();
-            System.out.print("Número de telemovel\n>> ");
-            this.nrTelemovel = signup.nextLine();
-            this.tipo = tipoUser.NULL;
+        loadMapUtilizador();
 
-            for (int i = 0; i <= map.size(); i++) {
-                if (!map.containsKey(i))
-                    id = i;
-            }
-//            if (map.get(0).get(0).contains(username)) {
-//                System.out.println("!Username não é válido!\n");
-//                signUp(map);
-//            }
+        System.out.print("Username\n>> ");
+        this.username = signup.nextLine();
+        System.out.print("Password\n>> ");
+        this.password = signup.nextLine();
+        System.out.print("Nome\n>> ");
+        this.nome = signup.nextLine();
+        System.out.print("Número de telemovel\n>> ");
+        this.nrTelemovel = signup.nextLine();
+        this.tipo = tipoUser.NULL;
+
+        for (int i = 0; i <= utilizadores.size(); i++) {
+            if (!utilizadores.containsKey(i))
+                id = i;
+        }
+        if (!utilizadores.get(0).get(0).contains(username)) {
+            throw new UtilizadorException("!Username não é válido!");
+        }
 
         dados.add(0, username);
         dados.add(1, password);
@@ -128,24 +120,25 @@ public class Utilizador {
         dados.add(3, nrTelemovel);
         dados.add(4, tipo.toString());
 
-        if (map.get(0).get(0).contains(username)) {
+        if (utilizadores.get(0).get(0).contains(username)) {
             throw new UtilizadorException("!!User já existente!!");
         } else {
-            map.put(id, dados);
+            utilizadores.put(id, dados);
             writeMapUtilizador();
             menuInicial();
         }
     }
 
-    //DOING ver menus (path para o menu anterior)
+    //DONE ver menus (path para o menu anterior)
     protected void editarUser(int idUserAtual) throws UtilizadorException, IOException {
         Admin admin = new Admin();
         Cliente cliente = new Cliente();
         DonoStand dono = new DonoStand();
-
-        loadMapUtilizador();
         Scanner input = new Scanner(System.in);
         Scanner inputOP = new Scanner(System.in);
+
+        loadMapUtilizador();
+
         int op = -1;
         String user, pass, nome, tele;
 
@@ -156,14 +149,8 @@ public class Utilizador {
             op = inputOP.nextInt();
 
             switch (op) {
-                // DOING ver onde buscar o map
                 case 0 -> {
-                    if (tipoDeUser(idUserAtual).equalsIgnoreCase("CLIENTE"))
-                        cliente.menuC(idUserAtual);
-                    else if (tipoDeUser(idUserAtual).equalsIgnoreCase("DONO"))
-                        dono.menuD(idUserAtual);
-                    else if (tipoDeUser(idUserAtual).equalsIgnoreCase("ADMIN"))
-                        admin.menuA(idUserAtual);
+                    menuAnt(idUserAtual);
                 }
                 case 1 -> {
                     do {
@@ -193,12 +180,12 @@ public class Utilizador {
                 }
                 default -> throw new IllegalStateException("Unexpected value: " + op);
             }
-
             writeMapUtilizador();
+            menuAnt(idUserAtual);
         }
     }
 
-    //DOING path para o menu anterior
+    //DONE path para o menu anterior
     protected void apagarUsers(int idUserAtual) throws IOException, UtilizadorException {
         Admin admin = new Admin();
         Cliente cliente = new Cliente();
@@ -212,23 +199,17 @@ public class Utilizador {
         System.out.print("ID do cliente a apagar: \n>> ");
         int id = input.nextInt();
 
-        if (utilizadores.get(id).get(4).equals("CLIENTE")) {
-            for (int i = 0; i < 5; i++)
-                utilizadores.get(id).set(i, "null");
+        if (utilizadores.containsKey(id)) {
+                utilizadores.get(id).set(4, "APAGADO");
         } else {
-            throw new UtilizadorException("Não tem permissões para apagar este utilizador!");
+            System.out.println("!Utilizador não é válido!");
+            apagarUsers(idUserAtual);
         }
         writeMapUtilizador();
-
-        if (tipoDeUser(idUserAtual).equalsIgnoreCase("CLIENTE"))
-            cliente.menuC(idUserAtual);
-        else if (tipoDeUser(idUserAtual).equalsIgnoreCase("DONO"))
-            dono.menuD(idUserAtual);
-        else if (tipoDeUser(idUserAtual).equalsIgnoreCase("ADMIN"))
-            admin.menuA(idUserAtual);
+        menuAnt(idUserAtual);
     }
 
-    //DOING path para o menu anterior
+    //DONE path para o menu anterior
     protected void alterarTipoUser(int idUser) throws IOException, UtilizadorException {
         loadMapUtilizador();
         Scanner inputint = new Scanner(System.in);
@@ -248,13 +229,28 @@ public class Utilizador {
             utilizadores.get(id).set(4, tipo.toUpperCase());
         } else {
             System.out.println("Tipo inválido!");
+            alterarTipoUser(idUser);
         }
 
         writeMapUtilizador();
-//        menuA(id);
+        menuAnt(idUser);
     }
 
-    //DOING path para o menu anterior
+    public void menuAnt(int idUser) throws IOException, UtilizadorException {
+        Cliente cliente = new Cliente();
+        DonoStand dono = new DonoStand();
+        Admin admin = new Admin();
+        loadMapUtilizador();
+        if (utilizadores.get(idUser).get(4).equals("ADMIN")) {
+            admin.menuA(idUser);
+        } else if (utilizadores.get(idUser).get(4).equals("DONO")) {
+            dono.menuD(idUser);
+        } else if (utilizadores.get(idUser).get(4).equals("CLIENTE")) {
+            cliente.menuC(idUser);
+        }
+    }
+
+    //DONE path para o menu anterior
     //DONE adicionar ao método listarUsers if() de forma a verificar o id e mostrar consoante a permissão
     public void listarUsers(int idUserAtual) throws IOException, UtilizadorException {
         loadMapUtilizador();
