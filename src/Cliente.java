@@ -63,7 +63,7 @@ public class Cliente extends Utilizador implements IMenu{
         Scanner input = new Scanner(System.in);
 
         System.out.println(">>Menu Reservas<<");
-        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Criar Reserva\n3 - Alterar Data Visita\n4 - Listar Reservas\n>> ");
+        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Criar Reserva\n3 - Alterar Data Visita\n4 - Apagar Reserva\n5 - Listar Reservas\n>> ");
         int op = input.nextInt();System.out.println();
 
         switch (op) {

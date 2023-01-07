@@ -62,15 +62,15 @@ public class Admin extends Utilizador implements IMenu {
         Scanner input = new Scanner(System.in);
 
         System.out.println(">>Menu Reservas<<");
-        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Alterar Data Visita\n3 - Listar Reservas\n>> ");
+        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Alterar Data Visita\n3 - Apagar Reserva\n4 - Listar Reservas\n>> ");
         int op = input.nextInt();System.out.println();
 
         switch (op) {
             case 0 -> {break;}
             case 1 -> {menuA(idUser);}
             case 2 -> {reserva.alterarDataVisita(idUser);}
-            case 4 -> {reserva.apagarReserva(idUser);}
-            case 5 -> {reserva.listarRes(idUser);}
+            case 3 -> {reserva.apagarReserva(idUser);}
+            case 4 -> {reserva.listarRes(idUser);}
             default -> throw new IllegalStateException("Unexpected value: " + op);
         }
     }

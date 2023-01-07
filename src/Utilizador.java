@@ -10,7 +10,7 @@ public class Utilizador {
     protected int id;
     protected tipoUser tipo;
 
-    protected LinkedHashMap<Integer, List<String>> utilizadores = new LinkedHashMap<>();
+    public LinkedHashMap<Integer, List<String>> utilizadores = new LinkedHashMap<>();
     protected List<String> dados;
 
     public Utilizador() throws IOException {}

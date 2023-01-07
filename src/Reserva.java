@@ -51,7 +51,7 @@ public class Reserva {
     Veiculo v = new Veiculo();
 
     public ArrayList<Reserva> loadListReserva() throws IOException {
-        resLoad = Ficheiro.loadListReserva("reservas", 6);
+        resLoad = Ficheiro.loadListReserva("reservas", 7);
         return resLoad;
     }
     public void writeListReserva() throws IOException {
@@ -133,17 +133,25 @@ public class Reserva {
 //        }
     }
 
+    //DONE verificar se é cliente e imprmir apenas o que lhe diz respeito
     //DOING Listagem de reservas por ordem de data de visita, data mais proxima para menos
-    //DOING !!se der tempo!! listar em conjunto a info do carro reservado
     public void listarRes(int idUser) throws IOException {
-        //if(idUserAtual contem tipo != 'CLIENTE')
-        System.out.println("\nNum. Reserva, dia, mês, ano, id user, id carro");
-        //TODO se id passado for de tipo "CLIENTE" apenas mostra o que tiver id dele
-        //else
-//            for (Reserva reserva : resLoad) {
-//                System.out.println(reserva);
-//            }
-//        }
+        Utilizador uM = new Utilizador();
+        loadListReserva();
+        uM.loadMapUtilizador();
+
+        if(uM.utilizadores.get(idUser).get(4).equals("CLIENTE")) {
+            System.out.println("\nNum. Reserva, dia, mês, ano, id user, id carro, estado");
+            for (Reserva entry : resLoad) {
+                if(entry.getIdCliente() == idUser)
+                    System.out.println(resLoad);
+            }
+        }else{
+            System.out.println("\nNum. Reserva, dia, mês, ano, id user, id carro, estado");
+            for (Reserva entry : resLoad) {
+                System.out.println(resLoad);
+            }
+        }
     }
 
     //DONE
@@ -154,6 +162,7 @@ public class Reserva {
                 + this.getMesVisita() + ", "
                 + this.getAnoVisita() + ", "
                 + this.getIdCliente() + ", "
-                + this.getIdCarro() + ";";
+                + this.getIdCarro() + ", "
+                + this.getEstado();
     }
 }
