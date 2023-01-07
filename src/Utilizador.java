@@ -112,7 +112,7 @@ public class Utilizador {
         Scanner signup = new Scanner(System.in);
 
         //TODO meter while a funcionar
-        while (!map.get(0).get(0).contains(username)) {
+        do {
             System.out.print("Username\n>> ");
             this.username = signup.nextLine();
             System.out.print("Password\n>> ");
@@ -127,7 +127,8 @@ public class Utilizador {
             if (!map.containsKey(i))
                 id = i;
         }
-    }
+        if(!map.get(0).get(0).contains(username)) System.out.println("!Username não é válido!\n");
+    } while (!map.get(0).get(0).contains(username));
 
         dados.add(0, username);
         dados.add(1, password);
@@ -155,43 +156,53 @@ public class Utilizador {
         Scanner input = new Scanner(System.in);
         Scanner inputOP = new Scanner(System.in);
         int op = -1;
+        String user, pass, nome, tele;
+
         while (op != 0) {
             listarUsers(idUserAtual);
             System.out.println("\n>>Editar perfil<<\n");
             System.out.print("0 - Sair\n1 - Username\n2 - Password\n3 - Nome\n4 - Telefone\n>> ");
             op = inputOP.nextInt();
-            switch (op) {
-                // DOING ver onde buscar o map
-                case 0 -> {
-                    if(tipoDeUser(idUserAtual).equalsIgnoreCase("CLIENTE"))
-                        cliente.menuC(idUserAtual);
-                    else if(tipoDeUser(idUserAtual).equalsIgnoreCase("DONO"))
-                        dono.menuD(idUserAtual);
-                    else if(tipoDeUser(idUserAtual).equalsIgnoreCase("ADMIN"))
-                        admin.menuA(idUserAtual);
+
+                switch (op) {
+                    // DOING ver onde buscar o map
+                    case 0 -> {
+                        if (tipoDeUser(idUserAtual).equalsIgnoreCase("CLIENTE"))
+                            cliente.menuC(idUserAtual);
+                        else if (tipoDeUser(idUserAtual).equalsIgnoreCase("DONO"))
+                            dono.menuD(idUserAtual);
+                        else if (tipoDeUser(idUserAtual).equalsIgnoreCase("ADMIN"))
+                            admin.menuA(idUserAtual);
+                    }
+                    case 1 -> {
+                        do {
+                            System.out.print("Username: \n>> ");
+                            user = input.nextLine();
+                            if (!utilizadores.get(0).get(0).contains(user)) {
+                                System.out.println("!Username não é válido!");
+                            } else {
+                                utilizadores.get(idUserAtual).set(0, user);
+                            }
+                        } while (!utilizadores.get(0).get(0).contains(user));
+                    }
+                    case 2 -> {
+                        System.out.print("Password: \n>> ");
+                        pass = input.nextLine();
+                        utilizadores.get(idUserAtual).set(1, pass);
+                    }
+                    case 3 -> {
+                        System.out.print("Nome: \n>> ");
+                        nome = input.nextLine();
+                        utilizadores.get(idUserAtual).set(2, nome);
+                    }
+                    case 4 -> {
+                        System.out.print("Telefone: \n>> ");
+                        tele = input.nextLine();
+                        utilizadores.get(idUserAtual).set(3, tele);
+                    }
+                    default -> throw new IllegalStateException("Unexpected value: " + op);
                 }
-                case 1 -> {
-                    System.out.print("Username: \n>> ");
-                    String user = input.nextLine();
-                    utilizadores.get(idUserAtual).set(0, user);
-                }
-                case 2 -> {
-                    System.out.print("Password: \n>> ");
-                    String pass = input.nextLine();
-                    utilizadores.get(idUserAtual).set(1, pass);
-                }
-                case 3 -> {
-                    System.out.print("Nome: \n>> ");
-                    String nome = input.nextLine();
-                    utilizadores.get(idUserAtual).set(2, nome);
-                }
-                case 4 -> {
-                    System.out.print("Telefone: \n>> ");
-                    String tele = input.nextLine();
-                    utilizadores.get(idUserAtual).set(3, tele);
-                }
-                default -> throw new IllegalStateException("Unexpected value: " + op);
-            }
+
             writeMapUtilizador();
         }
     }
