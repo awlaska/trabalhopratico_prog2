@@ -59,10 +59,12 @@ public class DonoStand extends Utilizador implements IMenu {
                 apagarUsers(idUser);
             }
             case 3 -> {
-                alterarTipoUser();
+                alterarTipoUser(idUser);
             }
             case 4 -> {
                 listarUsers(idUser);
+                System.out.println("\n\n");
+                menuUtilizadores(idUser);
             }
             default -> throw new IllegalStateException("Unexpected value: " + op);
         }
@@ -84,13 +86,15 @@ public class DonoStand extends Utilizador implements IMenu {
                 menuD(idUser);
             }
             case 2 -> {
-                veic.adicionarVeiculo();
+                veic.adicionarVeiculo(idUser);
             }
             case 3 -> {
                 veic.alterarEstado(idUser);
             }
             case 4 -> {
                 veic.listarVeiculos(idUser);
+                System.out.println("\n\n");
+                menuVeiculos(idUser);
             }
             default -> throw new IllegalStateException("Unexpected value: " + op);
         }
@@ -149,6 +153,8 @@ public class DonoStand extends Utilizador implements IMenu {
             }
             case 4 -> {
                 venda.listarVenda(idUser);
+                System.out.println("\n\n");
+                menuVendas(idUser);
             }
             default -> throw new IllegalStateException("Unexpected value: " + op);
         }

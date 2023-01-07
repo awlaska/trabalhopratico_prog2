@@ -60,10 +60,12 @@ public class Admin extends Utilizador implements IMenu {
                 apagarUsers(idUser);
             }
             case 3 -> {
-                alterarTipoUser();
+                alterarTipoUser(idUser);
             }
             case 4 -> {
                 listarUsers(idUser);
+                System.out.println("\n\n");
+                menuUtilizadores(idUser);
             }
             default -> throw new IllegalStateException("Unexpected value: " + op);
         }
@@ -89,6 +91,8 @@ public class Admin extends Utilizador implements IMenu {
             }
             case 3 -> {
                 veic.listarVeiculos(idUser);
+                System.out.println("\n\n");
+                menuVeiculos(idUser);
             }
             default -> throw new IllegalStateException("Unexpected value: " + op);
         }
@@ -144,6 +148,8 @@ public class Admin extends Utilizador implements IMenu {
             }
             case 3 -> {
                 venda.listarVenda(idUser);
+                System.out.println("\n\n");
+                menuVendas(idUser);
             }
             default -> throw new IllegalStateException("Unexpected value: " + op);
         }

@@ -30,56 +30,55 @@ public class Veiculo {
     //DONE verificar se o novo tem matricula já existente no map
     //DOING corrigir ciclo while caso algo errado volta a pedir dados (kinda funciona), está sempre a pedir mesmo que n exista
     //DOING path para o menu anterior
-    public void adicionarVeiculo() throws IOException {
+    public void adicionarVeiculo(int idUser) throws IOException, UtilizadorException {
         List dados = new ArrayList();
         Scanner adicionar = new Scanner(System.in);
         loadMapVeiculo();
         boolean existe = false;
 
-        do {
-            System.out.print("Marca\n>> ");
-            this.marca = adicionar.nextLine();
-            System.out.print("Modelo\n>> ");
-            this.modelo = adicionar.nextLine();
-            System.out.print("Data manufatura (dd-mm-aaaa)\n>> ");
-            this.dataManufatura = adicionar.nextLine();
-            System.out.print("Matricula\n>> ");
-            this.matricula = adicionar.nextLine();
-            System.out.print("Preço base\n>> ");
-            this.precoBase = adicionar.nextLine();
-            this.estado = estadoVeiculo.DISPONIVEL;
+        System.out.print("Marca\n>> ");
+        this.marca = adicionar.nextLine();
+        System.out.print("Modelo\n>> ");
+        this.modelo = adicionar.nextLine();
+        System.out.print("Data manufatura (dd-mm-aaaa)\n>> ");
+        this.dataManufatura = adicionar.nextLine();
+        System.out.print("Matricula\n>> ");
+        this.matricula = adicionar.nextLine();
+        System.out.print("Preço base\n>> ");
+        this.precoBase = adicionar.nextLine();
+        this.estado = estadoVeiculo.DISPONIVEL;
 
-            for (int i = 0; i <= veiculos.size(); i++) {
-                if (!veiculos.containsKey(i)) {
-                    numCarro = i;
-                }
+        for (int i = 0; i <= veiculos.size(); i++) {
+            if (!veiculos.containsKey(i)) {
+                numCarro = i;
             }
+        }
 
-            for (int j = 0; j < veiculos.size(); j++) {
-                if (veiculos.get(j).get(3).equalsIgnoreCase(matricula)) {
-                    existe = true;
-                }
+        for (int j = 0; j < veiculos.size(); j++) {
+            if (veiculos.get(j).get(3).equalsIgnoreCase(matricula)) {
+                existe = true;
             }
-            if (existe) {
-                System.out.println("Matricula ja existente!");
-            } else {
-                dados.add(0, marca);
-                dados.add(1, modelo);
-                dados.add(2, dataManufatura);
-                dados.add(3, matricula.toUpperCase());
-                dados.add(4, precoBase);
-                dados.add(5, estado.toString());
+        }
+        if (existe) {
+            System.out.println("Matricula ja existente!");
+            adicionarVeiculo(idUser);
+        } else {
+            dados.add(0, marca);
+            dados.add(1, modelo);
+            dados.add(2, dataManufatura);
+            dados.add(3, matricula.toUpperCase());
+            dados.add(4, precoBase);
+            dados.add(5, estado.toString());
 
-                veiculos.put(numCarro, dados);
-                writeMapVeiculo();
-                System.out.println("\n");
-            }
-        } while (existe);
+            veiculos.put(numCarro, dados);
+            writeMapVeiculo();
+            menuVeiculoAnt(idUser);
+        }
     }
 
     //DONE alterar estado veiculo
     //DOING path para o menu anterior
-    public void alterarEstado(int idUser) throws IOException {
+    public void alterarEstado(int idUser) throws IOException, UtilizadorException {
         Scanner inputint = new Scanner(System.in);
         Scanner inputstring = new Scanner(System.in);
 
@@ -99,10 +98,14 @@ public class Veiculo {
             veiculos.get(id).set(5, estado.toUpperCase());
         } else {
             System.out.println("Tipo inválido!");
+            alterarEstado(idUser);
         }
         writeMapVeiculo();
-//        menuD();
+        menuVeiculoAnt(idUser);
     }
+
+    //DOING fazer o método
+    public void apagarVeiculo(int idUser) throws IOException, UtilizadorException {}
 
     //DONE corrigir listar veiculo (caso não esteja em estado ATIVO o cliente não pode ver)
     //DOING path para o menu anterior
@@ -133,6 +136,21 @@ public class Veiculo {
                         ", " + entry.getValue().get(4) + "€ " +
                         ", " + entry.getValue().get(5));
             System.out.println();
+        }
+    }
+
+    public void menuVeiculoAnt(int idUser) throws IOException, UtilizadorException {
+        Cliente cliente = new Cliente();
+        DonoStand dono = new DonoStand();
+        Admin admin = new Admin();
+        Utilizador user = new Utilizador();
+        user.loadMapUtilizador();
+        if (user.utilizadores.get(idUser).get(4).equals("ADMIN")) {
+            admin.menuVeiculos(idUser);
+        } else if (user.utilizadores.get(idUser).get(4).equals("DONO")) {
+            dono.menuVeiculos(idUser);
+        } else if (user.utilizadores.get(idUser).get(4).equals("CLIENTE")) {
+            cliente.menuVeiculos(idUser);
         }
     }
 }

@@ -50,6 +50,8 @@ public class Cliente extends Utilizador implements IMenu {
             }
             case 3 -> {
                 listarUsers(idUser);
+                System.out.println("\n\n");
+                menuUtilizadores(idUser);
             }
             default -> throw new IllegalStateException("Unexpected value: " + op);
         }
@@ -72,6 +74,8 @@ public class Cliente extends Utilizador implements IMenu {
             }
             case 2 -> {
                 veic.listarVeiculos(idUser);
+                System.out.println("\n\n");
+                menuVeiculos(idUser);
             }
             default -> throw new IllegalStateException("Unexpected value: " + op);
         }
@@ -133,6 +137,8 @@ public class Cliente extends Utilizador implements IMenu {
             }
             case 4 -> {
                 venda.listarVenda(idUser);
+                System.out.println("\n\n");
+                menuVendas(idUser);
             }
             default -> throw new IllegalStateException("Unexpected value: " + op);
         }
