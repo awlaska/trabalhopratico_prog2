@@ -12,9 +12,13 @@ public class Utilizador {
     protected int id;
     protected tipoUser tipo;
     protected List<String> dados;
+
     Veiculo veic = new Veiculo();
     Reserva reserva = new Reserva();
     Venda venda = new Venda();
+
+
+
     public Utilizador() throws IOException {
     }
     public Utilizador(String user, String pass, String nome, String nrTelemovel, tipoUser tipo) throws IOException {
@@ -141,8 +145,12 @@ public class Utilizador {
         }
     }
 
-    //DOING path para o menu anterior
+    //DOING ver menus (path para o menu anterior)
     protected void editarUser(int idUserAtual) throws UtilizadorException, IOException {
+        Admin admin = new Admin();
+        Cliente cliente = new Cliente();
+        DonoStand dono = new DonoStand();
+
         loadMapUtilizador();
         Scanner input = new Scanner(System.in);
         Scanner inputOP = new Scanner(System.in);
@@ -153,8 +161,14 @@ public class Utilizador {
             System.out.print("0 - Sair\n1 - Username\n2 - Password\n3 - Nome\n4 - Telefone\n>> ");
             op = inputOP.nextInt();
             switch (op) {
+                // DOING ver onde buscar o map
                 case 0 -> {
-                    break;
+                    if(tipoDeUser(idUserAtual).equalsIgnoreCase("CLIENTE"))
+                        cliente.menuC(idUserAtual);
+                    else if(tipoDeUser(idUserAtual).equalsIgnoreCase("DONO"))
+                        dono.menuD(idUserAtual);
+                    else if(tipoDeUser(idUserAtual).equalsIgnoreCase("ADMIN"))
+                        admin.menuA(idUserAtual);
                 }
                 case 1 -> {
                     System.out.print("Username: \n>> ");
@@ -183,7 +197,10 @@ public class Utilizador {
     }
 
     //DOING path para o menu anterior
-    protected void apagarUsers() throws IOException, UtilizadorException {
+    protected void apagarUsers(int idUserAtual) throws IOException, UtilizadorException {
+        Admin admin = new Admin();
+        Cliente cliente = new Cliente();
+        DonoStand dono = new DonoStand();
         loadMapUtilizador();
         Scanner input = new Scanner(System.in);
 
@@ -200,7 +217,13 @@ public class Utilizador {
             throw new UtilizadorException("Não tem permissões para apagar este utilizador!");
         }
         writeMapUtilizador();
-//        menuD(id);
+
+        if(tipoDeUser(idUserAtual).equalsIgnoreCase("CLIENTE"))
+            cliente.menuC(idUserAtual);
+        else if(tipoDeUser(idUserAtual).equalsIgnoreCase("DONO"))
+            dono.menuD(idUserAtual);
+        else if(tipoDeUser(idUserAtual).equalsIgnoreCase("ADMIN"))
+            admin.menuA(idUserAtual);
     }
 
     //DOING path para o menu anterior
@@ -266,5 +289,9 @@ public class Utilizador {
                             ", " + entry.getValue().get(4));
             System.out.println();
         }
+    }
+
+    public String tipoDeUser(int idUser){
+        return utilizadores.get(idUser).get(4);
     }
 }

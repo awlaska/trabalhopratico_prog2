@@ -57,7 +57,7 @@ public class Admin extends Utilizador implements IMenu {
                 menuA(idUser);
             }
             case 2 -> {
-                apagarUsers();
+                apagarUsers(idUser);
             }
             case 3 -> {
                 alterarTipoUser();

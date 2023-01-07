@@ -78,8 +78,7 @@ public class Reserva {
         Scanner input = new Scanner(System.in);
         Reserva res1 = null;
         boolean certo = false;
-        int nrRes = 0;
-//        int diaAtual = currentdate.getDayOfMonth(), mesAtual = LocalDate.EPOCH.getMonthValue(), anoAtual = currentdate.getYear();
+        int nrRes;
 
         listarRes(user);
 
@@ -104,8 +103,13 @@ public class Reserva {
     }
 
     //DOING alterar estado do veiculo de DISPONIVEL para reservado
-    public void reservarVeic(int idCarro){
+    public void reservarVeic(int idCarro) throws IOException {
+        v.loadMapVeiculo();
+        v.listarVeiculos(1);
+        v.veiculos.get(idCarro).set(5, "RESERVADO");
 
+        v.listarVeiculos(1);
+        v.writeMapVeiculo();
     }
 
     //DONE reduzir redundancia (não fazer a verificação de validade duas vezes)
