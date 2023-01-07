@@ -101,13 +101,13 @@ public class Utilizador {
         }
     }
 
-    //DOING Corrigir ciclo while caso algo errado volta a pedir dados
+    //DOING rever ciclo while caso algo errado volta a pedir dados
     protected void signUp(LinkedHashMap<Integer, List<String>> map) throws UtilizadorException, IOException {
         this.dados = new ArrayList();
         Scanner signup = new Scanner(System.in);
 
         //TODO meter while a funcionar
-//        while (map.get(0).get(0).equals(username)){
+        while (!map.get(0).get(0).contains(username)) {
             System.out.print("Username\n>> ");
             this.username = signup.nextLine();
             System.out.print("Password\n>> ");
@@ -138,6 +138,7 @@ public class Utilizador {
                 menuInicial();
             }
         }
+    }
 
     //DOING path para o menu anterior
     protected void editarUser(int idUserAtual) throws UtilizadorException, IOException {
@@ -151,7 +152,9 @@ public class Utilizador {
             System.out.print("0 - Sair\n1 - Username\n2 - Password\n3 - Nome\n4 - Telefone\n>> ");
             op = inputOP.nextInt();
             switch (op) {
-                case 0 -> {break;}
+                case 0 -> {
+                    break;
+                }
                 case 1 -> {
                     System.out.print("Username: \n>> ");
                     String user = input.nextLine();
