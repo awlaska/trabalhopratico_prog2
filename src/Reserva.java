@@ -59,7 +59,7 @@ public class Reserva {
     }
 
     //DOING path para o menu anterior
-    //DOING o método tem de ser verificado, funciona mas pode ter "lixo"
+    //DOING Clean up do método
     //DOING metodo while caso o veiculo n esteja disponivel para pedir novamente um id de veiculo
     //DONE alterar o estado do veiculo para RESERVADO quando uma reserva é concluida
     //DONE apenas permitir reservar veiculos que se encontram no estado DISPONIVEL

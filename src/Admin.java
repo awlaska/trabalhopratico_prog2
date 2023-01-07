@@ -53,8 +53,8 @@ public class Admin extends Utilizador implements IMenu {
         switch (op) {
             case 0 -> {break;}
             case 1 -> {menuA(idUser);}
-            case 2 -> {veic.alterarEstado();}
-            case 4 -> {veic.listarVeiculos(idUser);}
+            case 2 -> {veic.alterarEstado(idUser);}
+            case 3 -> {veic.listarVeiculos(idUser);}
             default -> throw new IllegalStateException("Unexpected value: " + op);
         }
     }

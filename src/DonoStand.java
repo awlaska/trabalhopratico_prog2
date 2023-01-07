@@ -46,13 +46,14 @@ public class DonoStand extends Utilizador implements IMenu{
         Scanner input = new Scanner(System.in);
 
         System.out.println(">>Menu Veiculos<<");
-        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Alterar Estado Veiculo\n3 - Listar Veiculos\n>> ");
+        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Adicionar Veiculo\n3 - Alterar Estado Veiculo\n4 - Listar Veiculos\n>> ");
         int op = input.nextInt();System.out.println();
 
         switch (op) {
             case 0 -> {break;}
             case 1 -> {menuD(idUser);}
-            case 2 -> {veic.alterarEstado();}
+            case 2 -> {veic.adicionarVeiculo();}
+            case 3 -> {veic.alterarEstado(idUser);}
             case 4 -> {veic.listarVeiculos(idUser);}
             default -> throw new IllegalStateException("Unexpected value: " + op);
         }
