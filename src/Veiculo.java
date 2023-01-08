@@ -13,9 +13,9 @@ public class Veiculo {
     private String precoBase;
     private estadoVeiculo estado = estadoVeiculo.DISPONIVEL;
 
-    public Veiculo() {}
+    public Veiculo() {
+    }
 
-    //DONE Load do mapa e Escrita do ficheiro
     public void loadMapVeiculo() throws IOException {
         veiculos = Ficheiro.loadMap("veiculos", 7);
     }
@@ -24,15 +24,14 @@ public class Veiculo {
         Ficheiro.escreverFicheiroVeiculo("veiculos", veiculos);
     }
 
-    //DONE verificar se o novo tem matricula já existente no map
-    //DOING corrigir ciclo while caso algo errado volta a pedir dados (kinda funciona), está sempre a pedir mesmo que n exista
-    //DOING path para o menu anterior
     public void adicionarVeiculo(int idUser) throws IOException, UtilizadorException {
-        List dados = new ArrayList();
         Scanner adicionar = new Scanner(System.in);
-        loadMapVeiculo();
+        List dados = new ArrayList();
         boolean existe = false;
 
+        loadMapVeiculo();
+
+        System.out.println("\n>>Adicionar Veiculo<<");
         System.out.print("Marca\n>> ");
         this.marca = adicionar.nextLine();
         System.out.print("Modelo\n>> ");
@@ -50,39 +49,36 @@ public class Veiculo {
                 numCarro = i;
             }
         }
-
         for (int j = 0; j < veiculos.size(); j++) {
             if (veiculos.get(j).get(3).equalsIgnoreCase(matricula)) {
                 existe = true;
             }
         }
+
+        dados.add(0, marca);
+        dados.add(1, modelo);
+        dados.add(2, dataManufatura);
+        dados.add(3, matricula.toUpperCase());
+        dados.add(4, precoBase);
+        dados.add(5, estado.toString());
+
         if (existe) {
             System.out.println("Matricula ja existente!");
             adicionarVeiculo(idUser);
         } else {
-            dados.add(0, marca);
-            dados.add(1, modelo);
-            dados.add(2, dataManufatura);
-            dados.add(3, matricula.toUpperCase());
-            dados.add(4, precoBase);
-            dados.add(5, estado.toString());
-
-            veiculos.put(numCarro, dados);
-            writeMapVeiculo();
+            veiculos.put(numCarro, dados); writeMapVeiculo();
             menuVeiculoAnt(idUser);
         }
     }
 
-    //DONE alterar estado veiculo
-    //DOING path para o menu anterior
     public void alterarEstado(int idUser) throws IOException, UtilizadorException {
         Scanner inputint = new Scanner(System.in);
         Scanner inputstring = new Scanner(System.in);
 
         listarVeiculos(idUser);
 
-        System.out.println("\n!!Alteração do estado do veiculo!!");
-        System.out.print("ID do veiculo:\n>> ");
+        System.out.println("\n>>Alteração do estado do veiculo<<");
+        System.out.print("ID do veiculo\n>> ");
         int id = inputint.nextInt();
         System.out.print("Estado a atribuir (DISPONIVEL, DESATIVADO, RESERVADO, VENDIDO): \n>> ");
         String estado = inputstring.nextLine();
@@ -101,14 +97,13 @@ public class Veiculo {
         menuVeiculoAnt(idUser);
     }
 
-    //DONE corrigir listar veiculo (caso não esteja em estado ATIVO o cliente não pode ver)
-    //DOING path para o menu anterior
     public void listarVeiculos(int idUserAtual) throws IOException {
         Utilizador uM = new Utilizador();
         uM.loadMapUtilizador();
         loadMapVeiculo();
         if (uM.utilizadores.get(idUserAtual).get(4).equals("CLIENTE")) {
-            System.out.println("\nid -> marca, modelo, data manufatura, matricula, preço base");
+            System.out.println("\n>>Veiculos Disponiveis<<");
+            System.out.println("id -> marca, modelo, data manufatura, matricula, preço base");
             for (Map.Entry<Integer, List<String>> entry : veiculos.entrySet())
                 if (entry.getValue().contains("DISPONIVEL")) {
                     System.out.println(entry.getKey() +
@@ -120,7 +115,8 @@ public class Veiculo {
                 }
             System.out.println();
         } else {
-            System.out.println("\nid -> marca, modelo, data manufatura, matricula, preço base, estado");
+            System.out.println("\n>>Veiculos<<");
+            System.out.println("id -> marca, modelo, data manufatura, matricula, preço base, estado");
             for (Map.Entry<Integer, List<String>> entry : veiculos.entrySet())
                 System.out.println(entry.getKey() +
                         " -> " + entry.getValue().get(0) +
@@ -136,7 +132,7 @@ public class Veiculo {
     public void listarVeiculosDisponiveis() throws IOException {
         loadMapVeiculo();
         System.out.println("\n>>Veiculos<<");
-        System.out.println("\nid -> marca, modelo, data manufatura, matricula, preço base");
+        System.out.println("id -> marca, modelo, data manufatura, matricula, preço base");
         for (Map.Entry<Integer, List<String>> entry : veiculos.entrySet()) {
             if (entry.getValue().contains("DISPONIVEL")) {
                 System.out.println(entry.getKey() +

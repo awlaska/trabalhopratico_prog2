@@ -28,7 +28,6 @@ public class Utilizador {
         this.tipo = null;
     }
 
-    //DONE Load do mapa e Escrita do ficheiro
     public LinkedHashMap<Integer, List<String>> loadMapUtilizador() throws IOException {
         this.utilizadores = Ficheiro.loadMap("utilizadores", 6);
         return utilizadores;
@@ -38,17 +37,15 @@ public class Utilizador {
         Ficheiro.escreverFicheiroUtilizador("utilizadores", utilizadores);
     }
 
-    //DONE Menu inicial
     public void menuInicial() throws IOException, UtilizadorException {
-        loadMapUtilizador();
         Scanner input = new Scanner(System.in);
 
-        System.out.println(">>Menu Inicial<<");
+        loadMapUtilizador();
+
+        System.out.println("\n>>Menu Inicial<<");
         System.out.print("1 - Login\n2 - Signup\n0 - Sair\n>> ");
         int op = input.nextInt();
-        System.out.println();
 
-        //TODO adicionar escrita dos ficheiros em falta (veiculos, reservas, vendas)
         switch (op) {
             case 0 -> {
                 break;
@@ -59,13 +56,13 @@ public class Utilizador {
         }
     }
 
-    //DOING while para que passa dados outra vez e não parar de correr
     public void login() throws UtilizadorException, IOException {
         Scanner logIn = new Scanner(System.in);
         String uname = "", pword = "";
 
         loadMapUtilizador();
 
+        System.out.println("\n>>LogIn<<");
         System.out.print("Username\n>> ");
         uname = logIn.nextLine();
         System.out.print("Password\n>> ");
@@ -92,13 +89,12 @@ public class Utilizador {
         }
     }
 
-    //DOING rever ciclo while caso algo errado volta a pedir dados
     protected void signUp() throws UtilizadorException, IOException {
         this.dados = new ArrayList();
         Scanner signup = new Scanner(System.in);
 
         loadMapUtilizador();
-
+        System.out.println("\n>>SignUp<<");
         System.out.print("Username\n>> ");
         this.username = signup.nextLine();
         System.out.print("Password\n>> ");
@@ -126,13 +122,11 @@ public class Utilizador {
         if (utilizadores.get(0).get(0).contains(username)) {
             throw new UtilizadorException("!!User já existente!!");
         } else {
-            utilizadores.put(id, dados);
-            writeMapUtilizador();
+            utilizadores.put(id, dados); writeMapUtilizador();
             menuInicial();
         }
     }
 
-    //DONE ver menus (path para o menu anterior)
     protected void editarUser(int idUserAtual) throws UtilizadorException, IOException {
         Admin admin = new Admin();
         Cliente cliente = new Cliente();
@@ -157,7 +151,7 @@ public class Utilizador {
                 }
                 case 1 -> {
                     do {
-                        System.out.print("Username: \n>> ");
+                        System.out.print("\nUsername: \n>> ");
                         user = input.nextLine();
                         if (!utilizadores.get(0).get(0).contains(user)) {
                             System.out.println("!Username não é válido!");
@@ -188,7 +182,6 @@ public class Utilizador {
         }
     }
 
-    //DONE path para o menu anterior
     protected void apagarUsers(int idUserAtual) throws IOException, UtilizadorException {
         Admin admin = new Admin();
         Cliente cliente = new Cliente();
@@ -198,8 +191,8 @@ public class Utilizador {
 
         listarUsers(id);
 
-        System.out.println("\n!!Apagar cliente!!");
-        System.out.print("ID do cliente a apagar: \n>> ");
+        System.out.println("\n>>Apagar Utilizador<<");
+        System.out.print("ID do utilizar a apagar\n>> ");
         int id = input.nextInt();
 
         if (utilizadores.containsKey(id)) {
@@ -212,26 +205,24 @@ public class Utilizador {
         menuAnt(idUserAtual);
     }
 
-    //DONE path para o menu anterior
     protected void alterarTipoUser(int idUser) throws IOException, UtilizadorException {
         loadMapUtilizador();
         Scanner inputint = new Scanner(System.in);
         Scanner inputstring = new Scanner(System.in);
 
-        for (Map.Entry<Integer, List<String>> entry : utilizadores.entrySet())
-            System.out.println(entry.getKey() + "->" + entry.getValue());
+        listarUsers(idUser);
 
-        System.out.println("\n!!Alteração do tipo de user!!");
-        System.out.print("ID do user a alterar: \n>> ");
+        System.out.println("\n>>Alterar tipo de user<<");
+        System.out.print("ID do user a alterar\n>> ");
         int id = inputint.nextInt();
-        System.out.print("Tipo de user a atribuir (ADMIN, DONO, CLIENTE): \n>> ");
+        System.out.print("Tipo de user a atribuir (ADMIN, DONO, CLIENTE)\n>> ");
         String tipo = inputstring.nextLine();
 
 
         if (tipo.equalsIgnoreCase("ADMIN") || tipo.equalsIgnoreCase("DONO") || tipo.equalsIgnoreCase("CLIENTE")) {
             utilizadores.get(id).set(4, tipo.toUpperCase());
         } else {
-            System.out.println("Tipo inválido!");
+            System.out.println("!Tipo inválido!");
             alterarTipoUser(idUser);
         }
 
@@ -253,8 +244,6 @@ public class Utilizador {
         }
     }
 
-    //DONE path para o menu anterior
-    //DONE adicionar ao método listarUsers if() de forma a verificar o id e mostrar consoante a permissão
     public void listarUsers(int idUserAtual) throws IOException, UtilizadorException {
         loadMapUtilizador();
         if (utilizadores.get(idUserAtual).get(4).contains("CLIENTE")) {
@@ -267,7 +256,6 @@ public class Utilizador {
                             ", " + entry.getValue().get(1) +
                             ", " + entry.getValue().get(2) +
                             ", " + entry.getValue().get(3));
-            System.out.println();
         } else {
             System.out.println("\n>>Utilizadores no Sistema<<");
             System.out.println("id -> username, password, nome, telefone, tipo");
@@ -288,7 +276,6 @@ public class Utilizador {
                             ", " + entry.getValue().get(2) +
                             ", " + entry.getValue().get(3) +
                             ", " + entry.getValue().get(4));
-            System.out.println();
         }
     }
 

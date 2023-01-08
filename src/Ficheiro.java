@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Ficheiro {
-    //DONE MAPS
     public static void escreverFicheiroUtilizador(String ficheiro, LinkedHashMap<Integer, List<String>> map) throws IOException {
         try {
             File file = new File("src/Ficheiros/" + ficheiro + ".csv");
@@ -23,9 +22,8 @@ public class Ficheiro {
                 bf.newLine();
             }
             bf.flush();
-            System.out.println("Escreveu com successo.\n");
         } catch (IOException e) {
-            System.out.println("Ocorreu um erro.\n");
+            System.out.println("\nOcorreu um erro.\n");
             e.printStackTrace();
         }
     }
@@ -46,9 +44,8 @@ public class Ficheiro {
                 bf.newLine();
             }
             bf.flush();
-            System.out.println("Escreveu com successo.\n");
         } catch (IOException e) {
-            System.out.println("Ocorreu um erro.\n");
+            System.out.println("\nOcorreu um erro.\n");
             e.printStackTrace();
         }
     }
@@ -94,11 +91,9 @@ public class Ficheiro {
                         + ";" + entry.getEstado());
                 bf.newLine();
             }
-            System.out.println(reserva);
             bf.flush();
-            System.out.println("Escreveu com successo.\n");
         } catch (IOException e) {
-            System.out.println("Ocorreu um erro.\n");
+            System.out.println("\nOcorreu um erro.\n");
             e.printStackTrace();
         }
     }
@@ -153,11 +148,9 @@ public class Ficheiro {
                         + ";" + entry.getValor());
                 bf.newLine();
             }
-            System.out.println(venda);
             bf.flush();
-            System.out.println("Escreveu com successo.\n");
         } catch (IOException e) {
-            System.out.println("Ocorreu um erro.\n");
+            System.out.println("\nOcorreu um erro.\n");
             e.printStackTrace();
         }
     }
