@@ -104,7 +104,7 @@ public class DonoStand extends Utilizador implements IMenu {
         Scanner input = new Scanner(System.in);
 
         System.out.println(">>Menu Reservas<<");
-        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Alterar Data Visita\n3 - Listar Reservas\n>> ");
+        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Alterar Data Visita\n3 - Cancelar Reserva\n4 - Listar Reservas\n>> ");
         int op = input.nextInt();
         System.out.println();
 
@@ -118,10 +118,10 @@ public class DonoStand extends Utilizador implements IMenu {
             case 2 -> {
                 reserva.alterarDataVisita(idUser);
             }
-            case 4 -> {
-                reserva.apagarReserva(idUser);
+            case 3 -> {
+                reserva.cancelarReserva(idUser);
             }
-            case 5 -> {
+            case 4 -> {
                 reserva.listarRes(idUser);
                 System.out.println("\n\n");
                 menuReservas(idUser);
@@ -134,7 +134,7 @@ public class DonoStand extends Utilizador implements IMenu {
         Scanner input = new Scanner(System.in);
 
         System.out.println(">>Menu Vendas<<");
-        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Adicionar Venda\n3 - Apagar Venda\n4 - Listar Vendas\n>> ");
+        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Adicionar Venda\n3 - Listar Vendas\n>> ");
         int op = input.nextInt();
         System.out.println();
 
@@ -149,9 +149,6 @@ public class DonoStand extends Utilizador implements IMenu {
                 venda.adicionarVenda(idUser);
             }
             case 3 -> {
-                venda.apagarVenda();
-            }
-            case 4 -> {
                 venda.listarVenda(idUser);
                 System.out.println("\n\n");
                 menuVendas(idUser);

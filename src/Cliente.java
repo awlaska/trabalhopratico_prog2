@@ -84,7 +84,7 @@ public class Cliente extends Utilizador implements IMenu {
         Scanner input = new Scanner(System.in);
 
         System.out.println(">>Menu Reservas<<");
-        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Criar Reserva\n3 - Alterar Data Visita\n4 - Apagar Reserva\n5 - Listar Reservas\n>> ");
+        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Criar Reserva\n3 - Alterar Data Visita\n4 - Cancelar Reserva\n5 - Listar Reservas\n>> ");
         int op = input.nextInt();
         System.out.println();
 
@@ -102,7 +102,7 @@ public class Cliente extends Utilizador implements IMenu {
                 reserva.alterarDataVisita(idUser);
             }
             case 4 -> {
-                reserva.apagarReserva(idUser);
+                reserva.cancelarReserva(idUser);
             }
             case 5 -> {
                 reserva.listarRes(idUser);
@@ -117,7 +117,7 @@ public class Cliente extends Utilizador implements IMenu {
         Scanner input = new Scanner(System.in);
 
         System.out.println(">>Menu Vendas<<");
-        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Adicionar Venda\n3 - Apagar Venda\n4 - Listar Vendas\n>> ");
+        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Listar Compras\n>> ");
         int op = input.nextInt();
         System.out.println();
 
@@ -129,12 +129,6 @@ public class Cliente extends Utilizador implements IMenu {
                 menuC(idUser);
             }
             case 2 -> {
-                venda.adicionarVenda(idUser);
-            }
-            case 3 -> {
-                venda.apagarVenda();
-            }
-            case 4 -> {
                 venda.listarVenda(idUser);
                 System.out.println("\n\n");
                 menuVendas(idUser);

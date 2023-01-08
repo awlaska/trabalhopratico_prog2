@@ -102,7 +102,7 @@ public class Admin extends Utilizador implements IMenu {
         Scanner input = new Scanner(System.in);
 
         System.out.println(">>Menu Reservas<<");
-        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Alterar Data Visita\n3 - Apagar Reserva\n4 - Listar Reservas\n>> ");
+        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Alterar Data Visita\n3 - Cancelar Reserva\n4 - Listar Reservas\n>> ");
         int op = input.nextInt();
         System.out.println();
 
@@ -117,7 +117,7 @@ public class Admin extends Utilizador implements IMenu {
                 reserva.alterarDataVisita(idUser);
             }
             case 3 -> {
-                reserva.apagarReserva(idUser);
+                reserva.cancelarReserva(idUser);
             }
             case 4 -> {
                 reserva.listarRes(idUser);
@@ -132,7 +132,7 @@ public class Admin extends Utilizador implements IMenu {
         Scanner input = new Scanner(System.in);
 
         System.out.println(">>Menu Vendas<<");
-        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Apagar Venda\n3 - Listar Vendas\n>> ");
+        System.out.print("0 - Sair\n1 - Menu Anterior\n2 - Listar Vendas\n>> ");
         int op = input.nextInt();
         System.out.println();
 
@@ -144,9 +144,6 @@ public class Admin extends Utilizador implements IMenu {
                 menuA(idUser);
             }
             case 2 -> {
-                venda.apagarVenda();
-            }
-            case 3 -> {
                 venda.listarVenda(idUser);
                 System.out.println("\n\n");
                 menuVendas(idUser);

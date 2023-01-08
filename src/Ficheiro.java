@@ -149,7 +149,8 @@ public class Ficheiro {
                         + ";" + entry.getMesVenda()
                         + ";" + entry.getAnoVenda()
                         + ";" + entry.getIdCliente()
-                        + ";" + entry.getIdCarro());
+                        + ";" + entry.getIdCarro()
+                        + ";" + entry.getValor());
                 bf.newLine();
             }
             System.out.println(venda);
@@ -167,6 +168,7 @@ public class Ficheiro {
         String[] valuesTMP;
         BufferedReader bf = null;
         int nrVenda = 0, diaVend = 0, mesVend = 0, anoVend = 0, nUser = 0, nCarro = 0;
+        double valor = 0.0;
 
         try {
             bf = new BufferedReader(new FileReader("src/Ficheiros/" + ficheiro + ".csv"));
@@ -187,8 +189,9 @@ public class Ficheiro {
             anoVend = Integer.parseInt(values.get(3));
             nUser = Integer.parseInt(values.get(4));
             nCarro = Integer.parseInt(values.get(5));
+            valor = Double.parseDouble(values.get(6));
 
-            venda.add(new Venda(nrVenda, diaVend, mesVend, anoVend, nUser, nCarro));
+            venda.add(new Venda(nrVenda, diaVend, mesVend, anoVend, nUser, nCarro, valor));
         }
         return venda;
     }

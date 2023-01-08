@@ -82,10 +82,12 @@ public class Utilizador {
             throw new UtilizadorException("User não existente!");
         }
 
-        if (!utilizadores.get(id).get(4).equals("NULL")) {
-            menuAnt(id);
-        } else {
+        if (utilizadores.get(id).get(4).equals("NULL")) {
             throw new UtilizadorException("!!Aguarde ativação do administrador!!");
+        } else if (utilizadores.get(id).get(4).equals("APAGADO")) {
+            throw new UtilizadorException("!!Utilizador Apagado!!");
+        }else {
+            menuAnt(id);
         }
     }
 
@@ -200,7 +202,7 @@ public class Utilizador {
         int id = input.nextInt();
 
         if (utilizadores.containsKey(id)) {
-                utilizadores.get(id).set(4, "APAGADO");
+            utilizadores.get(id).set(4, "APAGADO");
         } else {
             System.out.println("!Utilizador não é válido!");
             apagarUsers(idUserAtual);
@@ -286,6 +288,22 @@ public class Utilizador {
                             ", " + entry.getValue().get(3) +
                             ", " + entry.getValue().get(4));
             System.out.println();
+        }
+    }
+
+    public void listarClientes() throws IOException, UtilizadorException {
+        loadMapUtilizador();
+        System.out.println("\n>>Clientes<<");
+        System.out.println("id -> username, password, nome, telefone, tipo");
+        for (Map.Entry<Integer, List<String>> entry : utilizadores.entrySet()) {
+            if (entry.getValue().contains("CLIENTE")) {
+                System.out.println(entry.getKey() +
+                        " -> " + entry.getValue().get(0) +
+                        ", " + entry.getValue().get(1) +
+                        ", " + entry.getValue().get(2) +
+                        ", " + entry.getValue().get(3) +
+                        ", " + entry.getValue().get(4));
+            }
         }
     }
 

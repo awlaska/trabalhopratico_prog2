@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Reserva {
-    protected estadoReserva estado;
     protected ArrayList<Reserva> resLoad = new ArrayList<>();
     Veiculo v = new Veiculo();
     private int nrReserva;
@@ -15,6 +14,7 @@ public class Reserva {
     private int anoVisita;
     private int idCliente;
     private int idCarro;
+    protected estadoReserva estado;
 
     public Reserva() throws IOException {
     }
@@ -83,20 +83,20 @@ public class Reserva {
     //DONE metodo while caso o veiculo n esteja disponivel para pedir novamente um id de veiculo
     //DONE alterar o estado do veiculo para RESERVADO quando uma reserva é concluida
     //DONE apenas permitir reservar veiculos que se encontram no estado DISPONIVEL
-    public int adicionarReserva(int user) throws IOException, UtilizadorException {
-        v.loadMapVeiculo();
+    public void adicionarReserva(int user) throws IOException, UtilizadorException {
         Scanner input = new Scanner(System.in);
         Reserva res1 = null;
         boolean certo = false;
         int nrRes;
 
+        v.loadMapVeiculo();
         v.listarVeiculos(user);
 
         System.out.println("\n>>Criar Reserva<<");
-        System.out.println("ID do carro que deseja reservar: ");
+        System.out.print("ID do carro que deseja reservar\n>> ");
         idCarro = input.nextInt();
         if (v.veiculos.get(idCarro).get(5).equals("DISPONIVEL")) {
-            System.out.println("Data para visitar o Stand:");
+            System.out.print("\nData para visitar o Stand\n");
             do {
                 atribuirData();
                 nrRes = resLoad.size();
@@ -111,7 +111,6 @@ public class Reserva {
             System.out.println("O veiculo selecionado não se encontra disponivel para reserva!");
             adicionarReserva(user);
         }
-        return idCarro;
     }
 
     //DONE alterar estado do veiculo de DISPONIVEL para reservado
@@ -121,6 +120,13 @@ public class Reserva {
         v.writeMapVeiculo();
         v.loadMapVeiculo();
     }
+    public void reativarVeic(int idCarro) throws IOException {
+        v.loadMapVeiculo();
+        v.veiculos.get(idCarro).set(5, "DISPONIVEL");
+        v.writeMapVeiculo();
+        v.loadMapVeiculo();
+    }
+
 
     //DONE reduzir redundancia (não fazer a verificação de validade duas vezes)
     public void atribuirData() {
@@ -128,17 +134,17 @@ public class Reserva {
         LocalDate currentdate = LocalDate.now();
         int diaAtual = currentdate.getDayOfMonth(), mesAtual = LocalDate.EPOCH.getMonthValue(), anoAtual = currentdate.getYear();
         do {
-            System.out.println("Dia >> ");
+            System.out.print("\nDia >> ");
             diaVisita = input.nextInt();
             if (diaVisita > 31) System.out.println("O dia inserido não é válido!");
         } while (diaVisita > 31);
         do {
-            System.out.println("Mês >> ");
+            System.out.print("\nMês >> ");
             mesVisita = input.nextInt();
             if (mesVisita > 12) System.out.println("O mês inserido não é válido!");
         } while (mesVisita > 12);
         do {
-            System.out.println("Ano >> ");
+            System.out.print("\nAno >> ");
             anoVisita = input.nextInt();
             if (anoVisita < 2023) System.out.println("O ano inserido não é válido!");
         } while (anoVisita < 2023);
@@ -149,8 +155,7 @@ public class Reserva {
             System.out.println("A data tem de ser válida!");
         else if (anoAtual == anoVisita && mesAtual == mesVisita && diaAtual >= diaVisita)
             System.out.println("A data tem de ser válida!");
-        else if ((anoAtual == anoVisita && mesAtual < mesVisita) || (anoAtual < anoVisita && mesAtual == mesVisita && diaAtual < diaVisita))
-            ;
+        else if ((anoAtual == anoVisita && mesAtual < mesVisita) || (anoAtual < anoVisita && mesAtual == mesVisita && diaAtual < diaVisita));
     }
 
     //DONE alterarDataVisita -> apenas permite alterar as reservas que contem o idUser passado como parametro
@@ -172,7 +177,7 @@ public class Reserva {
             if (user.utilizadores.get(idUser).get(4).equals("CLIENTE")) {//CLIENTE
                 if (entry.getNrReserva() == resAlt) {
                     if (entry.getIdCliente() == idUser) {
-                        System.out.print("Data para visitar o Stand\n>> ");
+                        System.out.print("Data para visitar o Stand\n");
                         atribuirData();
                         entry.setDiaVisita(diaVisita);
                         entry.setMesVisita(mesVisita);
@@ -213,15 +218,15 @@ public class Reserva {
     //DONE apagarReserva -> corrigir e testar o método
     //DONE cliente apenas pode apagar as dele
     //DONE dono e admin podem apagar a reserva que quiser
-    public void apagarReserva(int idUser) throws IOException, UtilizadorException {
+    public void cancelarReserva(int idUser) throws IOException, UtilizadorException {
         Utilizador user = new Utilizador();
         Scanner input1 = new Scanner(System.in);
         Reserva resD = null;
         user.loadMapUtilizador();
         loadListReserva();
 
-        System.out.println("\n>>Apagar Reserva<<");
-        System.out.print("Reserva que deseja apagar\n>> ");
+        System.out.println("\n>>Cancelar Reserva<<");
+        System.out.print("Reserva que deseja cancelar\n>> ");
         int resAlt = input1.nextInt();
         for (Reserva entry : resLoad) {
             if (user.utilizadores.get(idUser).get(4).equals("CLIENTE")) {//CLIENTE
@@ -229,21 +234,23 @@ public class Reserva {
                     if (entry.getIdCliente() == idUser) {
                         int dia = entry.getDiaVisita(), mes = entry.getMesVisita(), ano = entry.getAnoVisita(),
                                 nrRes = entry.getNrReserva(), idCar = entry.getIdCarro();
-                        resD = new Reserva(resAlt, dia, mes, ano, idUser, idCar, estadoReserva.APAGADA);
+                        resD = new Reserva(resAlt, dia, mes, ano, idUser, idCar, estadoReserva.CANCELADA);
                         resLoad.set(entry.getNrReserva(), resD);
+                        reativarVeic(idCarro);
                         writeListReserva();
                         menuReservaAnt(idUser);
                     } else {
-                        System.out.println("!Não tem permissão para Apagar esta reserva!");
-                        apagarReserva(idUser);
+                        System.out.println("!Não tem permissão para cancelar esta reserva!");
+                        cancelarReserva(idUser);
                     }
                 }
             } else if (user.utilizadores.get(idUser).get(4).equals("DONO") || user.utilizadores.get(idUser).get(4).equals("ADMIN")) {//DONO E ADMIN
                 if (entry.getNrReserva() == resAlt) {
                     int dia = entry.getDiaVisita(), mes = entry.getMesVisita(), ano = entry.getAnoVisita(),
                             nrRes = entry.getNrReserva(), idCli = entry.getIdCliente(), idCar = entry.getIdCarro();
-                    resD = new Reserva(resAlt, dia, mes, ano, idCli, idCar, estadoReserva.APAGADA);
+                    resD = new Reserva(resAlt, dia, mes, ano, idCli, idCar, estadoReserva.CANCELADA);
                     resLoad.set(entry.getNrReserva(), resD);
+                    reativarVeic(idCarro);
                     writeListReserva();
                     menuReservaAnt(idUser);
                 }
@@ -273,26 +280,23 @@ public class Reserva {
         loadListReserva();
         uM.loadMapUtilizador();
 
-        if (uM.utilizadores.get(idUser).get(4).equals("CLIENTE")) {
-            System.out.println("\nNum. Reserva, dia, mês, ano, id user, id carro, estado");
-            for (Reserva entry : resLoad) {
-                if ((entry.getIdCliente() == idUser) && entry.getEstado() == estadoReserva.CRIADA)
-                    System.out.print(resLoad);
-                break;
-            }
+        if (uM.utilizadores.get(idUser).get(4).contentEquals("CLIENTE")) {
+            System.out.print("\nNum. Reserva, dia, mês, ano, id user, id carro, estado");
+            for (Reserva entry : resLoad)
+                if (entry.getIdCliente() == idUser)
+                    System.out.print(entry);
         } else { //DOING Listagem de reservas por ordem de data de visita, data mais proxima para menos
-            System.out.println("\nNum. Reserva, dia, mês, ano, id user, id carro, estado");
-            for (Reserva entry : resLoad) {
-                System.out.print(resLoad);
-                break;
-            }
+            System.out.print("\nNum. Reserva, dia, mês, ano, id user, id carro, estado");
+            for (Reserva entry : resLoad)
+                System.out.print(entry);
         }
     }
 
     //DONE
     @Override
     public String toString() {
-        return "\n" + this.getNrReserva() + ", "
+        System.out.println();
+        return  this.getNrReserva() + ", "
                 + this.getDiaVisita() + ", "
                 + this.getMesVisita() + ", "
                 + this.getAnoVisita() + ", "

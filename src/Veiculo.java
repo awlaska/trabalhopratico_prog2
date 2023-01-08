@@ -139,6 +139,22 @@ public class Veiculo {
         }
     }
 
+    public void listarVeiculosDisponiveis() throws IOException {
+        loadMapVeiculo();
+        System.out.println("\n>>Veiculos<<");
+        System.out.println("\nid -> marca, modelo, data manufatura, matricula, preço base");
+        for (Map.Entry<Integer, List<String>> entry : veiculos.entrySet()) {
+            if (entry.getValue().contains("DISPONIVEL")) {
+                System.out.println(entry.getKey() +
+                        " -> " + entry.getValue().get(0) +
+                        ", " + entry.getValue().get(1) +
+                        ", " + entry.getValue().get(2) +
+                        ", " + entry.getValue().get(3) +
+                        ", " + entry.getValue().get(4) + "€");
+            }
+        }
+    }
+
     public void menuVeiculoAnt(int idUser) throws IOException, UtilizadorException {
         Cliente cliente = new Cliente();
         DonoStand dono = new DonoStand();
