@@ -13,17 +13,14 @@ public class Veiculo {
     private String precoBase;
     private estadoVeiculo estado = estadoVeiculo.DISPONIVEL;
 
-    public Veiculo() throws IOException {
-
-    }
+    public Veiculo() {}
 
     //DONE Load do mapa e Escrita do ficheiro
-    public LinkedHashMap<Integer, List<String>> loadMapVeiculo() throws IOException {
+    public void loadMapVeiculo() throws IOException {
         veiculos = Ficheiro.loadMap("veiculos", 7);
-        return veiculos;
     }
 
-    public void writeMapVeiculo() throws IOException {
+    public void writeMapVeiculo() {
         Ficheiro.escreverFicheiroVeiculo("veiculos", veiculos);
     }
 
@@ -103,9 +100,6 @@ public class Veiculo {
         writeMapVeiculo();
         menuVeiculoAnt(idUser);
     }
-
-    //DOING fazer o método
-    public void apagarVeiculo(int idUser) throws IOException, UtilizadorException {}
 
     //DONE corrigir listar veiculo (caso não esteja em estado ATIVO o cliente não pode ver)
     //DOING path para o menu anterior

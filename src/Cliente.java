@@ -16,12 +16,8 @@ public class Cliente extends Utilizador implements IMenu {
         int op = input.nextInt();
 
         switch (op) {
-            case 0 -> {
-                break;
-            }
-            case 1 -> {
-                menuInicial();
-            }
+            case 0 -> {}
+            case 1 -> menuInicial();
             case 2 -> menuUtilizadores(idUser);
             case 3 -> menuVeiculos(idUser);
             case 4 -> menuReservas(idUser);
@@ -39,14 +35,9 @@ public class Cliente extends Utilizador implements IMenu {
         System.out.println();
 
         switch (op) {
-            case 0 -> {
-            }
-            case 1 -> {
-                menuInicial();
-            }
-            case 2 -> {
-                editarUser(idUser);
-            }
+            case 0 -> {}
+            case 1 -> menuInicial();
+            case 2 -> editarUser(idUser);
             case 3 -> {
                 listarUsers(idUser);
                 System.out.println("\n\n");
@@ -65,12 +56,8 @@ public class Cliente extends Utilizador implements IMenu {
         System.out.println();
 
         switch (op) {
-            case 0 -> {
-                break;
-            }
-            case 1 -> {
-                menuC(idUser);
-            }
+            case 0 -> {}
+            case 1 -> menuC(idUser);
             case 2 -> {
                 veic.listarVeiculos(idUser);
                 System.out.println("\n\n");
@@ -89,21 +76,11 @@ public class Cliente extends Utilizador implements IMenu {
         System.out.println();
 
         switch (op) {
-            case 0 -> {
-                break;
-            }
-            case 1 -> {
-                menuC(idUser);
-            }
-            case 2 -> {
-                reserva.adicionarReserva(idUser);
-            }
-            case 3 -> {
-                reserva.alterarDataVisita(idUser);
-            }
-            case 4 -> {
-                reserva.cancelarReserva(idUser);
-            }
+            case 0 -> {}
+            case 1 -> menuC(idUser);
+            case 2 -> reserva.adicionarReserva(idUser);
+            case 3 -> reserva.alterarDataVisita(idUser);
+            case 4 -> reserva.cancelarReserva(idUser);
             case 5 -> {
                 reserva.listarRes(idUser);
                 System.out.println("\n\n");
@@ -122,12 +99,8 @@ public class Cliente extends Utilizador implements IMenu {
         System.out.println();
 
         switch (op) {
-            case 0 -> {
-                break;
-            }
-            case 1 -> {
-                menuC(idUser);
-            }
+            case 0 -> {}
+            case 1 -> menuC(idUser);
             case 2 -> {
                 venda.listarVenda(idUser);
                 System.out.println("\n\n");

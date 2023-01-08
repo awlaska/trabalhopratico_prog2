@@ -17,7 +17,8 @@ public class Utilizador {
     Reserva reserva = new Reserva();
     Venda venda = new Venda();
 
-    public Utilizador() throws IOException {}
+    public Utilizador() throws IOException {
+    }
 
     public Utilizador(String user, String pass, String nome, String nrTelemovel, tipoUser tipo) throws IOException {
         this.username = user;
@@ -86,7 +87,7 @@ public class Utilizador {
             throw new UtilizadorException("!!Aguarde ativação do administrador!!");
         } else if (utilizadores.get(id).get(4).equals("APAGADO")) {
             throw new UtilizadorException("!!Utilizador Apagado!!");
-        }else {
+        } else {
             menuAnt(id);
         }
     }

@@ -17,7 +17,9 @@ public class Venda {
     private int idCarro;
     private double valor;
 
-    public Venda() throws IOException {}
+    public Venda() throws IOException {
+    }
+
     public Venda(int nrVenda, int diaVenda, int mesVenda, int anoVenda, int idCliente, int idCarro, double valor) throws IOException {
         this.nrVenda = nrVenda;
         this.diaVenda = diaVenda;
@@ -31,29 +33,35 @@ public class Venda {
     public int getNrVenda() {
         return nrVenda;
     }
+
     public int getDiaVenda() {
         return diaVenda;
     }
+
     public int getMesVenda() {
         return mesVenda;
     }
+
     public int getAnoVenda() {
         return anoVenda;
     }
+
     public int getIdCliente() {
         return idCliente;
     }
+
     public int getIdCarro() {
         return idCarro;
     }
+
     public double getValor() {
         return valor;
     }
 
-    public ArrayList<Venda> loadListVenda() throws IOException {
+    public void loadListVenda() throws IOException {
         venda = Ficheiro.loadListVenda("vendas", 7);
-        return venda;
     }
+
     public void writeListVenda() throws IOException {
         Ficheiro.escreverFicheiroVenda("Vendas", venda);
     }
@@ -84,8 +92,8 @@ public class Venda {
     //DONE altera o estado do veiculo para VENDIDO
     public void concluirReserva(int idUser) throws IOException, UtilizadorException {
         Scanner input = new Scanner(System.in);
-        Reserva resD = null;
-        Venda vend = null;
+        Reserva resD;
+        Venda vend;
 
         r.loadListReserva();
         v.loadMapVeiculo();
@@ -108,8 +116,10 @@ public class Venda {
                     }
                     int nrRes = entry.getNrReserva(), idCli = entry.getIdCliente(), idCar = entry.getIdCarro();
                     resD = new Reserva(nrRes, diaVenda, mesVenda, anoVenda, idCli, idCar, estadoReserva.CONLCUIDA);
-                    r.resLoad.set(entry.getNrReserva(), resD);r.writeListReserva();
-                    v.veiculos.get(idCar).set(5, "VENDIDO");v.writeMapVeiculo();
+                    r.resLoad.set(entry.getNrReserva(), resD);
+                    r.writeListReserva();
+                    v.veiculos.get(idCar).set(5, "VENDIDO");
+                    v.writeMapVeiculo();
 
                     valor = Double.parseDouble(v.veiculos.get(idCar).get(4));
                     nrVenda = venda.size();
@@ -132,8 +142,8 @@ public class Venda {
     public void criarVenda(int idUser) throws IOException, UtilizadorException {
         Scanner input = new Scanner(System.in);
         Utilizador u = new Utilizador();
-        Venda vend = null;
-        boolean certo = false;
+        Venda vend;
+        boolean certo;
 
         v.loadMapVeiculo();
         v.listarVeiculosDisponiveis();
@@ -154,7 +164,8 @@ public class Venda {
                 vend = new Venda(nrVenda, diaVenda, mesVenda, anoVenda, idCliente, idCarro, valor);
                 certo = true;
             } while (!certo);
-            venda.add(vend);writeListVenda();
+            venda.add(vend);
+            writeListVenda();
             v.veiculos.get(idCarro).set(5, "VENDIDO");
             menuVendaAnt(idUser);
         } else {
@@ -167,6 +178,7 @@ public class Venda {
         Scanner input = new Scanner(System.in);
         LocalDate currentdate = LocalDate.now();
         int diaAtual = currentdate.getDayOfMonth(), mesAtual = LocalDate.EPOCH.getMonthValue(), anoAtual = currentdate.getYear();
+
         do {
             System.out.print("\nDia >> ");
             diaVenda = input.nextInt();
@@ -229,7 +241,7 @@ public class Venda {
     //DONE
     @Override
     public String toString() {
-        return  this.getNrVenda() + ", "
+        return this.getNrVenda() + ", "
                 + this.getDiaVenda() + ", "
                 + this.getMesVenda() + ", "
                 + this.getAnoVenda() + ", "

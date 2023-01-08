@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Reserva {
     protected ArrayList<Reserva> resLoad = new ArrayList<>();
+    protected estadoReserva estado;
     Veiculo v = new Veiculo();
     private int nrReserva;
     private int diaVisita;
@@ -14,7 +15,6 @@ public class Reserva {
     private int anoVisita;
     private int idCliente;
     private int idCarro;
-    protected estadoReserva estado;
 
     public Reserva() throws IOException {
     }
@@ -120,6 +120,7 @@ public class Reserva {
         v.writeMapVeiculo();
         v.loadMapVeiculo();
     }
+
     public void reativarVeic(int idCarro) throws IOException {
         v.loadMapVeiculo();
         v.veiculos.get(idCarro).set(5, "DISPONIVEL");
@@ -155,7 +156,8 @@ public class Reserva {
             System.out.println("A data tem de ser válida!");
         else if (anoAtual == anoVisita && mesAtual == mesVisita && diaAtual >= diaVisita)
             System.out.println("A data tem de ser válida!");
-        else if ((anoAtual == anoVisita && mesAtual < mesVisita) || (anoAtual < anoVisita && mesAtual == mesVisita && diaAtual < diaVisita));
+        else if ((anoAtual == anoVisita && mesAtual < mesVisita) || (anoAtual < anoVisita && mesAtual == mesVisita && diaAtual < diaVisita))
+            ;
     }
 
     //DONE alterarDataVisita -> apenas permite alterar as reservas que contem o idUser passado como parametro
@@ -296,7 +298,7 @@ public class Reserva {
     @Override
     public String toString() {
         System.out.println();
-        return  this.getNrReserva() + ", "
+        return this.getNrReserva() + ", "
                 + this.getDiaVisita() + ", "
                 + this.getMesVisita() + ", "
                 + this.getAnoVisita() + ", "
