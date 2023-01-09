@@ -85,6 +85,7 @@ public class Reserva {
 
         v.loadMapVeiculo();
         v.listarVeiculos(user);
+        loadListReserva();
 
         System.out.println("\n>>Criar Reserva<<");
         System.out.print("ID do carro que deseja reservar\n>> ");
@@ -97,8 +98,7 @@ public class Reserva {
                 res1 = new Reserva(nrReserva, diaVisita, mesVisita, anoVisita, user, idCarro, estadoReserva.CRIADA);
                 certo = true;
             } while (!certo);
-            resLoad.add(res1);
-            writeListReserva();
+            resLoad.add(res1); writeListReserva();
             reservarVeic(idCarro);
             menuReservaAnt(user);
         } else {
@@ -119,36 +119,6 @@ public class Reserva {
         v.veiculos.get(idCarro).set(5, "DISPONIVEL");
         v.writeMapVeiculo();
         v.loadMapVeiculo();
-    }
-
-    public void atribuirData() {
-        Scanner input = new Scanner(System.in);
-        LocalDate currentdate = LocalDate.now();
-        int diaAtual = currentdate.getDayOfMonth(), mesAtual = LocalDate.EPOCH.getMonthValue(), anoAtual = currentdate.getYear();
-        do {
-            System.out.print("\nDia\n>> ");
-            diaVisita = input.nextInt();
-            if (diaVisita > 31) System.out.println("!O dia inserido não é válido!");
-        } while (diaVisita > 31);
-        do {
-            System.out.print("\nMês\n>> ");
-            mesVisita = input.nextInt();
-            if (mesVisita > 12) System.out.println("!O mês inserido não é válido!");
-        } while (mesVisita > 12);
-        do {
-            System.out.print("\nAno\n>> ");
-            anoVisita = input.nextInt();
-            if (anoVisita < 2023) System.out.println("!O ano inserido não é válido!");
-        } while (anoVisita < 2023);
-
-        if (anoAtual > anoVisita)
-            System.out.println("!A data tem de ser válida!");
-        else if (anoAtual == anoVisita && mesAtual > mesVisita)
-            System.out.println("!A data tem de ser válida!");
-        else if (anoAtual == anoVisita && mesAtual == mesVisita && diaAtual > diaVisita)
-            System.out.println("!A data tem de ser válida!");
-        else if ((anoAtual == anoVisita && mesAtual <= mesVisita) || (anoAtual <= anoVisita && mesAtual == mesVisita && diaAtual <= diaVisita))
-            ;
     }
 
     public void alterarDataVisita(int idUser) throws IOException, UtilizadorException {
@@ -236,6 +206,27 @@ public class Reserva {
                 }
             }
         }
+    }
+
+    public void atribuirData() {
+        Scanner input = new Scanner(System.in);
+        LocalDate currentdate = LocalDate.now();
+        int diaAtual = currentdate.getDayOfMonth(), mesAtual = LocalDate.EPOCH.getMonthValue(), anoAtual = currentdate.getYear();
+        do {
+            System.out.print("\nAno\n>> ");
+            anoVisita = input.nextInt();
+            if (anoAtual > anoVisita) System.out.println("!O ano inserido não é válido!");
+        } while (anoAtual > anoVisita);
+        do {
+            System.out.print("\nMês\n>> ");
+            mesVisita = input.nextInt();
+            if (anoAtual >= anoVisita && mesAtual > mesVisita) System.out.println("!O mês inserido não é válido!");
+        } while (anoAtual >= anoVisita && mesAtual > mesVisita);
+        do {
+            System.out.print("\nDia\n>> ");
+            diaVisita = input.nextInt();
+            if (anoAtual >= anoVisita && mesAtual >= mesVisita && diaAtual > diaVisita) System.out.println("!O dia inserido não é válido!");
+        } while (anoAtual >= anoVisita && mesAtual >= mesVisita && diaAtual > diaVisita);
     }
 
     public void menuReservaAnt(int idUser) throws IOException, UtilizadorException {

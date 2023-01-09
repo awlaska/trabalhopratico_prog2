@@ -164,29 +164,20 @@ public class Venda {
         int diaAtual = currentdate.getDayOfMonth(), mesAtual = LocalDate.EPOCH.getMonthValue(), anoAtual = currentdate.getYear();
 
         do {
-            System.out.print("\nDia\n>> ");
-            diaVenda = input.nextInt();
-            if (diaVenda > 31) System.out.println("!O dia inserido não é válido!");
-        } while (diaVenda > 31);
+            System.out.print("\nAno\n>> ");
+            anoVenda = input.nextInt();
+            if (anoAtual > anoVenda) System.out.println("!O ano inserido não é válido!");
+        } while (anoAtual > anoVenda);
         do {
             System.out.print("\nMês\n>> ");
             mesVenda = input.nextInt();
-            if (mesVenda > 12) System.out.println("!O mês inserido não é válido!");
-        } while (mesVenda > 12);
+            if (anoAtual >= anoVenda && mesAtual > mesVenda) System.out.println("!O mês inserido não é válido!");
+        } while (anoAtual >= anoVenda && mesAtual > mesVenda);
         do {
-            System.out.print("\nAno\n>> ");
-            anoVenda = input.nextInt();
-            if (anoVenda < 2023) System.out.println("!O ano inserido não é válido!");
-        } while (anoVenda < 2023);
-
-        if (anoAtual > anoVenda)
-            System.out.println("!A data tem de ser válida!");
-        else if (anoAtual == anoVenda && mesAtual > mesVenda)
-            System.out.println("!A data tem de ser válida!");
-        else if (anoAtual == anoVenda && mesAtual == mesVenda && diaAtual > diaVenda)
-            System.out.println("!A data tem de ser válida!");
-        else if ((anoAtual == anoVenda && mesAtual <= mesVenda) || (anoAtual <= anoVenda && mesAtual == mesVenda && diaAtual <= diaVenda))
-            ;
+            System.out.print("\nDia\n>> ");
+            diaVenda = input.nextInt();
+            if (anoAtual >= anoVenda && mesAtual >= mesVenda && diaAtual > diaVenda) System.out.println("!O dia inserido não é válido!");
+        } while (anoAtual >= anoVenda && mesAtual >= mesVenda && diaAtual > diaVenda);
     }
 
     public void menuVendaAnt(int idUser) throws IOException, UtilizadorException {
