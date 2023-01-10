@@ -166,18 +166,18 @@ public class Venda {
         do {
             System.out.print("\nAno\n>> ");
             anoVenda = input.nextInt();
-            if (anoAtual > anoVenda) System.out.println("!O ano inserido não é válido!");
-        } while (anoAtual > anoVenda);
+            if (anoAtual <= anoVenda) System.out.println("!O ano inserido não é válido!");
+        } while (anoAtual <= anoVenda);
         do {
             System.out.print("\nMês\n>> ");
             mesVenda = input.nextInt();
-            if (anoAtual >= anoVenda && mesAtual > mesVenda) System.out.println("!O mês inserido não é válido!");
-        } while (anoAtual >= anoVenda && mesAtual > mesVenda);
+            if (anoAtual == anoVenda && mesAtual > mesVenda) System.out.println("!O mês inserido não é válido!");
+        } while (anoAtual == anoVenda && mesAtual > mesVenda);
         do {
             System.out.print("\nDia\n>> ");
             diaVenda = input.nextInt();
-            if (anoAtual >= anoVenda && mesAtual >= mesVenda && diaAtual > diaVenda) System.out.println("!O dia inserido não é válido!");
-        } while (anoAtual >= anoVenda && mesAtual >= mesVenda && diaAtual > diaVenda);
+            if (anoAtual == anoVenda && mesAtual == mesVenda && diaAtual > diaVenda) System.out.println("!O dia inserido não é válido!");
+        } while (anoAtual == anoVenda && mesAtual == mesVenda && diaAtual > diaVenda);
     }
 
     public void menuVendaAnt(int idUser) throws IOException, UtilizadorException {

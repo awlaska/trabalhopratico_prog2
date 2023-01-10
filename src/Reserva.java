@@ -215,18 +215,18 @@ public class Reserva {
         do {
             System.out.print("\nAno\n>> ");
             anoVisita = input.nextInt();
-            if (anoAtual > anoVisita) System.out.println("!O ano inserido não é válido!");
-        } while (anoAtual > anoVisita);
+            if (anoAtual <= anoVisita) System.out.println("!O ano inserido não é válido!");
+        } while (anoAtual <= anoVisita);
         do {
             System.out.print("\nMês\n>> ");
             mesVisita = input.nextInt();
-            if (anoAtual >= anoVisita && mesAtual > mesVisita) System.out.println("!O mês inserido não é válido!");
-        } while (anoAtual >= anoVisita && mesAtual > mesVisita);
+            if (anoAtual == anoVisita && mesAtual > mesVisita) System.out.println("!O mês inserido não é válido!");
+        } while (anoAtual == anoVisita && mesAtual > mesVisita);
         do {
             System.out.print("\nDia\n>> ");
             diaVisita = input.nextInt();
-            if (anoAtual >= anoVisita && mesAtual >= mesVisita && diaAtual > diaVisita) System.out.println("!O dia inserido não é válido!");
-        } while (anoAtual >= anoVisita && mesAtual >= mesVisita && diaAtual > diaVisita);
+            if (anoAtual == anoVisita && mesAtual == mesVisita && diaAtual > diaVisita) System.out.println("!O dia inserido não é válido!");
+        } while (anoAtual == anoVisita && mesAtual == mesVisita && diaAtual > diaVisita);
     }
 
     public void menuReservaAnt(int idUser) throws IOException, UtilizadorException {
