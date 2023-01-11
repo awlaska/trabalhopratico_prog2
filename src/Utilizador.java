@@ -28,6 +28,7 @@ public class Utilizador {
         this.tipo = null;
     }
 
+
     public LinkedHashMap<Integer, List<String>> loadMapUtilizador() throws IOException {
         this.utilizadores = Ficheiro.loadMap("utilizadores", 6);
         return utilizadores;
@@ -43,38 +44,35 @@ public class Utilizador {
         loadMapUtilizador();
 
         System.out.println("\n>>Menu Inicial<<");
-        System.out.print("1 - Login\n2 - Signup\n0 - Sair\n>> ");
+        System.out.print("0 - Sair\n1 - Login\n2 - Signup\n>> ");
         int op = input.nextInt();
 
         switch (op) {
-            case 0 -> {
-                break;
-            }
+            case 0 -> { break; }
             case 1 -> login();
             case 2 -> signUp();
             default -> throw new IllegalStateException("Unexpected value: " + op);
         }
     }
 
-    public void login() throws UtilizadorException, IOException {
+    protected void login() throws UtilizadorException, IOException {
         Scanner logIn = new Scanner(System.in);
-        String uname = "", pword = "";
 
         loadMapUtilizador();
 
         System.out.println("\n>>LogIn<<");
         System.out.print("Username\n>> ");
-        uname = logIn.nextLine();
+        username = logIn.nextLine();
         System.out.print("Password\n>> ");
-        pword = logIn.nextLine();
+        password = logIn.nextLine();
 
         for (int i = 0; i < utilizadores.size(); i++) {
-            if (utilizadores.get(i).get(0).equals(uname)) {
+            if (utilizadores.get(i).get(0).equals(username)) {
                 id = i;
             }
         }
 
-        if (utilizadores.get(id).get(0).equals(uname) && utilizadores.get(id).get(1).equals(pword)) {
+        if (utilizadores.get(id).get(0).equals(username) && utilizadores.get(id).get(1).equals(password)) {
             System.out.println("User autenticado!\n");
         } else {
             throw new UtilizadorException("User não existente!");
@@ -109,7 +107,7 @@ public class Utilizador {
             if (!utilizadores.containsKey(i))
                 id = i;
         }
-        if (!utilizadores.get(0).get(0).contains(username)) {
+        if (utilizadores.get(0).get(0).contains(username)) {
             throw new UtilizadorException("!Username não é válido!");
         }
 
@@ -122,48 +120,42 @@ public class Utilizador {
         if (utilizadores.get(0).get(0).contains(username)) {
             throw new UtilizadorException("!!User já existente!!");
         } else {
-            utilizadores.put(id, dados); writeMapUtilizador();
+            utilizadores.put(id, dados);
+            writeMapUtilizador();
             menuInicial();
         }
     }
 
     protected void editarUser(int idUserAtual) throws UtilizadorException, IOException {
-        Admin admin = new Admin();
-        Cliente cliente = new Cliente();
-        DonoStand dono = new DonoStand();
         Scanner input = new Scanner(System.in);
         Scanner inputOP = new Scanner(System.in);
 
         loadMapUtilizador();
 
         int op = -1;
-        String user, pass, nome, tele;
 
         while (op != 0) {
             listarUsers(idUserAtual);
             System.out.println("\n>>Editar perfil<<\n");
             System.out.print("0 - Sair\n1 - Username\n2 - Password\n3 - Nome\n4 - Telefone\n>> ");
             op = inputOP.nextInt();
-
             switch (op) {
-                case 0 -> {
-                    menuAnt(idUserAtual);
-                }
+                case 0 -> { menuAnt(idUserAtual); }
                 case 1 -> {
                     do {
                         System.out.print("\nUsername: \n>> ");
-                        user = input.nextLine();
-                        if (!utilizadores.get(0).get(0).contains(user)) {
+                        username = input.nextLine();
+                        if (!utilizadores.get(0).get(0).contains(username)) {
                             System.out.println("!Username não é válido!");
                         } else {
-                            utilizadores.get(idUserAtual).set(0, user);
+                            utilizadores.get(idUserAtual).set(0, username);
                         }
-                    } while (!utilizadores.get(0).get(0).contains(user));
+                    } while (!utilizadores.get(0).get(0).contains(username));
                 }
                 case 2 -> {
                     System.out.print("Password: \n>> ");
-                    pass = input.nextLine();
-                    utilizadores.get(idUserAtual).set(1, pass);
+                    password = input.nextLine();
+                    utilizadores.get(idUserAtual).set(1, password);
                 }
                 case 3 -> {
                     System.out.print("Nome: \n>> ");
@@ -172,8 +164,8 @@ public class Utilizador {
                 }
                 case 4 -> {
                     System.out.print("Telefone: \n>> ");
-                    tele = input.nextLine();
-                    utilizadores.get(idUserAtual).set(3, tele);
+                    nrTelemovel = input.nextLine();
+                    utilizadores.get(idUserAtual).set(3, nrTelemovel);
                 }
                 default -> throw new IllegalStateException("Unexpected value: " + op);
             }
@@ -183,33 +175,30 @@ public class Utilizador {
     }
 
     protected void apagarUsers(int idUserAtual) throws IOException, UtilizadorException {
-        Admin admin = new Admin();
-        Cliente cliente = new Cliente();
-        DonoStand dono = new DonoStand();
-        loadMapUtilizador();
         Scanner input = new Scanner(System.in);
 
+        loadMapUtilizador();
         listarUsers(id);
 
         System.out.println("\n>>Apagar Utilizador<<");
         System.out.print("ID do utilizar a apagar\n>> ");
         int id = input.nextInt();
-
         if (utilizadores.containsKey(id)) {
             utilizadores.get(id).set(4, "APAGADO");
         } else {
             System.out.println("!Utilizador não é válido!");
-            apagarUsers(idUserAtual);
+            menuAnt(idUserAtual);
         }
+
         writeMapUtilizador();
         menuAnt(idUserAtual);
     }
 
     protected void alterarTipoUser(int idUser) throws IOException, UtilizadorException {
-        loadMapUtilizador();
         Scanner inputint = new Scanner(System.in);
         Scanner inputstring = new Scanner(System.in);
 
+        loadMapUtilizador();
         listarUsers(idUser);
 
         System.out.println("\n>>Alterar tipo de user<<");
@@ -234,7 +223,9 @@ public class Utilizador {
         Cliente cliente = new Cliente();
         DonoStand dono = new DonoStand();
         Admin admin = new Admin();
+
         loadMapUtilizador();
+
         if (utilizadores.get(idUser).get(4).equals("ADMIN")) {
             admin.menuA(idUser);
         } else if (utilizadores.get(idUser).get(4).equals("DONO")) {
@@ -245,7 +236,9 @@ public class Utilizador {
     }
 
     public void listarUsers(int idUserAtual) throws IOException, UtilizadorException {
+
         loadMapUtilizador();
+
         if (utilizadores.get(idUserAtual).get(4).contains("CLIENTE")) {
             System.out.println("\n>>Utilizador Atual<<");
             System.out.println("id -> username, password, nome, telefone");
@@ -267,7 +260,7 @@ public class Utilizador {
                         ", " + entry.getValue().get(3) +
                         ", " + entry.getValue().get(4));
             System.out.println("\n>>Utilizador Atual<<");
-            System.out.println("id -> username, password, nome, telefone, estado");
+            System.out.println("id -> username, password, nome, telefone, tipo");
             for (Map.Entry<Integer, List<String>> entry : utilizadores.entrySet())
                 if (entry.getKey().equals(idUserAtual))
                     System.out.println(entry.getKey() +
@@ -293,9 +286,5 @@ public class Utilizador {
                         ", " + entry.getValue().get(4));
             }
         }
-    }
-
-    public String tipoDeUser(int idUser) {
-        return utilizadores.get(idUser).get(4);
     }
 }
